@@ -1,15 +1,13 @@
-#strin
+# frozen_string_literal: true
 
+# Clase utilizada para el manejo de sesiones
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
   private
 
   def respond_with(_resources, _opts = {})
-    render json: {
-      message: 'You are logged in.',
-      user: current_user
-    }, status: :ok
+    render json: { message: 'You are logged in.', user: current_user }, status: :ok
   end
 
   def respond_to_on_destroy
