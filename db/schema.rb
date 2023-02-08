@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_062259) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_01_030441) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_062259) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cuentas_contable", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.string "tipo_afectacion", limit: 1
+    t.integer "subnivel"
+    t.bigint "padre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["padre_id"], name: "index_cuentas_contable_on_padre_id"
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.string "name"
     t.string "name_file"
@@ -77,9 +87,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_062259) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
 end
