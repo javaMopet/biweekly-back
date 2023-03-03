@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_01_030441) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_234816) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,12 +39,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_030441) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categorias", force: :cascade do |t|
+    t.string "nombre", limit: 200
+    t.string "icono", limit: 50
+    t.string "descripcion"
+    t.string "color", limit: 20
+    t.bigint "tipo_categoria_id", null: false
+    t.bigint "cuenta_contable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_contable_id"], name: "index_categorias_on_cuenta_contable_id"
+    t.index ["tipo_categoria_id"], name: "index_categorias_on_tipo_categoria_id"
+  end
+
   create_table "cfdis", force: :cascade do |t|
     t.string "uuid"
     t.string "rfc_emisor"
     t.string "rfc_receptor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cuentas", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.string "descripcion"
+    t.bigint "cuenta_contable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_contable_id"], name: "index_cuentas_on_cuenta_contable_id"
   end
 
   create_table "cuentas_contable", force: :cascade do |t|
@@ -55,6 +77,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_030441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["padre_id"], name: "index_cuentas_contable_on_padre_id"
+  end
+
+  create_table "detalles_registro", force: :cascade do |t|
+    t.bigint "registro_id", null: false
+    t.string "registrable_type"
+    t.integer "registrable_id"
+    t.string "observaciones"
+    t.string "tipo_afectacion", limit: 1
+    t.bigint "cuenta_contable_id", null: false
+    t.decimal "importe_absoluto", precision: 10, scale: 2
+    t.decimal "importe_real", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_contable_id"], name: "index_detalles_registro_on_cuenta_contable_id"
+    t.index ["registro_id"], name: "index_detalles_registro_on_registro_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -73,8 +110,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_030441) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
+  create_table "menus", force: :cascade do |t|
+    t.string "nombre", limit: 30
+    t.string "icono", limit: 30
+    t.string "ruta", limit: 150
+    t.integer "padre", limit: 2
+    t.boolean "tiene_hijos"
+    t.integer "orden", limit: 2
+    t.boolean "activo"
+    t.string "ruta_vista"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registros", force: :cascade do |t|
+    t.string "observaciones"
+    t.string "comentarios"
+    t.date "fecha_transaccion"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_registros_on_user_id"
+  end
+
   create_table "tests", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tipos_categoria", force: :cascade do |t|
+    t.string "nombre", limit: 20
+    t.string "tipo_afectacion", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,5 +160,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_030441) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "categorias", "cuentas_contable"
+  add_foreign_key "categorias", "tipos_categoria"
+  add_foreign_key "cuentas", "cuentas_contable"
   add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
+  add_foreign_key "detalles_registro", "cuentas_contable"
+  add_foreign_key "detalles_registro", "registros"
+  add_foreign_key "registros", "users"
 end

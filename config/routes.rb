@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :detalles_registro
+  resources :registros
+  resources :cuentas
+  resources :categorias
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
 
   post '/graphql', to: 'graphql#execute'

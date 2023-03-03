@@ -26,3 +26,5 @@ begin
   CuentaContable.create!(id: 13000, nombre: "Activo No Circulante", tipo_afectacion: "C", subnivel: 2, padre_id: 10000)
   CuentaContable.create!(id: 13100, nombre: "Efectivo", tipo_afectacion: "C", subnivel: 1, padre_id: 11000)
   CuentaContable.create!(id: 13101, nombre: "Efectivo", tipo_afectacion: "C", subnivel: 0, padre_id: 11100)
+
+  

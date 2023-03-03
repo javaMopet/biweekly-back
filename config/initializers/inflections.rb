@@ -26,6 +26,7 @@ ActiveSupport::Inflector.inflections do |inflect|
     inflect.singular /(.*)ces([A-Z]|_|$)$/i, '\1z\2'    
 
     inflect.irregular 'user', 'users'
+    inflect.irregular 'detalle', 'detalles'
 
     inflect.acronym("GraphiQL")
 end
