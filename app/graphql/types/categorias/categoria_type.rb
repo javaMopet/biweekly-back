@@ -8,8 +8,8 @@ module Types
       field :icono, String
       field :descripcion, String
       field :color, String
-      field :tipo_categoria_id, Integer, null: false
-      field :cuenta_contable_id, Integer, null: false
+      field :tipo_categoria, Types::Categorias::TipoCategoriaType, null: false
+      field :cuenta_contable, Types::CuentaContableType, null: false
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end

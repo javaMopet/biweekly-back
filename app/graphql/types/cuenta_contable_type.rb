@@ -7,6 +7,7 @@ module Types
     field :tipo_afectacion, String
     field :subnivel, Integer
     field :padre_id, Integer
+    field :nombre_completo, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end
