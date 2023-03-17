@@ -4,11 +4,17 @@ begin
     puts 'No postgresql'
   end
   
-  begin
-    ActiveRecord::Base.connection.execute('DELETE FROM cuentas_contable') # sqlserver
-    # ActiveRecord::Base.connection.execute('DELETE FROM cuentas_contable; DBCC CHECKIDENT (cuentas_contable, RESEED, 0)') # sqlserver
+  begin    
+    ActiveRecord::Base.connection.execute("
+    DELETE FROM categorias;
+		DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
+		DBCC CHECKIDENT (categorias, RESEED, @reseedc);
+    DELETE FROM cuentas_contable;
+		DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
+		DBCC CHECKIDENT (cuentas_contable, RESEED, @reseed)
+    ") # sqlserver
   rescue StandardError => e
-    puts 'No sqlserver'
+    puts "No sqlserver #{e}"
   end
   # Activo
   CuentaContable.create!(id: 10000, nombre: "Activo", tipo_afectacion: "C", subnivel: 3  )
@@ -37,10 +43,10 @@ begin
 
   CuentaContable.create!(id: 21200, nombre: "Bancos", tipo_afectacion: "A", subnivel: 1, padre_id: 11000)
 
-  CuentaContable.create!(id: 22000, nombre: "Bancomer LMS", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
-  CuentaContable.create!(id: 22100, nombre: "Santander HPM", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
-  CuentaContable.create!(id: 22101, nombre: "Scotiabank LMS", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
-  CuentaContable.create!(id: 22102, nombre: "Banco Azteca LMS", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
+  CuentaContable.create!(id: 21201, nombre: "Bancomer LMS", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
+  CuentaContable.create!(id: 21202, nombre: "Santander HPM", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
+  CuentaContable.create!(id: 21203, nombre: "Scotiabank LMS", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
+  CuentaContable.create!(id: 21204, nombre: "Banco Azteca LMS", tipo_afectacion: "A", subnivel: 0, padre_id: 11200)
 
   #Ingresos
   CuentaContable.create!(id: 40000, nombre: "Ingresos", tipo_afectacion: "A", subnivel: 2, padre_id: nil)
