@@ -5,10 +5,10 @@ module Resolvers
     class ListaCuentasContables < Resolvers::Base
       type [Types::CuentaContableType], null: false
 
-      argument :subnivel, Integer, required: false
+      argument :subnivel, Integer, required: true
 
       def resolve(subnivel:)
-        if(subnivel.nil?)
+        if(subnivel == -1)
           CuentaContable.all
         else
           CuentaContable.where({subnivel:}).all
