@@ -61,3 +61,4 @@ gem 'graphql', '~> 2.0', '>= 2.0.15'
 
 gem 'blueprinter'
 gem 'oj'
+gem "byebug", "~> 11.1", :groups => [:development, :test]

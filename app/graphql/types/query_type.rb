@@ -24,5 +24,8 @@ module Types
 
     field :lista_cuentas_contables, resolver: Resolvers::ListaCuentasContables,
     description: 'Obtener lista de cuentas contables'
+
+    field :arbol_cuentas_contables, resolver: Resolvers::CuentasContables::ArbolCuentasContables,
+    description: 'Obtener arbol de cuentas contables'
   end
 end
