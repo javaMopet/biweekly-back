@@ -1,0 +1,170 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_234816) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categorias", force: :cascade do |t|
+    t.string "nombre", limit: 200
+    t.string "icono", limit: 50
+    t.string "descripcion"
+    t.string "color", limit: 20
+    t.bigint "tipo_categoria_id", null: false
+    t.bigint "cuenta_contable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_contable_id"], name: "index_categorias_on_cuenta_contable_id"
+    t.index ["tipo_categoria_id"], name: "index_categorias_on_tipo_categoria_id"
+  end
+
+  create_table "cfdis", force: :cascade do |t|
+    t.string "uuid"
+    t.string "rfc_emisor"
+    t.string "rfc_receptor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cuentas", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.string "descripcion"
+    t.bigint "cuenta_contable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_contable_id"], name: "index_cuentas_on_cuenta_contable_id"
+  end
+
+  create_table "cuentas_contable", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.string "tipo_afectacion", limit: 1
+    t.integer "subnivel"
+    t.bigint "padre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["padre_id"], name: "index_cuentas_contable_on_padre_id"
+  end
+
+  create_table "detalles_registro", force: :cascade do |t|
+    t.bigint "registro_id", null: false
+    t.string "registrable_type"
+    t.integer "registrable_id"
+    t.string "observaciones"
+    t.string "tipo_afectacion", limit: 1
+    t.bigint "cuenta_contable_id", null: false
+    t.decimal "importe_absoluto", precision: 10, scale: 2
+    t.decimal "importe_real", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_contable_id"], name: "index_detalles_registro_on_cuenta_contable_id"
+    t.index ["registro_id"], name: "index_detalles_registro_on_registro_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "name"
+    t.string "name_file"
+    t.binary "xml_file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "jwt_denylist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string "nombre", limit: 30
+    t.string "icono", limit: 30
+    t.string "ruta", limit: 150
+    t.integer "padre", limit: 2
+    t.boolean "tiene_hijos"
+    t.integer "orden", limit: 2
+    t.boolean "activo"
+    t.string "ruta_vista"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registros", force: :cascade do |t|
+    t.string "observaciones"
+    t.string "comentarios"
+    t.date "fecha_transaccion"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_registros_on_user_id"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tipos_categoria", force: :cascade do |t|
+    t.string "nombre", limit: 20
+    t.string "tipo_afectacion", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "categorias", "cuentas_contable"
+  add_foreign_key "categorias", "tipos_categoria"
+  add_foreign_key "cuentas", "cuentas_contable"
+  add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
+  add_foreign_key "detalles_registro", "cuentas_contable"
+  add_foreign_key "detalles_registro", "registros"
+  add_foreign_key "registros", "users"
+end
