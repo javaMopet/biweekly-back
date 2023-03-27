@@ -4,7 +4,7 @@ class CreateCuentasContable < ActiveRecord::Migration[7.0]
       t.string :nombre, limit: 100
       t.string :tipo_afectacion, limit: 1
       t.integer :subnivel
-      t.references :padre, null: true, foreign_key:  { to_table: :cuentas_contable }
+      t.references :padre, null: true, foreign_key: { to_table: :cuentas_contable }
 
       t.timestamps
     end
