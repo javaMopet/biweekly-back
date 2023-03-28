@@ -1,5 +1,6 @@
 module Types
   class MutationType < Types::BaseObject
+    field :cuenta_contable_create, mutation: Mutations::CuentaContableCreate
     field :cuenta_delete, mutation: Mutations::CuentaDelete
     field :cuenta_update, mutation: Mutations::CuentaUpdate
     field :cuenta_create, mutation: Mutations::CuentaCreate
