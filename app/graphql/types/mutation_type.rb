@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class MutationType < Types::BaseObject
     field :cuenta_contable_update, mutation: Mutations::CuentaContableUpdate

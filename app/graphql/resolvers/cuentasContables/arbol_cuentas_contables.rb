@@ -33,13 +33,13 @@ module Resolvers
         # nodos finales
         if hijos.empty?
           return { label: "#{node.id} - #{node.nombre}", nombre: node.nombre,
-                   padreId: node.padre_id, tipo_afectacion: node.tipo_afectacion,
+                   padreId: node.padre_id, tipoAfectacion: node.tipo_afectacion,
                    subnivel: node.subnivel, id: node.id, selectable: true }
         end
 
         # nodos con hijos
         { label: "#{node.id} - #{node.nombre}", nombre: node.nombre,
-          padreId: node.padre_id, tipo_afectacion: node.tipo_afectacion,
+          padreId: node.padre_id, tipoAfectacion: node.tipo_afectacion,
           subnivel: node.subnivel,
           id: node.id, selectable: false,
           children: hijos.collect do |v|

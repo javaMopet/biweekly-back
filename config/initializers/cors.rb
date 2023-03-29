@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Avoid CORS issues when API is called from the frontend app.
@@ -7,11 +9,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "*"
+    # origins ENV.fetch('CORS_ORIGIN', '172.17.155.176:9000'), 'http://unishop-front.test'
+    origins ENV.fetch('CORS_ORIGIN', 'localhost:9001'), 'http://biweekly-front.test'
 
-    resource "*",
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      expose: %w[Authorization, Uid]
+    resource '*',
+             headers: :any,
+             methods: %i[get post put patch delete options head],
+             expose: %w[Authorization Uid]
   end
 end
