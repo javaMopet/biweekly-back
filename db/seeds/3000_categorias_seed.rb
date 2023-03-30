@@ -15,16 +15,22 @@ rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end
 
-Categoria.create!(nombre: 'Sueldo Mensual', icono: 'star',
-                  descripcion: 'Sueldo mensual de Leticita', color: '#FF00FF',
+Categoria.create!(nombre: 'Sueldo Mensual', icono: 'account_balance',
+                  descripcion: 'Sueldo mensual de Leticita', color: '#005c00',
                   tipo_categoria_id: 1, cuenta_contable_id: 41_101)
-Categoria.create!(nombre: 'Sueldo Quincenal', icono: 'star',
-                  descripcion: 'Sueldo quincenal de Horacio', color: '#FF00FF',
+Categoria.create!(nombre: 'Sueldo Quincenal', icono: 'account_balance',
+                  descripcion: 'Sueldo quincenal de Horacio', color: '#005c00',
                   tipo_categoria_id: 1, cuenta_contable_id: 41_102)
+Categoria.create!(nombre: 'Cash Back', icono: 'currency_exchange',
+                  descripcion: 'Promoción por tarjeta Santander LikeU', color: '#ff3333',
+                  tipo_categoria_id: 1, cuenta_contable_id: 42_101)
+# Categoria.create!(nombre: 'Sueldo Quincenal', icono: 'account_balance',
+#                   descripcion: 'Sueldo quincenal de Horacio', color: '#005c00',
+#                   tipo_categoria_id: 1, cuenta_contable_id: 41_102)
 
 Categoria.create!(nombre: 'Cash Back', icono: 'star',
                   descripcion: 'Promoción originada por tarjeta Cash Back LikeU', color: '#FF00FF',
                   tipo_categoria_id: 1, cuenta_contable_id: 42_101)
-Categoria.create!(nombre: 'Inversiones', icono: 'star',
+Categoria.create!(nombre: 'Inversiones', icono: 'fa-solid fa-sack-dollar',
                   descripcion: 'Interes por inversiones', color: '#FF00FF',
                   tipo_categoria_id: 1, cuenta_contable_id: 42_102)
