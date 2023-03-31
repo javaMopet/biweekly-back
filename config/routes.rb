@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :detalles_movimiento
+  resources :movimientos
+  resources :tipos_movimiento
+  resources :estados_movimiento
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',

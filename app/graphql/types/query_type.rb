@@ -11,21 +11,25 @@ module Types
 
     field :menu_levels, resolver: Resolvers::MenuLevels, description: 'Arbol de menús'
 
-    field :users_list, resolver: Resolvers::Users::UsersList, description: 'Obtener lista de usuarios'
+    field :users_list, resolver: Resolvers::Users::UsersList,
+                       description: 'Obtener lista de usuarios'
 
-    field :lista_categorias, resolver: Resolvers::Categorias::ListaCategorias, 
-    description: 'Obtener lista de categorias'
+    field :lista_categorias, resolver: Resolvers::Categorias::ListaCategorias,
+                             description: 'Obtener lista de categorias'
 
     field :lista_tipos_categoria, resolver: Resolvers::Categorias::ListaTiposCategoria,
-    description: 'Obtener lista de tipos de categoria'
+                                  description: 'Obtener lista de tipos de categoria'
 
     field :lista_cuentas, resolver: Resolvers::Cuentas::ListaCuentas,
-    description: 'Obtener lista de cuentas'
+                          description: 'Obtener lista de cuentas'
 
     field :lista_cuentas_contables, resolver: Resolvers::ListaCuentasContables,
-    description: 'Obtener lista de cuentas contables'
+                                    description: 'Obtener lista de cuentas contables'
 
     field :arbol_cuentas_contables, resolver: Resolvers::CuentasContables::ArbolCuentasContables,
-    description: 'Obtener arbol de cuentas contables'
+                                    description: 'Obtener arbol de cuentas contables'
+
+    field :lista_movimientos, resolver: Resolvers::Movimientos::ListaMovimientos,
+                              description: 'Obtener lista de movimientos'
   end
 end

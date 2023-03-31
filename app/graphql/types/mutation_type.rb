@@ -2,6 +2,15 @@
 
 module Types
   class MutationType < Types::BaseObject
+    field :detalle_movimiento_delete, mutation: Mutations::DetalleMovimientoDelete
+    field :detalle_movimiento_update, mutation: Mutations::DetalleMovimientoUpdate
+    field :detalle_movimiento_create, mutation: Mutations::DetalleMovimientoCreate
+    field :movimiento_delete, mutation: Mutations::MovimientoDelete
+    field :movimiento_update, mutation: Mutations::MovimientoUpdate
+    field :movimiento_create, mutation: Mutations::MovimientoCreate
+    field :estado_movimiento_delete, mutation: Mutations::EstadoMovimientoDelete
+    field :estado_movimiento_update, mutation: Mutations::EstadoMovimientoUpdate
+    field :estado_movimiento_create, mutation: Mutations::EstadoMovimientoCreate
     field :cuenta_contable_update, mutation: Mutations::CuentaContableUpdate
     field :cuenta_contable_delete, mutation: Mutations::CuentaContableDelete
     field :cuenta_contable_create, mutation: Mutations::CuentaContableCreate

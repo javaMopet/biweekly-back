@@ -27,6 +27,9 @@ ActiveSupport::Inflector.inflections do |inflect|
 
     inflect.irregular 'user', 'users'
     inflect.irregular 'detalle', 'detalles'
+    inflect.irregular 'Detalle', 'Detalles'
+    inflect.irregular 'detalle_movimiento', 'detalles_movimiento'
+    inflect.irregular 'DetalleMovimiento', 'DetallesMovimiento'
 
     inflect.acronym("GraphiQL")
 end

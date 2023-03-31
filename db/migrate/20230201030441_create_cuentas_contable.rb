@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Creación de la tabla de Cuentas Contables
 class CreateCuentasContable < ActiveRecord::Migration[7.0]
   def change
     create_table :cuentas_contable do |t|
