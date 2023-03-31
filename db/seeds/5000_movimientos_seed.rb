@@ -21,7 +21,7 @@ rescue StandardError => e
 end
 
 movimiento = Movimiento.create!(numero: 1, estado_movimiento_id: 2, tipo_movimiento_id: 1,
-                                fecha: Date.today, obsevaciones: 'Sueldo Mensual', user_id: 1)
+                                fecha: Date.today, observaciones: 'Sueldo Mensual', user_id: 1)
 
 DetalleMovimiento.create!(movimiento_id: movimiento.id, categoria_id: 1, cuenta_id: nil,
                           importe: 20_500.26, tipo_afectacion: 'A',
@@ -33,7 +33,7 @@ DetalleMovimiento.create!(movimiento_id: movimiento.id, categoria_id: nil, cuent
                           cuenta_contable_id: 41_101)
 
 movimiento2 = Movimiento.create!(numero: 1, estado_movimiento_id: 2, tipo_movimiento_id: 1,
-                                 fecha: Date.today, obsevaciones: 'Sueldo Quincenal', user_id: 1)
+                                 fecha: Date.today, observaciones: 'Sueldo Quincenal', user_id: 1)
 
 DetalleMovimiento.create!(movimiento_id: movimiento2.id, categoria_id: 1, cuenta_id: nil,
                           importe: 30_502.26, tipo_afectacion: 'A',

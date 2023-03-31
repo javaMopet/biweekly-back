@@ -150,7 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_185112) do
     t.bigint "estado_movimiento_id", null: false
     t.bigint "tipo_movimiento_id", null: false
     t.date "fecha"
-    t.string "obsevaciones", limit: 300
+    t.string "observaciones", limit: 300
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -28,9 +28,9 @@ Categoria.create!(nombre: 'Cash Back', icono: 'currency_exchange',
 #                   descripcion: 'Sueldo quincenal de Horacio', color: '#005c00',
 #                   tipo_categoria_id: 1, cuenta_contable_id: 41_102)
 
-Categoria.create!(nombre: 'Cash Back', icono: 'star',
-                  descripcion: 'Promoción originada por tarjeta Cash Back LikeU', color: '#FF00FF',
-                  tipo_categoria_id: 1, cuenta_contable_id: 42_101)
+# Categoria.create!(nombre: 'Cash Back', icono: 'currency_exchange',
+#                   descripcion: 'Promoción originada por tarjeta Cash Back LikeU', color: '#c21b3c',
+#                   tipo_categoria_id: 1, cuenta_contable_id: 42_101)
 Categoria.create!(nombre: 'Inversiones', icono: 'fa-solid fa-sack-dollar',
                   descripcion: 'Interes por inversiones', color: '#FF00FF',
                   tipo_categoria_id: 1, cuenta_contable_id: 42_102)

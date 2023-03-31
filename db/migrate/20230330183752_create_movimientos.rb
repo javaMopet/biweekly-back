@@ -8,7 +8,7 @@ class CreateMovimientos < ActiveRecord::Migration[7.0]
       t.references :estado_movimiento, null: false, foreign_key: true
       t.references :tipo_movimiento, null: false, foreign_key: true
       t.date :fecha
-      t.string :obsevaciones, limit: 300
+      t.string :observaciones, limit: 300
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

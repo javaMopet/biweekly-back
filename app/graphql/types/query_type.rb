@@ -19,6 +19,8 @@ module Types
 
     field :lista_tipos_categoria, resolver: Resolvers::Categorias::ListaTiposCategoria,
                                   description: 'Obtener lista de tipos de categoria'
+    field :lista_tipos_movimiento, resolver: Resolvers::Movimientos::ListaTiposMovimiento,
+                                   description: 'Obtener lista de tipos de movimientos'
 
     field :lista_cuentas, resolver: Resolvers::Cuentas::ListaCuentas,
                           description: 'Obtener lista de cuentas'
