@@ -12,7 +12,8 @@ module Types
     field :importe, Float
     field :tipo_afectacion, String
     field :tipo_detalle, String
-    field :cuenta_contable_id, Integer, null: false
+    # field :cuenta_contable_id, Integer, null: false
+    field :cuenta_contable, Types::CuentaContableType, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end

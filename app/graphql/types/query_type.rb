@@ -33,5 +33,7 @@ module Types
 
     field :lista_movimientos, resolver: Resolvers::Movimientos::ListaMovimientos,
                               description: 'Obtener lista de movimientos'
+    field :lista_detalles_movimiento, resolver: Resolvers::Movimientos::ListaDetallesMovimiento,
+                                      description: 'Obtener lista de detalles de movimientos'
   end
 end

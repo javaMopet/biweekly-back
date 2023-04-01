@@ -4,10 +4,11 @@ module Resolvers
   module Movimientos
     # Resolver para obtener la lista de movimientos
     class ListaMovimientos < Resolvers::Base
-      type [Types::DetalleMovimientoType], null: false
+      type [Types::MovimientoType], null: false
 
       def resolve
-        DetalleMovimiento.includes(:movimiento, :categoria, :cuenta).all
+        Movimiento.includes(:tipo_movimiento,
+                            detalles_movimiento: %i[categoria cuenta cuenta_contable]).all
       end
     end
   end
