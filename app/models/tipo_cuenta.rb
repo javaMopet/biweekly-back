@@ -1,0 +1,2 @@
+class TipoCuenta < ApplicationRecord
+end

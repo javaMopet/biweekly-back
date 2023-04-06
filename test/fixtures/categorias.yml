@@ -5,7 +5,7 @@ one:
   icono: MyString
   descripcion: MyString
   color: MyString
-  tipo_categoria: one
+  tipo_movimiento: one
   cuenta_contable: one
 
 two:
@@ -13,5 +13,5 @@ two:
   icono: MyString
   descripcion: MyString
   color: MyString
-  tipo_categoria: two
+  tipo_movimiento: two
   cuenta_contable: two

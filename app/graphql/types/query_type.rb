@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Types
+  # Queries
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
     include GraphQL::Types::Relay::HasNodeField
@@ -17,10 +18,12 @@ module Types
     field :lista_categorias, resolver: Resolvers::Categorias::ListaCategorias,
                              description: 'Obtener lista de categorias'
 
-    field :lista_tipos_categoria, resolver: Resolvers::Categorias::ListaTiposCategoria,
-                                  description: 'Obtener lista de tipos de categoria'
     field :lista_tipos_movimiento, resolver: Resolvers::Movimientos::ListaTiposMovimiento,
                                    description: 'Obtener lista de tipos de movimientos'
+
+    field :lista_tipos_cuenta,
+          resolver: Resolvers::Cuentas::ListaTiposCuenta,
+          description: 'Obtener lista de tipos de tipos de cuenta'
 
     field :lista_cuentas, resolver: Resolvers::Cuentas::ListaCuentas,
                           description: 'Obtener lista de cuentas'

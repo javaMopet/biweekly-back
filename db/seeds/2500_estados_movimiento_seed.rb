@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-begin
-  ActiveRecord::Base.connection.execute('DELETE FROM estados_movimiento RESTART IDENTITY CASCADE')
-rescue StandardError => e
-  puts "No postgresql #{e.message}"
-end
+# begin
+#   ActiveRecord::Base.connection.execute('DELETE FROM estados_movimiento RESTART IDENTITY CASCADE')
+# rescue StandardError => e
+#   puts "No postgresql #{e.message}"
+# end
 
 begin
   ActiveRecord::Base.connection.execute('DELETE FROM estados_movimiento;

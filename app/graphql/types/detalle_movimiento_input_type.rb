@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Types
+  # Detalle Movimiento Input
   class DetalleMovimientoInputType < Types::BaseInputObject
     argument :id, ID, required: false
     argument :movimiento_id, Integer, required: false

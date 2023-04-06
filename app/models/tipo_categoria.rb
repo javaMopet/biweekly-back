@@ -1,2 +1,0 @@
-class TipoCategoria < ApplicationRecord
-end

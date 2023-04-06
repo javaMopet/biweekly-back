@@ -7,7 +7,7 @@ module Resolvers
       type [Types::Cuentas::CuentaType], null: false
 
       def resolve
-        Cuenta.all
+        Cuenta.includes(:cuenta_contable).all
       end
     end
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tipos_cuenta
   resources :detalles_movimiento
   resources :movimientos
   resources :tipos_movimiento

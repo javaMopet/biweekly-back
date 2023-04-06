@@ -12,7 +12,8 @@ module Mutations
     def resolve(cuenta_input:)
       cuenta = ::Cuenta.new(**cuenta_input)
       unless cuenta.save
-        raise GraphQL::ExecutionError.new 'Error creating cuenta', extensions: cuenta.errors.to_hash
+        raise GraphQL::ExecutionError.new "Error creating cuenta #{cuenta.errors.full_messages}",
+                                          extensions: cuenta.errors.to_hash
       end
 
       { cuenta: }

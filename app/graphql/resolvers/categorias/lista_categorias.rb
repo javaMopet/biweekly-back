@@ -7,7 +7,7 @@ module Resolvers
       type [Types::Categorias::CategoriaType], null: false
 
       def resolve
-        Categoria.includes(:tipo_categoria, :cuenta_contable).all
+        Categoria.includes(:tipo_movimiento, :cuenta_contable).all
       end
     end
   end

@@ -2,8 +2,6 @@
 
 one:
   nombre: MyString
-  tipo_afectacion: MyString
 
 two:
   nombre: MyString
-  tipo_afectacion: MyString
