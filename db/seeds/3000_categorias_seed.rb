@@ -77,9 +77,9 @@ Categoria.create!(nombre: 'Mobiliario y equipo', icono: 'fa-brands fa-spotify',
                   descripcion: 'Muebles, computadoras, pantallas, teclados, ', color: '#1ad560', tipo_movimiento_id: 2,
                   cuenta_contable_id: 511_004, orden: 2600)
 
-Categoria.create!(nombre: 'Mobiliario y equipo', icono: 'fa-brands fa-spotify',
-                  descripcion: 'Muebles, computadoras, pantallas, teclados, ', color: '#1ad560', tipo_movimiento_id: 2,
-                  cuenta_contable_id: 511_004, orden: 2700)
+# Categoria.create!(nombre: 'Mobiliario y equipo', icono: 'fa-brands fa-spotify',
+#                   descripcion: 'Muebles, computadoras, pantallas, teclados, ', color: '#1ad560', tipo_movimiento_id: 2,
+#                   cuenta_contable_id: 511_004, orden: 2700)
 Categoria.create!(nombre: 'Anualidades', icono: 'fa-brands fa-spotify', descripcion: 'Anualidades, ',
                   color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 2800)
 Categoria.create!(nombre: 'Crédito hipotecario', icono: 'fa-brands fa-spotify', descripcion: 'Hipoteca Scotiabank',
@@ -87,8 +87,8 @@ Categoria.create!(nombre: 'Crédito hipotecario', icono: 'fa-brands fa-spotify',
 Categoria.create!(nombre: 'Adecuaciones Casa', icono: 'fa-brands fa-spotify', descripcion: 'Adecuaciones casa',
                   color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 3000)
 
-Categoria.create!(nombre: 'Adecuaciones Casa', icono: 'fa-brands fa-spotify', descripcion: 'Adecuaciones casa',
-                  color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 3100)
+# Categoria.create!(nombre: 'Adecuaciones Casa', icono: 'fa-brands fa-spotify', descripcion: 'Adecuaciones casa',
+#                   color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 3100)
 Categoria.create!(nombre: 'Mantenimiento Casa', icono: 'fa-brands fa-spotify', descripcion: 'Mantenimiento casa',
                   color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 3200)
 Categoria.create!(nombre: 'Mantenimiento Auto', icono: 'fa-brands fa-spotify', descripcion: 'Mantenimiento auto',
