@@ -7,6 +7,8 @@ module Types
     field :nombre, String
     field :label, String
     field :value, ID, null: false
+    field :icono, String, null: true
+    field :icon, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
@@ -17,5 +19,9 @@ module Types
     def label
       object.nombre.to_s
     end
+
+    def icon 
+      object.icono.to_s
+    end 
   end
 end

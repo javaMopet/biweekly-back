@@ -12,6 +12,8 @@ module Types
       field :tipo_movimiento_id, ID, null: false
       field :tipo_movimiento, Types::TipoMovimientoType, null: false
       field :cuenta_contable, Types::CuentaContableType, null: false
+      field :cuenta, Types::Cuentas::CuentaType, null: true
+      field :importe, Float, null: false
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
