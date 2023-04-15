@@ -20,6 +20,6 @@ rescue StandardError => e
   puts 'No sqlserver'
 end
 
-TipoMovimiento.create!(nombre: 'Ingreso')
-TipoMovimiento.create!(nombre: 'Gasto')
-TipoMovimiento.create!(nombre: 'Transferencia')
+TipoMovimiento.create!(nombre: 'Ingreso', icono: 'fa-solid fa-hand-holding-dollar')
+TipoMovimiento.create!(nombre: 'Gasto', icono: 'fa-solid fa-file-invoice-dollar')
+TipoMovimiento.create!(nombre: 'Transferencia', icono: 'sync_alt')
