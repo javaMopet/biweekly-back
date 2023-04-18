@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Types
-  # Input Type para Ingreso
-  class IngresoInputType < Types::BaseInputObject
+  # Input Type para Egreso
+  class EgresoInputType < Types::BaseInputObject
     argument :id, ID, required: false
     argument :categoria_id, Integer, required: false
     argument :cuenta_id, Integer, required: false
