@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cuenta_origen: one
+  cuenta_destino: one
+  observaciones: MyString
+
+two:
+  cuenta_origen: two
+  cuenta_destino: two
+  observaciones: MyString

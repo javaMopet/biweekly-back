@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_043555) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_221105) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -102,25 +102,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_043555) do
     t.index ["movimiento_id"], name: "index_detalles_movimiento_on_movimiento_id"
   end
 
-  create_table "detalles_registro", force: :cascade do |t|
-    t.bigint "registro_id", null: false
-    t.string "registrable_type"
-    t.integer "registrable_id"
+  create_table "egresos", force: :cascade do |t|
+    t.bigint "categoria_id", null: false
+    t.bigint "cuenta_id", null: false
     t.string "observaciones"
-    t.string "tipo_afectacion", limit: 1
-    t.bigint "cuenta_contable_id", null: false
-    t.decimal "importe_absoluto", precision: 10, scale: 2
-    t.decimal "importe_real", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cuenta_contable_id"], name: "index_detalles_registro_on_cuenta_contable_id"
-    t.index ["registro_id"], name: "index_detalles_registro_on_registro_id"
+    t.index ["categoria_id"], name: "index_egresos_on_categoria_id"
+    t.index ["cuenta_id"], name: "index_egresos_on_cuenta_id"
   end
 
   create_table "estados_movimiento", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "estados_registro", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ingresos", force: :cascade do |t|
+    t.bigint "categoria_id", null: false
+    t.bigint "cuenta_id", null: false
+    t.string "observaciones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categoria_id"], name: "index_ingresos_on_categoria_id"
+    t.index ["cuenta_id"], name: "index_ingresos_on_cuenta_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -167,13 +178,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_043555) do
   end
 
   create_table "registros", force: :cascade do |t|
-    t.string "observaciones"
-    t.string "comentarios"
-    t.date "fecha_transaccion"
-    t.bigint "user_id", null: false
+    t.bigint "estado_registro_id", null: false
+    t.string "registrable_type", limit: 100
+    t.bigint "registrable_id"
+    t.decimal "importe", precision: 10, scale: 4
+    t.date "fecha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_registros_on_user_id"
+    t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -194,6 +206,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_043555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "icono", limit: 50
+  end
+
+  create_table "transferencias", force: :cascade do |t|
+    t.bigint "cuenta_origen_id", null: false
+    t.bigint "cuenta_destino_id", null: false
+    t.string "observaciones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_destino_id"], name: "index_transferencias_on_cuenta_destino_id"
+    t.index ["cuenta_origen_id"], name: "index_transferencias_on_cuenta_origen_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -220,10 +242,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_043555) do
   add_foreign_key "detalles_movimiento", "cuentas"
   add_foreign_key "detalles_movimiento", "cuentas_contable"
   add_foreign_key "detalles_movimiento", "movimientos"
-  add_foreign_key "detalles_registro", "cuentas_contable"
-  add_foreign_key "detalles_registro", "registros"
+  add_foreign_key "egresos", "categorias"
+  add_foreign_key "egresos", "cuentas"
+  add_foreign_key "ingresos", "categorias"
+  add_foreign_key "ingresos", "cuentas"
   add_foreign_key "movimientos", "estados_movimiento"
   add_foreign_key "movimientos", "tipos_movimiento"
   add_foreign_key "movimientos", "users"
-  add_foreign_key "registros", "users"
+  add_foreign_key "registros", "estados_registro"
+  add_foreign_key "transferencias", "cuentas", column: "cuenta_destino_id"
+  add_foreign_key "transferencias", "cuentas", column: "cuenta_origen_id"
 end

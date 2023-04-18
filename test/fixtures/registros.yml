@@ -1,13 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  observaciones: MyString
-  comentarios: MyString
-  fecha_transaccion: 2023-03-02
-  user: one
+  estado_registro: one
+  registrable_type: MyString
+  registrable_id: 
+  importe: 9.99
+  fecha: 2023-04-17
 
 two:
-  observaciones: MyString
-  comentarios: MyString
-  fecha_transaccion: 2023-03-02
-  user: two
+  estado_registro: two
+  registrable_type: MyString
+  registrable_id: 
+  importe: 9.99
+  fecha: 2023-04-17

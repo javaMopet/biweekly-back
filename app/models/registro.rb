@@ -1,3 +1,3 @@
 class Registro < ApplicationRecord
-  belongs_to :user
+  belongs_to :estado_registro
 end

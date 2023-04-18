@@ -2,6 +2,7 @@
 
 module Types
   class MutationType < Types::BaseObject
+    field :ingreso_create, mutation: Mutations::IngresoCreate
     field :detalle_movimiento_delete, mutation: Mutations::DetalleMovimientoDelete
     field :detalle_movimiento_update, mutation: Mutations::DetalleMovimientoUpdate
     field :detalle_movimiento_create, mutation: Mutations::DetalleMovimientoCreate

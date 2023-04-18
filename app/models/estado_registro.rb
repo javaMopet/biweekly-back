@@ -1,0 +1,2 @@
+class EstadoRegistro < ApplicationRecord
+end

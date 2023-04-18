@@ -46,6 +46,6 @@ class RegistrosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def registro_params
-      params.require(:registro).permit(:observaciones, :comentarios, :fecha_transaccion, :user_id)
+      params.require(:registro).permit(:estado_registro_id, :registrable_type, :registrable_id, :importe, :fecha)
     end
 end

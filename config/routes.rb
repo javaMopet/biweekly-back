@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :transferencias
+  resources :egresos
+  resources :ingresos
+  resources :registros
   resources :tipos_cuenta
   resources :detalles_movimiento
   resources :movimientos
@@ -9,8 +13,6 @@ Rails.application.routes.draw do
                sessions: 'users/sessions',
                registrations: 'users/registrations'
              }, defaults: { format: :json }
-  resources :detalles_registro
-  resources :registros
   resources :cuentas
   resources :categorias
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?

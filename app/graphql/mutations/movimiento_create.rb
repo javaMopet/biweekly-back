@@ -49,7 +49,7 @@ module Mutations
       detalle_movimiento.importe = detalle.importe
       detalle_movimiento.tipo_afectacion = 'C'
       detalle_movimiento.tipo_detalle = 'N'
-      detalle_movimiento.cuenta_contable_id = 51_203
+      # detalle_movimiento.cuenta_contable_id = 511_003
       detalle_movimiento
     end
   end
