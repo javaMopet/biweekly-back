@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
+  get 'columnas', to: 'registros#columnas'
+  get 'movimientos', to: 'registros#movimientos'
+
   resources :transferencias
   resources :egresos
   resources :ingresos

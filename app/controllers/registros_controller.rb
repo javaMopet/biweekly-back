@@ -1,11 +1,24 @@
+# frozen_string_literal: true
+
+# Controlador para registros
 class RegistrosController < ApplicationController
-  before_action :set_registro, only: %i[ show update destroy ]
+  before_action :set_registro, only: %i[show update destroy]
 
   # GET /registros
   def index
     @registros = Registro.all
 
     render json: @registros
+  end
+
+  # GET /movimientos
+  def movimientos
+    render json: { data: Pro::DataImport.buscar_movimientos(2023) }
+  end
+
+  # GET /columnas
+  def columnas
+    render json: { data: Pro::DataImport.buscar_columnas(2023) }
   end
 
   # GET /registros/1
@@ -39,13 +52,15 @@ class RegistrosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_registro
-      @registro = Registro.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def registro_params
-      params.require(:registro).permit(:estado_registro_id, :registrable_type, :registrable_id, :importe, :fecha)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_registro
+    @registro = Registro.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def registro_params
+    params.require(:registro).permit(:estado_registro_id, :registrable_type, :registrable_id,
+                                     :importe, :fecha)
+  end
 end
