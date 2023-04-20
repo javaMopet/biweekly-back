@@ -8,9 +8,8 @@ module Pro
       execute_procedure('PA_COLUMNAS', 2023, 4, 1, 2)
     end
 
-    def self.buscar_movimientos(ejercicio_fiscal)
-      p " Buscando movimientos ejercicio_fiscal: #{ejercicio_fiscal}"
-      execute_procedure('PA_MOVIMIENTOS', 2023, 4, 1, 2)
+    def self.buscar_movimientos(_ejercicio_fiscal, tipo_movimiento_id)
+      execute_procedure('PA_MOVIMIENTOS', 2023, 4, 1, tipo_movimiento_id)
     end
   end
 end

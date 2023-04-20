@@ -8,6 +8,7 @@ module Types
     field :registrable_id, Integer
     field :importe, Float
     field :fecha, GraphQL::Types::ISO8601Date
+    field :nombre_completo, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end

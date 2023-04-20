@@ -6,4 +6,8 @@ class Ingreso < ApplicationRecord
 
   belongs_to :categoria
   belongs_to :cuenta
+
+  def nombre_completo
+    'Hola mundo!'
+  end 
 end

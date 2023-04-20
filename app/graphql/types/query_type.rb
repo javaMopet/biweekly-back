@@ -38,5 +38,11 @@ module Types
                               description: 'Obtener lista de movimientos'
     field :lista_detalles_movimiento, resolver: Resolvers::Movimientos::ListaDetallesMovimiento,
                                       description: 'Obtener lista de detalles de movimientos'
+    field :obtener_registros, resolver: Resolvers::Registros::ObtenerRegistros,
+                              description: 'Obtener lista de registros de movimientos'
+    field :obtener_ingresos, resolver: Resolvers::Registros::ObtenerIngresos,
+                             description: 'Obtener lista de registros de movimientos de ingreso'
+    field :obtener_egresos, resolver: Resolvers::Registros::ObtenerEgresos,
+                            description: 'Obtener lista de registros de movimientos de egreso'
   end
 end

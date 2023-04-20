@@ -13,7 +13,10 @@ class RegistrosController < ApplicationController
 
   # GET /movimientos
   def movimientos
-    render json: { data: Pro::DataImport.buscar_movimientos(2023) }
+    render json: { data: Pro::DataImport
+      .buscar_movimientos(2023,
+                          params.fetch(:tipoMovimientoId,
+                                       0).to_i) }
   end
 
   # GET /columnas

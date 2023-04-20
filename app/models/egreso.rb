@@ -6,4 +6,8 @@ class Egreso < ApplicationRecord
   
   belongs_to :categoria
   belongs_to :cuenta
+
+  def nombre_completo
+    "#{id} - #{categoria.nombre}"
+  end 
 end

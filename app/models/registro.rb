@@ -4,6 +4,7 @@
 class Registro < ApplicationRecord
   belongs_to :estado_registro
   delegated_type :registrable, types: %w[Ingreso Egreso Transferencia], required: false
+  delegate :nombre_completo, to: :registrable
 
   validates :importe, presence: true
 end
