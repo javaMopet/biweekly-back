@@ -2,12 +2,12 @@
 
 module Resolvers
   module Cuentas
-    # Resolver para obtener la lista de cuentas 
+    # Resolver para obtener la lista de cuentas
     class ListaCuentas < Resolvers::Base
       type [Types::Cuentas::CuentaType], null: false
 
       def resolve
-        Cuenta.includes(:cuenta_contable).all
+        Cuenta.includes(:cuenta_contable, :tipo_cuenta).all
       end
     end
   end

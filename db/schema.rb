@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_221105) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_20_205324) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -134,6 +134,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_221105) do
     t.index ["cuenta_id"], name: "index_ingresos_on_cuenta_id"
   end
 
+  create_table "inversiones", force: :cascade do |t|
+    t.bigint "categoria_id", null: false
+    t.bigint "cuenta_id", null: false
+    t.string "observaciones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categoria_id"], name: "index_inversiones_on_categoria_id"
+    t.index ["cuenta_id"], name: "index_inversiones_on_cuenta_id"
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.string "name"
     t.string "name_file"
@@ -246,6 +256,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_221105) do
   add_foreign_key "egresos", "cuentas"
   add_foreign_key "ingresos", "categorias"
   add_foreign_key "ingresos", "cuentas"
+  add_foreign_key "inversiones", "categorias"
+  add_foreign_key "inversiones", "cuentas"
   add_foreign_key "movimientos", "estados_movimiento"
   add_foreign_key "movimientos", "tipos_movimiento"
   add_foreign_key "movimientos", "users"

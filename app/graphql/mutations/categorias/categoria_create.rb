@@ -2,6 +2,7 @@
 
 module Mutations
   module Categorias
+    # Creación de categorias
     class CategoriaCreate < BaseMutation
       description 'Creates a new categoria'
 
@@ -12,8 +13,9 @@ module Mutations
       def resolve(categoria_input:)
         categoria = ::Categoria.new(**categoria_input)
         unless categoria.save
-          raise GraphQL::ExecutionError.new 'Error creating categoria',
-                                            extensions: categoria.errors.to_hash
+          raise GraphQL::ExecutionError
+            .new "Error creating categoria #{categoria.errors.full_messages}",
+                 extensions: categoria.errors.to_hash
         end
 
         { categoria: }

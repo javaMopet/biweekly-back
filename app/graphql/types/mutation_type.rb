@@ -2,6 +2,7 @@
 
 module Types
   class MutationType < Types::BaseObject
+    field :inversion_create, mutation: Mutations::InversionCreate
     field :transferencia_create, mutation: Mutations::TransferenciaCreate
     field :egreso_create, mutation: Mutations::EgresoCreate
     field :ingreso_create, mutation: Mutations::IngresoCreate

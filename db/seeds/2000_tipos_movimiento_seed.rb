@@ -23,3 +23,4 @@ end
 TipoMovimiento.create!(nombre: 'Ingreso', icono: 'fa-solid fa-hand-holding-dollar')
 TipoMovimiento.create!(nombre: 'Gasto', icono: 'fa-solid fa-file-invoice-dollar')
 TipoMovimiento.create!(nombre: 'Transferencia', icono: 'sync_alt')
+TipoMovimiento.create!(nombre: 'Inversion', icono: 'fa-solid fa-file-invoice-dollar')
