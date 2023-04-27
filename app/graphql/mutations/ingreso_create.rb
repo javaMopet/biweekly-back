@@ -14,8 +14,9 @@ module Mutations
       ingreso = ::Ingreso.new(ingreso_input.to_hash.except!(:registro))
 
       registro.registrable = ingreso
-      unless registro.save
-        raise GraphQL::ExecutionError.new "Error creating ingreso #{registro.errors.full_messages}",
+      ingreso.registro = registro
+      unless ingreso.save
+        raise GraphQL::ExecutionError.new "Error creating ingreso #{ingreso.errors.full_messages}",
                                           extensions: ingreso.errors.to_hash
       end
 
