@@ -16,14 +16,18 @@ class RegistrosController < ApplicationController
     render json: { data: Pro::DataImport
       .buscar_movimientos(2023,
                           params.fetch(:tipoMovimientoId,
+                                       0).to_i,
+                          params.fetch(:isSaldos,
                                        0).to_i) }
   end
 
   # GET /saldos_cuentas
   def saldos_cuentas
-    ejercicio_fiscal_id = params.fetch(:ejercicio_fiscal_id,0).to_i
+    ejercicio_fiscal_id = params.fetch(:ejercicio_fiscal_id, 0).to_i
     p ejercicio_fiscal_id
-    render json: { data: Pro::DataImport.buscar_saldos_cuentas(2023) }
+    render json: { data: Pro::DataImport
+      .buscar_saldos_cuentas(2023,
+                             params.fetch(:isSaldos, 0).to_i) }
   end
 
   # GET /columnas
