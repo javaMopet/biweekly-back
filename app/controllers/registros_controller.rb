@@ -21,6 +21,13 @@ class RegistrosController < ApplicationController
                                        0).to_i) }
   end
 
+  # GET /saldos_movimientos
+  def saldos_movimientos
+    ejercicio_fiscal_id = params.fetch(:ejercicio_fiscal_id, 0).to_i
+
+    render json: { data: Pro::DataImport.buscar_saldos_movimientos(2023, 4, 1) }
+  end
+
   # GET /saldos_cuentas
   def saldos_cuentas
     ejercicio_fiscal_id = params.fetch(:ejercicio_fiscal_id, 0).to_i

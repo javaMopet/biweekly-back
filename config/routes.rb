@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'columnas', to: 'registros#columnas'
   get 'movimientos', to: 'registros#movimientos'
   get 'saldos_cuentas', to: 'registros#saldos_cuentas'
+  get 'saldos_movimientos', to: 'registros#saldos_movimientos'
 
   resources :transferencias
   resources :egresos
