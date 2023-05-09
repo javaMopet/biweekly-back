@@ -37,6 +37,11 @@ class RegistrosController < ApplicationController
                              params.fetch(:isSaldos, 0).to_i) }
   end
 
+  # GET /saldos_finales
+  def saldos_finales
+    render json: { data: Pro::DataImport.buscar_saldos_finales(2023) }
+  end
+
   # GET /columnas
   def columnas
     render json: { data: Pro::DataImport.buscar_columnas(2023) }

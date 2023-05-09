@@ -19,5 +19,9 @@ module Pro
     def self.buscar_saldos_cuentas(_ejercicio_fiscal, is_saldos)
       execute_procedure('PA_SALDOS_CUENTAS', 2023, 4, 1, 1, is_saldos)
     end
+
+    def self.buscar_saldos_finales(_ejercicio_fiscal)
+      execute_procedure('PA_SALDOS_FINALES', 2023, 4, 1)
+    end
   end
 end
