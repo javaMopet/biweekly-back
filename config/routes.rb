@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :registros_tarjeta
   resources :inversiones
   get 'columnas', to: 'registros#columnas'
   get 'movimientos', to: 'registros#movimientos'

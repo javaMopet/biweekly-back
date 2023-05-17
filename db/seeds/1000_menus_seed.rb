@@ -33,3 +33,6 @@ Menu.create!(nombre: 'Cuentas Contables', icono: 'list_alt', ruta: 'cuentas_cont
 
 Menu.create!(nombre: 'Opciones', icono: 'settings', ruta: 'system_options', padre: 0,
              tiene_hijos: 1, orden: 600, activo: 1)
+
+Menu.create!(nombre: 'Tarjetas de crédito', icono: 'credit_card', ruta: 'tarjetas_credito', padre: 0, tiene_hijos: 1,
+             orden: 150, activo: 1)
