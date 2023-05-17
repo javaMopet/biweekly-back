@@ -11,6 +11,13 @@ class RegistrosController < ApplicationController
     render json: @registros
   end
 
+  # GET /columnas
+  def columnas
+    ejercicio_fiscal = params.fetch(:ejercicio_fiscal,0).to_i
+    mes = params.fetch(:mes, 0).to_i
+    render json: { data: Pro::DataImport.buscar_columnas(ejercicio_fiscal, mes) }
+  end
+
   # GET /movimientos
   def movimientos
     render json: { data: Pro::DataImport
@@ -40,11 +47,6 @@ class RegistrosController < ApplicationController
   # GET /saldos_finales
   def saldos_finales
     render json: { data: Pro::DataImport.buscar_saldos_finales(2023) }
-  end
-
-  # GET /columnas
-  def columnas
-    render json: { data: Pro::DataImport.buscar_columnas(2023) }
   end
 
   # GET /registros/1
