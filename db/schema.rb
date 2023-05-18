@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_20_205324) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -198,6 +198,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_205324) do
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
   end
 
+  create_table "registros_tarjeta", force: :cascade do |t|
+    t.date "fecha"
+    t.string "concepto"
+    t.bigint "categoria_id", null: false
+    t.decimal "importe", precision: 10, scale: 4
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categoria_id"], name: "index_registros_tarjeta_on_categoria_id"
+  end
+
   create_table "tests", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -262,6 +272,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_205324) do
   add_foreign_key "movimientos", "tipos_movimiento"
   add_foreign_key "movimientos", "users"
   add_foreign_key "registros", "estados_registro"
+  add_foreign_key "registros_tarjeta", "categorias"
   add_foreign_key "transferencias", "cuentas", column: "cuenta_destino_id"
   add_foreign_key "transferencias", "cuentas", column: "cuenta_origen_id"
 end
