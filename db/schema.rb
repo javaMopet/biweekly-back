@@ -199,8 +199,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
   end
 
   create_table "registros_tarjeta", force: :cascade do |t|
-    t.date "fecha"
-    t.string "concepto"
+    t.integer "consecutivo", null: false
+    t.date "fecha", null: false
+    t.string "concepto", null: false
     t.bigint "categoria_id", null: false
     t.decimal "importe", precision: 10, scale: 4
     t.datetime "created_at", null: false

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Controlador Api Rest para los registros de un tarjeta
 class RegistrosTarjetaController < ApplicationController
-  before_action :set_registro_tarjeta, only: %i[ show update destroy ]
+  before_action :set_registro_tarjeta, only: %i[show update destroy]
 
   # GET /registros_tarjeta
   def index
@@ -39,13 +42,15 @@ class RegistrosTarjetaController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_registro_tarjeta
-      @registro_tarjeta = RegistroTarjeta.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def registro_tarjeta_params
-      params.require(:registro_tarjeta).permit(:fecha, :concepto, :categoria_id, :importe)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_registro_tarjeta
+    @registro_tarjeta = RegistroTarjeta.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def registro_tarjeta_params
+    params.require(:registro_tarjeta).permit(:consecutivo, :fecha, :concepto, :categoria_id,
+                                             :importe)
+  end
 end
