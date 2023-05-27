@@ -1,6 +1,6 @@
 require "test_helper"
 
-class EstadoMovimientoTest < ActiveSupport::TestCase
+class CorteCuentaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

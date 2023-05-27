@@ -1,0 +1,2 @@
+class CorteCuenta < ApplicationRecord
+end

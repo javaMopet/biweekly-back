@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,10 +56,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
     t.index ["tipo_movimiento_id"], name: "index_categorias_on_tipo_movimiento_id"
   end
 
-  create_table "cfdis", force: :cascade do |t|
-    t.string "uuid"
-    t.string "rfc_emisor"
-    t.string "rfc_receptor"
+  create_table "cortes_cuenta", force: :cascade do |t|
+    t.decimal "saldo_inicial", precision: 10, scale: 4
+    t.decimal "saldo_final", precision: 10, scale: 4
+    t.date "fecha_inicial"
+    t.date "fecha_final"
+    t.string "estatus", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
     t.datetime "updated_at", null: false
     t.bigint "tipo_cuenta_id", null: false
     t.decimal "saldo", precision: 10, scale: 4
+    t.integer "dia_corte"
     t.index ["cuenta_contable_id"], name: "index_cuentas_on_cuenta_contable_id"
     t.index ["tipo_cuenta_id"], name: "index_cuentas_on_tipo_cuenta_id"
   end
@@ -86,22 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
     t.index ["padre_id"], name: "index_cuentas_contable_on_padre_id"
   end
 
-  create_table "detalles_movimiento", force: :cascade do |t|
-    t.bigint "movimiento_id", null: false
-    t.bigint "categoria_id"
-    t.bigint "cuenta_id"
-    t.decimal "importe", precision: 10, scale: 4
-    t.string "tipo_afectacion", limit: 1
-    t.string "tipo_detalle", limit: 1
-    t.bigint "cuenta_contable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["categoria_id"], name: "index_detalles_movimiento_on_categoria_id"
-    t.index ["cuenta_contable_id"], name: "index_detalles_movimiento_on_cuenta_contable_id"
-    t.index ["cuenta_id"], name: "index_detalles_movimiento_on_cuenta_id"
-    t.index ["movimiento_id"], name: "index_detalles_movimiento_on_movimiento_id"
-  end
-
   create_table "egresos", force: :cascade do |t|
     t.bigint "categoria_id", null: false
     t.bigint "cuenta_id", null: false
@@ -110,12 +97,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
     t.datetime "updated_at", null: false
     t.index ["categoria_id"], name: "index_egresos_on_categoria_id"
     t.index ["cuenta_id"], name: "index_egresos_on_cuenta_id"
-  end
-
-  create_table "estados_movimiento", force: :cascade do |t|
-    t.string "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "estados_registro", force: :cascade do |t|
@@ -173,20 +154,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "movimientos", force: :cascade do |t|
-    t.integer "numero"
-    t.bigint "estado_movimiento_id", null: false
-    t.bigint "tipo_movimiento_id", null: false
-    t.date "fecha"
-    t.string "observaciones", limit: 300
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["estado_movimiento_id"], name: "index_movimientos_on_estado_movimiento_id"
-    t.index ["tipo_movimiento_id"], name: "index_movimientos_on_tipo_movimiento_id"
-    t.index ["user_id"], name: "index_movimientos_on_user_id"
-  end
-
   create_table "registros", force: :cascade do |t|
     t.bigint "estado_registro_id", null: false
     t.string "registrable_type", limit: 100
@@ -196,17 +163,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
-  end
-
-  create_table "registros_tarjeta", force: :cascade do |t|
-    t.integer "consecutivo", null: false
-    t.date "fecha", null: false
-    t.string "concepto", null: false
-    t.bigint "categoria_id", null: false
-    t.decimal "importe", precision: 10, scale: 4
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["categoria_id"], name: "index_registros_tarjeta_on_categoria_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -259,21 +215,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_215944) do
   add_foreign_key "cuentas", "cuentas_contable"
   add_foreign_key "cuentas", "tipos_cuenta"
   add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
-  add_foreign_key "detalles_movimiento", "categorias"
-  add_foreign_key "detalles_movimiento", "cuentas"
-  add_foreign_key "detalles_movimiento", "cuentas_contable"
-  add_foreign_key "detalles_movimiento", "movimientos"
   add_foreign_key "egresos", "categorias"
   add_foreign_key "egresos", "cuentas"
   add_foreign_key "ingresos", "categorias"
   add_foreign_key "ingresos", "cuentas"
   add_foreign_key "inversiones", "categorias"
   add_foreign_key "inversiones", "cuentas"
-  add_foreign_key "movimientos", "estados_movimiento"
-  add_foreign_key "movimientos", "tipos_movimiento"
-  add_foreign_key "movimientos", "users"
   add_foreign_key "registros", "estados_registro"
-  add_foreign_key "registros_tarjeta", "categorias"
   add_foreign_key "transferencias", "cuentas", column: "cuenta_destino_id"
   add_foreign_key "transferencias", "cuentas", column: "cuenta_origen_id"
 end

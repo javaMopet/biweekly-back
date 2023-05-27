@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :registros_tarjeta
+  resources :cortes_cuenta
   resources :inversiones
   get 'columnas', to: 'registros#columnas'
   get 'movimientos', to: 'registros#movimientos'
@@ -14,10 +14,7 @@ Rails.application.routes.draw do
   resources :ingresos
   resources :registros
   resources :tipos_cuenta
-  resources :detalles_movimiento
-  resources :movimientos
   resources :tipos_movimiento
-  resources :estados_movimiento
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
@@ -29,7 +26,6 @@ Rails.application.routes.draw do
 
   post '/graphql', to: 'graphql#execute'
   get 'pages/home'
-  resources :cfdis
 
   get 'member-data', to: 'members#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
