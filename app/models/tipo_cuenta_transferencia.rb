@@ -1,0 +1,2 @@
+class TipoCuentaTransferencia < ApplicationRecord
+end

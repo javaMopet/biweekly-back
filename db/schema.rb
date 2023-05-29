@@ -40,19 +40,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   end
 
   create_table "categorias", force: :cascade do |t|
-    t.string "nombre", limit: 200
+    t.bigint "tipo_movimiento_id", null: false
+    t.integer "orden", null: false
+    t.string "nombre", limit: 200, null: false
     t.string "icono", limit: 50
-    t.string "descripcion"
+    t.string "descripcion", limit: 1000
     t.string "color", limit: 20
-    t.bigint "cuenta_contable_id", null: false
+    t.bigint "cuenta_contable_id"
+    t.bigint "cuenta_default_id"
+    t.decimal "importe_default", precision: 10, scale: 4, default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tipo_movimiento_id", null: false
-    t.bigint "cuenta_id"
-    t.integer "orden", default: 1000, null: false
-    t.decimal "importe", precision: 10, scale: 4, default: 0.0, null: false
     t.index ["cuenta_contable_id"], name: "index_categorias_on_cuenta_contable_id"
-    t.index ["cuenta_id"], name: "index_categorias_on_cuenta_id"
+    t.index ["cuenta_default_id"], name: "index_categorias_on_cuenta_default_id"
     t.index ["tipo_movimiento_id"], name: "index_categorias_on_tipo_movimiento_id"
   end
 
@@ -69,12 +69,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
     t.string "descripcion"
+    t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
+    t.integer "dia_corte"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tipo_cuenta_id", null: false
-    t.decimal "saldo", precision: 10, scale: 4
-    t.integer "dia_corte"
     t.index ["cuenta_contable_id"], name: "index_cuentas_on_cuenta_contable_id"
     t.index ["tipo_cuenta_id"], name: "index_cuentas_on_tipo_cuenta_id"
   end
@@ -92,7 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   create_table "egresos", force: :cascade do |t|
     t.bigint "categoria_id", null: false
     t.bigint "cuenta_id", null: false
-    t.string "observaciones"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categoria_id"], name: "index_egresos_on_categoria_id"
@@ -108,7 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   create_table "ingresos", force: :cascade do |t|
     t.bigint "categoria_id", null: false
     t.bigint "cuenta_id", null: false
-    t.string "observaciones"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categoria_id"], name: "index_ingresos_on_categoria_id"
@@ -158,8 +155,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
     t.bigint "estado_registro_id", null: false
     t.string "registrable_type", limit: 100
     t.bigint "registrable_id"
-    t.decimal "importe", precision: 10, scale: 4
-    t.date "fecha"
+    t.decimal "importe", precision: 10, scale: 4, null: false
+    t.date "fecha", null: false
+    t.string "observaciones", limit: 1000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
@@ -172,27 +170,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   end
 
   create_table "tipos_cuenta", force: :cascade do |t|
-    t.string "nombre", limit: 30
+    t.string "nombre", limit: 50, null: false
+    t.string "icono", limit: 50, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "icono", limit: 30
+  end
+
+  create_table "tipos_cuenta_transferencia", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tipos_movimiento", force: :cascade do |t|
-    t.string "nombre", limit: 20
+    t.string "nombre", limit: 50
+    t.string "icono", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "icono", limit: 50
   end
 
   create_table "transferencias", force: :cascade do |t|
-    t.bigint "cuenta_origen_id", null: false
-    t.bigint "cuenta_destino_id", null: false
-    t.string "observaciones"
+    t.bigint "tipo_cuenta_transferencia_id", null: false
+    t.bigint "cuenta_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cuenta_destino_id"], name: "index_transferencias_on_cuenta_destino_id"
-    t.index ["cuenta_origen_id"], name: "index_transferencias_on_cuenta_origen_id"
+    t.index ["cuenta_id"], name: "index_transferencias_on_cuenta_id"
+    t.index ["tipo_cuenta_transferencia_id"], name: "index_transferencias_on_tipo_cuenta_transferencia_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -209,7 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categorias", "cuentas"
+  add_foreign_key "categorias", "cuentas", column: "cuenta_default_id"
   add_foreign_key "categorias", "cuentas_contable"
   add_foreign_key "categorias", "tipos_movimiento"
   add_foreign_key "cuentas", "cuentas_contable"
@@ -222,6 +225,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   add_foreign_key "inversiones", "categorias"
   add_foreign_key "inversiones", "cuentas"
   add_foreign_key "registros", "estados_registro"
-  add_foreign_key "transferencias", "cuentas", column: "cuenta_destino_id"
-  add_foreign_key "transferencias", "cuentas", column: "cuenta_origen_id"
+  add_foreign_key "transferencias", "cuentas"
+  add_foreign_key "transferencias", "tipos_cuenta_transferencia"
 end
