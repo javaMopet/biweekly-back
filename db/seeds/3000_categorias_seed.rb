@@ -8,9 +8,9 @@
 
 begin
   ActiveRecord::Base.connection.execute('
-  DELETE FROM detalles_movimiento;
-    DECLARE @reseeddm tinyint = IIF(@@ROWCOUNT > 0, 0, 0);
-    DBCC CHECKIDENT (detalles_movimiento, RESEED, @reseeddm);
+  -- DELETE FROM detalles_movimiento;
+    -- DECLARE @reseeddm tinyint = IIF(@@ROWCOUNT > 0, 0, 0);
+    -- DBCC CHECKIDENT (detalles_movimiento, RESEED, @reseeddm);
   DELETE FROM categorias;
     DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 0);
     DBCC CHECKIDENT (categorias, RESEED, @reseed);
@@ -40,7 +40,7 @@ Categoria.create!(nombre: 'Spotify', icono: 'fa-brands fa-spotify', descripcion:
                   color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 900)
 
 Categoria.create!(nombre: 'Crédito Taos', icono: 'directions_car', descripcion: 'Pago mensual de taos',
-                  color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, cuenta_id: 1, orden: 1000)
+                  color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, cuenta_default_id: 1, orden: 1000)
 Categoria.create!(nombre: 'Nuevos Proyectos', icono: 'account_tree', descripcion: 'Nuevos proyectos',
                   color: '#1ad560', tipo_movimiento_id: 2, cuenta_contable_id: 511_004, orden: 1100)
 Categoria.create!(nombre: 'Agua', icono: 'emoji_food_beverage', descripcion: 'Agua',

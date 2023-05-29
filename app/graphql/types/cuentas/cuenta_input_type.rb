@@ -9,6 +9,7 @@ module Types
       argument :descripcion, String, required: false
       argument :cuenta_contable_id, Integer, required: false
       argument :tipo_cuenta_id, Integer, required: true
+      argument :dia_corte, Integer, required: false
       argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
       argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
     end

@@ -8,9 +8,9 @@
 
 begin
   ActiveRecord::Base.connection.execute("
-    DELETE FROM detalles_movimiento;
-		DECLARE @reseeddm tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
-		DBCC CHECKIDENT (detalles_movimiento, RESEED, @reseeddm);
+    -- DELETE FROM detalles_movimiento;
+		-- DECLARE @reseeddm tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
+		-- DBCC CHECKIDENT (detalles_movimiento, RESEED, @reseeddm);
     DELETE FROM categorias;
 		DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
 		DBCC CHECKIDENT (categorias, RESEED, @reseedc);
