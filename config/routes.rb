@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'saldos_finales', to: 'registros#saldos_finales'
 
   resources :transferencias
+  post '/create_list', to: 'egresos#create_list'
   resources :egresos
   resources :ingresos
   resources :registros

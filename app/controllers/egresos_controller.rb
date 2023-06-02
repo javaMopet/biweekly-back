@@ -1,5 +1,5 @@
 class EgresosController < ApplicationController
-  before_action :set_egreso, only: %i[ show update destroy ]
+  before_action :set_egreso, only: %i[show update destroy]
 
   # GET /egresos
   def index
@@ -24,6 +24,13 @@ class EgresosController < ApplicationController
     end
   end
 
+  # POST /create_list
+  def create_list
+    lista_egresos = params.fetch(:listaEgresos, [])
+    listado =  JSON.parse(lista_egresos.to_json)
+    p (listado.to_a)[0]["id"]
+  end
+
   # PATCH/PUT /egresos/1
   def update
     if @egreso.update(egreso_params)
@@ -39,13 +46,14 @@ class EgresosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_egreso
-      @egreso = Egreso.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def egreso_params
-      params.require(:egreso).permit(:categoria_id, :cuenta_id, :observaciones)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_egreso
+    @egreso = Egreso.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def egreso_params
+    params.require(:egreso).permit(:categoria_id, :cuenta_id, :observaciones)
+  end
 end
