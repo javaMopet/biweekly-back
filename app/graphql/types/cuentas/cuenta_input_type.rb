@@ -6,7 +6,7 @@ module Types
     class CuentaInputType < Types::BaseInputObject
       argument :id, ID, required: false
       argument :nombre, String, required: false
-      argument :descripcion, String, required: false
+      argument :identificador, String, required: false
       argument :cuenta_contable_id, Integer, required: false
       argument :tipo_cuenta_id, Integer, required: true
       argument :dia_corte, Integer, required: false

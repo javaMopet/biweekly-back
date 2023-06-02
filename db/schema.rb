@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
 
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
-    t.string "descripcion"
+    t.string "identificador", limit: 10, null: false
     t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
     t.integer "dia_corte"

@@ -16,14 +16,17 @@ rescue StandardError => e
 end
 
 Cuenta.create!(nombre: 'Bacomer LMS', tipo_cuenta_id: 1,
-               descripcion: 'Cuenta de Ahorros de LMS en Bancomer',
+               identificador: '2659',
                cuenta_contable_id: 112_001)
 Cuenta.create!(nombre: 'Santander HPM', tipo_cuenta_id: 1,
-               descripcion: 'Cuenta de Ahorros de HPM en Santander',
+               identificador: '37889',
                cuenta_contable_id: 112_002)
 Cuenta.create!(nombre: 'Scotiabank', tipo_cuenta_id: 1,
-               descripcion: 'Cuenta de Scotiabank para el pago de hipoteca',
+               identificador: '2058',
                cuenta_contable_id: 112_003)
 Cuenta.create!(nombre: 'Banco azteca', tipo_cuenta_id: 1,
-               descripcion: 'Cuenta de Ahorros Banco Azteca',
+               identificador: '5573',
                cuenta_contable_id: 112_004)
+Cuenta.create!(nombre: 'Santander Like U', tipo_cuenta_id: 3,
+               identificador: '3376',
+               cuenta_contable_id: 212_001)
