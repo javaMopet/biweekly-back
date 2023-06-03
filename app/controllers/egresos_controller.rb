@@ -26,9 +26,9 @@ class EgresosController < ApplicationController
 
   # POST /create_list
   def create_list
-    lista_egresos = params.fetch(:listaEgresos, [])
-    listado =  JSON.parse(lista_egresos.to_json)
-    p (listado.to_a)[0]["id"]
+    listado = params.fetch(:lista_egresos, [])
+    listado_json =  JSON.parse(lista_egresos.to_json)
+    p (listado_json.to_a)[0]["id"]
   end
 
   # PATCH/PUT /egresos/1
