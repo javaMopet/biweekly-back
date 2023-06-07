@@ -4,8 +4,7 @@
 class Egreso < ApplicationRecord
   include Registrable
   
-  belongs_to :categoria
-  belongs_to :cuenta
+  belongs_to :categoria  
 
   def nombre_completo
     "#{id} - #{categoria.nombre}"

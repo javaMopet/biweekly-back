@@ -9,6 +9,7 @@ class CreateRegistros < ActiveRecord::Migration[7.0]
       t.bigint :registrable_id
       t.decimal :importe, precision: 10, scale: 4, null: false
       t.date :fecha, null: false
+      t.references :cuenta, null: true, foreign_key: true
       t.string :observaciones, limit: 1000, null: true
 
       t.timestamps

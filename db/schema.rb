@@ -90,11 +90,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
 
   create_table "egresos", force: :cascade do |t|
     t.bigint "categoria_id", null: false
-    t.bigint "cuenta_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categoria_id"], name: "index_egresos_on_categoria_id"
-    t.index ["cuenta_id"], name: "index_egresos_on_cuenta_id"
   end
 
   create_table "estados_registro", force: :cascade do |t|
@@ -105,11 +103,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
 
   create_table "ingresos", force: :cascade do |t|
     t.bigint "categoria_id", null: false
-    t.bigint "cuenta_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categoria_id"], name: "index_ingresos_on_categoria_id"
-    t.index ["cuenta_id"], name: "index_ingresos_on_cuenta_id"
   end
 
   create_table "inversiones", force: :cascade do |t|
@@ -157,9 +153,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
     t.bigint "registrable_id"
     t.decimal "importe", precision: 10, scale: 4, null: false
     t.date "fecha", null: false
+    t.bigint "cuenta_id"
     t.string "observaciones", limit: 1000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_registros_on_cuenta_id"
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
   end
 
@@ -191,10 +189,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
 
   create_table "transferencias", force: :cascade do |t|
     t.bigint "tipo_cuenta_transferencia_id", null: false
-    t.bigint "cuenta_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cuenta_id"], name: "index_transferencias_on_cuenta_id"
     t.index ["tipo_cuenta_transferencia_id"], name: "index_transferencias_on_tipo_cuenta_transferencia_id"
   end
 
@@ -219,12 +215,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   add_foreign_key "cuentas", "tipos_cuenta"
   add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
   add_foreign_key "egresos", "categorias"
-  add_foreign_key "egresos", "cuentas"
   add_foreign_key "ingresos", "categorias"
-  add_foreign_key "ingresos", "cuentas"
   add_foreign_key "inversiones", "categorias"
   add_foreign_key "inversiones", "cuentas"
+  add_foreign_key "registros", "cuentas"
   add_foreign_key "registros", "estados_registro"
-  add_foreign_key "transferencias", "cuentas"
   add_foreign_key "transferencias", "tipos_cuenta_transferencia"
 end

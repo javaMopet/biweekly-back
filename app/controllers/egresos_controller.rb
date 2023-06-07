@@ -46,9 +46,7 @@ class EgresosController < ApplicationController
       registro.registrable = egreso_save
       egreso_save.registro = registro
 
-      unless egreso_save.save
-        p egreso_save.errors.full_messages
-      end       
+      p egreso_save.errors.full_messages unless egreso_save.save
     end
   end
 
@@ -84,6 +82,7 @@ class EgresosController < ApplicationController
     registro.estado_registro_id = registro_aux[:estado_registro_id]
     registro.importe = registro_aux[:importe]
     registro.fecha = registro_aux[:fecha]
+    registro.cuenta_id = registro_aux[:cuenta_id]
     registro.observaciones = registro_aux[:observaciones]
 
     registro
@@ -92,8 +91,6 @@ class EgresosController < ApplicationController
   def obtener_egreso(egreso_aux)
     egreso =Egreso.new
     egreso.categoria_id = egreso_aux[:categoria_id]
-    egreso.cuenta_id = egreso_aux[:cuenta_id]
-
     egreso
   end
 end
