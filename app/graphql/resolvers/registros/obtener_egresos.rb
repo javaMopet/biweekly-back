@@ -13,9 +13,9 @@ module Resolvers
 
       def resolve(categoria_id:, cuenta_id:, fecha_inicio:, fecha_fin:)
         p cuenta_id
-        listado = Egreso.includes(:registro, :cuenta, :categoria).joins(:registro)
+        listado = Egreso.includes({ registro: :cuenta }, :categoria).joins(:registro)
         listado = listado.where(categoria_id:) if categoria_id
-        listado = listado.where(cuenta_id:) if cuenta_id
+        listado = listado.where(registros: { cuenta_id: }) if cuenta_id
         listado = listado.where(registros: { fecha: fecha_inicio..fecha_fin })
         listado.all
       end
