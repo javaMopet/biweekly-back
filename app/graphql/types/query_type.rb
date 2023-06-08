@@ -47,5 +47,8 @@ module Types
                              description: 'Obtener lista de registros de movimientos de ingreso'
     field :obtener_egresos, resolver: Resolvers::Registros::ObtenerEgresos,
                             description: 'Obtener lista de registros de movimientos de egreso'
+
+    field :lista_registros_tarjeta, resolver: Resolvers::RegistrosTarjeta::ListaRegistrosTarjeta,
+                                    description: 'Obtener lista de registros de una tarjeta de crédito'
   end
 end

@@ -5,7 +5,7 @@ class Registro < ApplicationRecord
   belongs_to :estado_registro
   belongs_to :cuenta, optional: true
 
-  delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia], required: false
+  delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia], required: false, dependent: :destroy
   delegate :nombre_completo, to: :registrable
 
   validates :importe, presence: true

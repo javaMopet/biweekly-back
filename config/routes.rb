@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
+  resources :registros_tarjeta
   resources :cortes_cuenta
   resources :inversiones
   get 'columnas', to: 'registros#columnas'
@@ -10,7 +12,6 @@ Rails.application.routes.draw do
   get 'saldos_finales', to: 'registros#saldos_finales'
 
   resources :transferencias
-  post '/create_list', to: 'egresos#create_list'
   resources :egresos
   resources :ingresos
   resources :registros
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
                sessions: 'users/sessions',
                registrations: 'users/registrations'
              }, defaults: { format: :json }
+  get '/cuentas/obtener_saldo_tarjeta', to: 'cuentas#obtener_saldo_tarjeta'
   resources :cuentas
   resources :categorias
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?

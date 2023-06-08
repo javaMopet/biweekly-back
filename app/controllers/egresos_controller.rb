@@ -24,31 +24,31 @@ class EgresosController < ApplicationController
     end
   end
 
-  # POST /create_list
-  def create_list
-    listado = params.fetch(:lista_egresos, [])
-    # p listado.class
-    # p listado
-    # listado = params["lista_egresos"]
-    # listado_json =  JSON.parse(listado.to_json)
-    # p listado_json.class
-    # p listado_json
-    # p (listado_json.to_a)[0]["registro"]
-    listado.each do |egreso|
-      p egreso["registro"]
-      p egreso[:registro]
-      p egreso[:categoria_id]
-      p egreso[:cuenta_id]
-      p egreso[:registro][:estado_registro_id]
-      registro = obtener_registro egreso[:registro]
-      egreso_save = obtener_egreso egreso
+  
+  # def create_list
+  #   listado = params.fetch(:lista_egresos, [])
+  #   # p listado.class
+  #   # p listado
+  #   # listado = params["lista_egresos"]
+  #   # listado_json =  JSON.parse(listado.to_json)
+  #   # p listado_json.class
+  #   # p listado_json
+  #   # p (listado_json.to_a)[0]["registro"]
+  #   listado.each do |egreso|
+  #     p egreso["registro"]
+  #     p egreso[:registro]
+  #     p egreso[:categoria_id]
+  #     p egreso[:cuenta_id]
+  #     p egreso[:registro][:estado_registro_id]
+  #     registro = obtener_registro egreso[:registro]
+  #     egreso_save = obtener_egreso egreso
 
-      registro.registrable = egreso_save
-      egreso_save.registro = registro
+  #     registro.registrable = egreso_save
+  #     egreso_save.registro = registro
 
-      p egreso_save.errors.full_messages unless egreso_save.save
-    end
-  end
+  #     p egreso_save.errors.full_messages unless egreso_save.save
+  #   end
+  # end
 
   # PATCH/PUT /egresos/1
   def update

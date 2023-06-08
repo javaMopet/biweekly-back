@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_182328) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -101,6 +101,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "estados_registro_tarjeta", force: :cascade do |t|
+    t.string "nombre", limit: 20
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ingresos", force: :cascade do |t|
     t.bigint "categoria_id", null: false
     t.datetime "created_at", null: false
@@ -159,6 +165,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
     t.datetime "updated_at", null: false
     t.index ["cuenta_id"], name: "index_registros_on_cuenta_id"
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
+  end
+
+  create_table "registros_tarjeta", force: :cascade do |t|
+    t.bigint "estado_registro_tarjeta_id", null: false
+    t.bigint "cuenta_id", null: false
+    t.bigint "categoria_id", null: false
+    t.decimal "importe", precision: 10, scale: 4
+    t.date "fecha"
+    t.string "concepto", limit: 1000
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categoria_id"], name: "index_registros_tarjeta_on_categoria_id"
+    t.index ["cuenta_id"], name: "index_registros_tarjeta_on_cuenta_id"
+    t.index ["estado_registro_tarjeta_id"], name: "index_registros_tarjeta_on_estado_registro_tarjeta_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -220,5 +240,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_183721) do
   add_foreign_key "inversiones", "cuentas"
   add_foreign_key "registros", "cuentas"
   add_foreign_key "registros", "estados_registro"
+  add_foreign_key "registros_tarjeta", "categorias"
+  add_foreign_key "registros_tarjeta", "cuentas"
+  add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"
   add_foreign_key "transferencias", "tipos_cuenta_transferencia"
 end

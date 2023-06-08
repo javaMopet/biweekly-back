@@ -1,0 +1,2 @@
+class EstadoRegistroTarjeta < ApplicationRecord
+end
