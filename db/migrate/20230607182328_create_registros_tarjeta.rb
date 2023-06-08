@@ -5,7 +5,7 @@ class CreateRegistrosTarjeta < ActiveRecord::Migration[7.0]
       t.references :cuenta, null: false, foreign_key: true
       t.references :categoria, null: false, foreign_key: true
       t.decimal :importe, precision: 10, scale: 4
-      t.date :fecha
+      t.date :fecha, null: false
       t.string :concepto, limit: 1000
 
       t.timestamps
