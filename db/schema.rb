@@ -172,8 +172,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182328) do
     t.bigint "cuenta_id", null: false
     t.bigint "categoria_id", null: false
     t.decimal "importe", precision: 10, scale: 4
-    t.date "fecha"
+    t.date "fecha", null: false
     t.string "concepto", limit: 1000
+    t.boolean "isMsi", default: false, null: false
+    t.integer "numero_msi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categoria_id"], name: "index_registros_tarjeta_on_categoria_id"
