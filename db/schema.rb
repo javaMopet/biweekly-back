@@ -174,7 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182328) do
     t.decimal "importe", precision: 10, scale: 4
     t.date "fecha", null: false
     t.string "concepto", limit: 1000
-    t.boolean "isMsi", default: false, null: false
+    t.boolean "is_msi", default: false, null: false
     t.integer "numero_msi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

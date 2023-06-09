@@ -75,6 +75,6 @@ class RegistrosTarjetaController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def registro_tarjeta_params
-    params.require(:registro_tarjeta).permit(:estado_registro_tarjeta_id, :cuenta_id, :importe, :fecha, :concepto)
+    params.require(:registro_tarjeta).permit(:estado_registro_tarjeta_id, :cuenta_id, :importe, :fecha, :concepto, :is_msi, :numero_msi)
   end
 end
