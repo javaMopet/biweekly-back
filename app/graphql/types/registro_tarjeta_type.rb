@@ -12,6 +12,8 @@ module Types
     field :importe, Float
     field :fecha, GraphQL::Types::ISO8601Date
     field :concepto, String
+    field :is_msi, Boolean, null: false
+    field :numero_msi, Integer, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end
