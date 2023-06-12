@@ -16,7 +16,7 @@ module Resolvers
         registros = registros.where(cuenta_id:) if cuenta_id
         registros = registros.where(fecha: fecha_inicio..fecha_fin)
         registros = registros.where(is_msi:) unless is_msi.nil?
-        registros.all
+        registros.order(fecha: :desc, id: :desc).all
       end
     end
   end
