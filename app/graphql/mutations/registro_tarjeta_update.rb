@@ -11,9 +11,12 @@ module Mutations
 
     def resolve(id:, registro_tarjeta_input:)
       registro_tarjeta = ::RegistroTarjeta.find(id)
-      raise GraphQL::ExecutionError.new "Error updating registro_tarjeta", extensions: registro_tarjeta.errors.to_hash unless registro_tarjeta.update(**registro_tarjeta_input)
+      unless registro_tarjeta.update(**registro_tarjeta_input)
+        raise GraphQL::ExecutionError.new "Error updating registro_tarjeta #{registro_tarjeta.errors.full_messages}",
+                                          extensions: registro_tarjeta.errors.to_hash
+      end
 
-      { registro_tarjeta: registro_tarjeta }
+      { registro_tarjeta: }
     end
   end
 end
