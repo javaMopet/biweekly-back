@@ -50,5 +50,7 @@ module Types
 
     field :lista_registros_tarjeta, resolver: Resolvers::RegistrosTarjeta::ListaRegistrosTarjeta,
                                     description: 'Obtener lista de registros de una tarjeta de crédito'
+    field :lista_bancos, resolver: Resolvers::Bancos::ListaBancos,
+                                    description: 'Obtener lista de bancos'
   end
 end
