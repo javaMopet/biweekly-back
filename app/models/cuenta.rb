@@ -4,6 +4,7 @@
 class Cuenta < ApplicationRecord
   belongs_to :tipo_cuenta
   belongs_to :cuenta_contable
+  belongs_to :banco, optional: true
 
   has_many :registros, dependent: :destroy
 end

@@ -28,6 +28,10 @@ Menu.create!(nombre: 'Categorias', icono: 'category', ruta: 'categorias',
 
 Menu.create!(nombre: 'Cuentas', icono: 'wallet', ruta: 'cuentas',
              padre: menu_administracion.id, tiene_hijos: 1, orden: 310, activo: 1)
+
+Menu.create!(nombre: 'Bancos', icono: 'account_balance', ruta: 'bancos',
+             padre: menu_administracion.id, tiene_hijos: 1, orden: 320, activo: 1)
+
 Menu.create!(nombre: 'Cuentas Contables', icono: 'list_alt', ruta: 'cuentas_contables',
              padre: menu_administracion.id, tiene_hijos: 1, orden: 320, activo: 1)
 

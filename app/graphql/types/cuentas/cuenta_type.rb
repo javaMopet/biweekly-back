@@ -11,6 +11,8 @@ module Types
       field :cuenta_contable, Types::CuentaContableType
       field :tipo_cuenta, Types::TipoCuentaType, null: false
       field :dia_corte, Integer, null: true
+      field :banco, Types::BancoType, null: false
+      field :saldo, Float
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
