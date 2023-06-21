@@ -9,7 +9,7 @@ module Resolvers
       argument :id, ID, required: true
 
       def resolve(id:)
-        Categoria.includes(:tipo_movimiento, :cuenta_contable, :cuenta).find(id)
+        Categoria.includes(:tipo_movimiento, :cuenta_contable, :cuenta_default).find(id)
       end
     end
   end
