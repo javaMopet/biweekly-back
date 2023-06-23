@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   resources :bancos
   post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
+  post '/registros/create_multiple', to: 'registros#create_multiple'
   resources :registros_tarjeta
   resources :cortes_cuenta
   resources :inversiones

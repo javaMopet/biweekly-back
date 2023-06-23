@@ -10,7 +10,7 @@ class CuentasController < ApplicationController
 
   # GET /cuentas/1
   def show
-    render json: @cuenta
+    render json: CuentaBlueprint.render(@cuenta, view: :normal, root: :data), status: :ok
   end
 
   # POST /cuentas

@@ -7,6 +7,7 @@ class Registro < ApplicationRecord
 
   delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia], required: false, dependent: :destroy
   delegate :nombre_completo, to: :registrable
+  delegate :categoria, to: :registrable
 
   validates :importe, presence: true
 end

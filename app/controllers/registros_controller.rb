@@ -65,6 +65,31 @@ class RegistrosController < ApplicationController
     end
   end
 
+  # POST /registros/create_multiple
+  def create_multiple
+    listado = params.fetch(:lista_registros, [])
+    retorno = []
+
+    listado.each do |registro_param|
+      p registro_param
+      registro = nil
+      if registro_param["tipoMovimientoId"] == 1
+        p 'Ingreso'
+        registro = obtener_ingreso registro_param
+      else
+        p 'Egreso'
+        registro = obtener_egreso registro_param
+      end
+      registro.save
+      # registro_tarjeta = obtener_registro registro_param
+      # p registro_tarjeta.errors.full_messages unless registro_tarjeta.save
+
+      retorno.push(registro)
+    end
+
+    render json: { retorno: }, status: :ok
+  end
+
   # PATCH/PUT /registros/1
   def update
     if @registro.update(registro_params)
@@ -80,6 +105,34 @@ class RegistrosController < ApplicationController
   end
 
   private
+
+  def obtener_ingreso(registro_param)
+    registro = obtener_registro registro_param
+    ingreso = Ingreso.new
+    ingreso.categoria_id = registro_param["categoria_id"]
+    registro.registrable = ingreso
+    ingreso.registro = registro
+    registro
+  end
+
+  def obtener_egreso(registro_param)
+    registro = obtener_registro registro_param
+    egreso = Egreso.new
+    egreso.categoria_id = registro_param["categoria_id"]
+    registro.registrable = egreso
+    egreso.registro = registro
+    registro
+  end
+
+  def obtener_registro(registro_param)
+    registro = Registro.new
+    registro.estado_registro_id = registro_param["estado_registro_id"]
+    registro.importe = registro_param["importe"]
+    registro.fecha = registro_param["fecha"]
+    registro.cuenta_id = registro_param["cuenta_id"]
+    registro.observaciones = registro_param["observaciones"]
+    registro
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_registro

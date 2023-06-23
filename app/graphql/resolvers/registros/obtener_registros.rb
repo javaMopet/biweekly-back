@@ -6,17 +6,15 @@ module Resolvers
     class ObtenerRegistros < Resolvers::Base
       type [Types::RegistroType], null: false
 
-      argument :categoria_id, ID, required: true
+      argument :cuenta_id, ID, required: true
+      # argument :categoria_id, ID, required: false
       argument :fecha_inicio, GraphQL::Types::ISO8601Date, required: true
       argument :fecha_fin, GraphQL::Types::ISO8601Date, required: true
 
-      def resolve(categoria_id:, fecha_inicio:, fecha_fin:)
-        p categoria_id
-        p fecha_inicio
-        p fecha_fin
-        categoria = Categoria.find(categoria_id)
-        p categoria
-        Registro.all
+      def resolve(cuenta_id:, fecha_inicio:, fecha_fin:)
+        query = Cuenta.find(cuenta_id).registros
+        query = query.where(fecha: fecha_inicio..fecha_fin)
+        query.all
       end
     end
   end
