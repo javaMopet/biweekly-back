@@ -16,8 +16,8 @@ rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end
 
-Banco.create!(nombre: 'Santander', icono: 'santander.png')
-Banco.create!(nombre: 'Bancomer', icono: 'bancomer.png')
-Banco.create!(nombre: 'Scotiabank', icono: 'scotiabank.png')
-Banco.create!(nombre: 'Banco Azteca', icono: 'bazteca.png')
-Banco.create!(nombre: 'Banamex', icono: 'banamex.png')
+Banco.create!(nombre: 'Santander', icono: 'santander1.png')
+Banco.create!(nombre: 'Bancomer', icono: 'bancomer1.png')
+Banco.create!(nombre: 'Scotiabank', icono: 'scotiabank1.png')
+Banco.create!(nombre: 'Banco Azteca', icono: 'aztecabank1.png')
+Banco.create!(nombre: 'Banamex', icono: 'banamex1.png')

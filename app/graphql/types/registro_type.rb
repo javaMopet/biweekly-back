@@ -5,16 +5,13 @@ module Types
   class RegistroType < Types::BaseObject
     field :id, ID, null: false
     field :estado_registro_id, Integer, null: false
-    field :registrable_type, String
-    field :registrable_id, Integer
+    field :tipo_afectacion, String, null: false
     field :importe, Float
     field :importe_string, String, null: true
     field :fecha, GraphQL::Types::ISO8601Date
     field :observaciones, String
     field :nombre_completo, String
     field :cuenta_id, Integer, null: false
-    # field :ingreso, Types::IngresoType, null: true
-    # field :egreso, Types::EgresoType, null: true
     field :categoria, Types::Categorias::CategoriaType, null: true
     field :cuenta, Types::Cuentas::CuentaType, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

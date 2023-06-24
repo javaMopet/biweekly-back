@@ -11,10 +11,9 @@ module Resolvers
       argument :fecha_fin, GraphQL::Types::ISO8601Date, required: true
 
       def resolve(categoria_id:, fecha_inicio:, fecha_fin:)
-        Ingreso.includes(:registro).joins(:registro)
-               .where(categoria_id:)
-               .where(registros: { fecha: fecha_inicio..fecha_fin })
-               .all
+        Registro.where(categoria_id:)
+                .where(registros: { fecha: fecha_inicio..fecha_fin })
+                .all
       end
     end
   end
