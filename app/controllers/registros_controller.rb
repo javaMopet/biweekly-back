@@ -72,17 +72,12 @@ class RegistrosController < ApplicationController
 
     listado.each do |registro_param|
       p registro_param
-      registro = nil
-      if registro_param["tipoMovimientoId"] == 1
-        p 'Ingreso'
-        registro = obtener_ingreso registro_param
-      else
-        p 'Egreso'
-        registro = obtener_egreso registro_param
-      end
-      registro.save
-      # registro_tarjeta = obtener_registro registro_param
-      # p registro_tarjeta.errors.full_messages unless registro_tarjeta.save
+
+      registro = obtener_registro registro_param
+
+      # registro.save
+
+      p registro.errors.full_messages unless registro.save
 
       retorno.push(registro)
     end
@@ -106,27 +101,12 @@ class RegistrosController < ApplicationController
 
   private
 
-  def obtener_ingreso(registro_param)
-    registro = obtener_registro registro_param
-    ingreso = Ingreso.new
-    ingreso.categoria_id = registro_param["categoria_id"]
-    registro.registrable = ingreso
-    ingreso.registro = registro
-    registro
-  end
-
-  def obtener_egreso(registro_param)
-    registro = obtener_registro registro_param
-    egreso = Egreso.new
-    egreso.categoria_id = registro_param["categoria_id"]
-    registro.registrable = egreso
-    egreso.registro = registro
-    registro
-  end
 
   def obtener_registro(registro_param)
     registro = Registro.new
     registro.estado_registro_id = registro_param["estado_registro_id"]
+    registro.tipo_afectacion = registro_param["tipo_afectacion"]
+    registro.categoria_id = registro_param["categoria_id"]
     registro.importe = registro_param["importe"]
     registro.fecha = registro_param["fecha"]
     registro.cuenta_id = registro_param["cuenta_id"]
