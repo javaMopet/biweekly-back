@@ -33,6 +33,6 @@ Cuenta.create!(nombre: 'Santander Like U', tipo_cuenta_id: 3, banco_id: 1,
 Cuenta.create!(nombre: 'Bancomer Oro', tipo_cuenta_id: 3, banco_id: 2,
                identificador: '2587',
                cuenta_contable_id: 212_001)
-Cuenta.create!(nombre: 'Banamex prueba', tipo_cuenta_id: 1, banco_id: 5,
-               identificador: '3378',
-               cuenta_contable_id: 212_001)
+Cuenta.create!(nombre: 'American Express', tipo_cuenta_id: 3, banco_id: 6,
+               identificador: '4003',
+               cuenta_contable_id: 212_008)

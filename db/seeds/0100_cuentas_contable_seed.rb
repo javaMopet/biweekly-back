@@ -11,6 +11,9 @@ begin
     -- DELETE FROM detalles_movimiento;
 		-- DECLARE @reseeddm tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
 		-- DBCC CHECKIDENT (detalles_movimiento, RESEED, @reseeddm);
+    DELETE FROM registros;
+		DECLARE @reseedre tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
+		DBCC CHECKIDENT (registros, RESEED, @reseedre);
     DELETE FROM categorias;
 		DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
 		DBCC CHECKIDENT (categorias, RESEED, @reseedc);
