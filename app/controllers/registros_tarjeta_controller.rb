@@ -39,6 +39,20 @@ class RegistrosTarjetaController < ApplicationController
     render json: { retorno: }, status: :ok
   end
 
+  # POST /registros_tarjeta/create_pago
+  def create_pago
+    listado = params.fetch(:lista_registros, [])
+    retorno = []
+
+    listado.each do |registro_param|
+      p registro_param
+      registro = obtener_registro registro_param
+      p registro.errors.full_messages unless registro.save
+      retorno.push(registro)
+    end
+    render json: { retorno: }, status: :ok
+  end
+
   # PATCH/PUT /registros_tarjeta/1
   def update
     if @registro_tarjeta.update(registro_tarjeta_params)
@@ -61,6 +75,7 @@ class RegistrosTarjetaController < ApplicationController
     registro_tarjeta.estado_registro_tarjeta_id = registro_param[:estado_registro_tarjeta_id]
     registro_tarjeta.cuenta_id = registro_param[:cuenta_id]
     registro_tarjeta.categoria_id = registro_param[:categoria_id]
+    registro_tarjeta.tipo_afectacion = registro_param[:tipo_afectacion]
     registro_tarjeta.importe = registro_param[:importe]
     registro_tarjeta.fecha = registro_param[:fecha]
     registro_tarjeta.concepto = registro_param[:concepto]

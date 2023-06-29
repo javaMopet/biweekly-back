@@ -7,6 +7,8 @@ class Registro < ApplicationRecord
   belongs_to :categoria, optional: true
   belongs_to :tipo_cuenta_transferencia, optional: true
 
+  has_one :registro_tarjeta
+
   # delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia], required: false, dependent: :destroy
   # delegate :nombre_completo, to: :registrable
   # delegate :categoria, to: :registrable
