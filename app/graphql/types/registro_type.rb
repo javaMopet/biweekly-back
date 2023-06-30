@@ -12,6 +12,8 @@ module Types
     field :observaciones, String
     field :nombre_completo, String
     field :cuenta_id, Integer, null: false
+    field :cargo, Float, null: true
+    field :abono, Float, null: true
     field :categoria, Types::Categorias::CategoriaType, null: true
     field :cuenta, Types::Cuentas::CuentaType, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

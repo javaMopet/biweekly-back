@@ -8,4 +8,12 @@ class RegistroTarjeta < ApplicationRecord
   validates :tipo_afectacion, presence: true
   validates :fecha, presence: true
   validates :importe, presence: true
+
+  def cargo
+    tipo_afectacion == 'C' ? importe * -1 : 0
+  end
+
+  def abono
+    tipo_afectacion == 'A' ? importe : 0
+  end
 end

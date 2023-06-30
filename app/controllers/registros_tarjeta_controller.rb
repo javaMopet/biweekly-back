@@ -30,7 +30,7 @@ class RegistrosTarjetaController < ApplicationController
     retorno = []
 
     listado.each do |registro_param|
-      registro_tarjeta = obtener_registro registro_param
+      registro_tarjeta = obtener_registro_tarjeta registro_param
       p registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
       retorno.push(registro_tarjeta)
@@ -41,16 +41,30 @@ class RegistrosTarjetaController < ApplicationController
 
   # POST /registros_tarjeta/create_pago
   def create_pago
-    listado = params.fetch(:lista_registros, [])
-    retorno = []
+    ActiveRecord::Base.transaction do
+      listado = params.fetch(:lista_registros, [])
+      retorno = []
 
-    listado.each do |registro_param|
-      p registro_param
-      registro = obtener_registro registro_param
-      p registro.errors.full_messages unless registro.save
-      retorno.push(registro)
+      listado.each do |registro_param|
+        registro_tarjeta = RegistroTarjeta.find(registro_param[:registro_id])
+
+        registro = obtener_registro registro_param
+        registro_tarjeta.registro = registro
+        raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
+
+        retorno.push(registro)
+      end
+      registro_first = retorno[0]
+      total = retorno.sum(&:importe) * -1
+
+      registro_tarjeta_pago = create_registro_tarjeta_pago registro_first, total
+      registro_tarjeta_pago.save
+      render json: { retorno: }, status: :ok
+    # rescue ActiveRecord::RecordInvalid => e
+    rescue StandardError => e
+      puts e
+      raise e
     end
-    render json: { retorno: }, status: :ok
   end
 
   # PATCH/PUT /registros_tarjeta/1
@@ -69,7 +83,7 @@ class RegistrosTarjetaController < ApplicationController
 
   private
 
-  def obtener_registro(registro_param)
+  def obtener_registro_tarjeta(registro_param)
     registro_tarjeta = RegistroTarjeta.new
 
     registro_tarjeta.estado_registro_tarjeta_id = registro_param[:estado_registro_tarjeta_id]
@@ -79,6 +93,37 @@ class RegistrosTarjetaController < ApplicationController
     registro_tarjeta.importe = registro_param[:importe]
     registro_tarjeta.fecha = registro_param[:fecha]
     registro_tarjeta.concepto = registro_param[:concepto]
+
+    registro_tarjeta
+  end
+
+  def obtener_registro(registro_param)
+    registro = Registro.new
+    registro.estado_registro_id = registro_param[:estado_registro_id]
+    registro.tipo_afectacion = registro_param[:tipo_afectacion]
+    registro.importe = registro_param[:importe]
+    registro.fecha = registro_param[:fecha]
+    registro.categoria_id = registro_param[:categoria_id]
+    registro.observaciones = registro_param[:observaciones]
+    registro.cuenta_id = registro_param[:cuenta_id]
+    raise StandardError, registro.errors.full_messages unless registro.save
+
+    registro
+  end
+
+  def create_registro_tarjeta_pago(registro_first, total)
+    p registro_first
+    registro_tarjeta = RegistroTarjeta.new
+    registro_tarjeta.estado_registro_tarjeta_id = 2
+    registro_tarjeta.cuenta_id = registro_first.cuenta_id
+    registro_tarjeta.categoria_id = nil
+    registro_tarjeta.tipo_afectacion = "A"
+    registro_tarjeta.importe = total
+    registro_tarjeta.fecha = "2023-06-09" # fecha_final # último día del periodo
+    registro_tarjeta.concepto = 'Pago del mes'
+    registro_tarjeta.registro = nil
+    registro_tarjeta.is_msi = false
+    registro_tarjeta.numero_msi = 0
 
     registro_tarjeta
   end

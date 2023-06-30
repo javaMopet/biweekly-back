@@ -10,7 +10,10 @@ module Mutations
 
     def resolve(registro_tarjeta_input:)
       registro_tarjeta = ::RegistroTarjeta.new(**registro_tarjeta_input)
-      raise GraphQL::ExecutionError.new "Error creating registro_tarjeta", extensions: registro_tarjeta.errors.to_hash unless registro_tarjeta.save
+      unless registro_tarjeta.save
+        raise GraphQL::ExecutionError.new "Error creating registro_tarjeta",
+                                          extensions: registro_tarjeta.errors.to_hash
+      end
 
       { registro_tarjeta: }
     end

@@ -4,6 +4,7 @@ module Types
   class RegistroTarjetaInputType < Types::BaseInputObject
     argument :id, ID, required: false
     argument :estado_registro_tarjeta_id, Integer, required: false
+    argument :tipo_afectacion, String, required: true
     argument :cuenta_id, Integer, required: false
     argument :categoria_id, Integer, required: false
     argument :importe, Float, required: false

@@ -15,4 +15,12 @@ class Registro < ApplicationRecord
 
   validates :importe, presence: true
   validates :tipo_afectacion, presence: true
+
+  def cargo
+    tipo_afectacion == 'C' ? importe : 0
+  end
+
+  def abono
+    tipo_afectacion == 'A' ? importe : 0
+  end
 end
