@@ -26,23 +26,30 @@ class RegistrosTarjetaController < ApplicationController
 
   # POST /create_multiple_registros_tarjeta
   def create_multiple
-    listado = params.fetch(:lista_registros_tarjeta, [])
-    retorno = []
+    ActiveRecord::Base.transaction do
+      listado = params.fetch(:lista_registros_tarjeta, [])
+      retorno = []
 
-    listado.each do |registro_param|
-      registro_tarjeta = obtener_registro_tarjeta registro_param
-      p registro_tarjeta.errors.full_messages unless registro_tarjeta.save
+      listado.each do |registro_param|
+        registro_tarjeta = obtener_registro_tarjeta registro_param
+        raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
-      retorno.push(registro_tarjeta)
+        retorno.push(registro_tarjeta)
+      end
+
+      render json: { retorno: }, status: :ok
+    rescue StandardError => e
+      puts e
+      raise e
     end
-
-    render json: { retorno: }, status: :ok
   end
 
   # POST /registros_tarjeta/create_pago
   def create_pago
     ActiveRecord::Base.transaction do
       listado = params.fetch(:lista_registros, [])
+      fecha_fin = params.fetch(:fecha_fin, nil)
+      cuenta_id = params.fetch(:cuenta_id, nil)
       retorno = []
 
       listado.each do |registro_param|
@@ -50,15 +57,16 @@ class RegistrosTarjetaController < ApplicationController
 
         registro = obtener_registro registro_param
         registro_tarjeta.registro = registro
+        registro_tarjeta.estado_registro_tarjeta_id = 2 
         raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
         retorno.push(registro)
-      end
-      registro_first = retorno[0]
+      end      
       total = retorno.sum(&:importe) * -1
 
-      registro_tarjeta_pago = create_registro_tarjeta_pago registro_first, total
-      registro_tarjeta_pago.save
+      registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin
+      registro_tarjeta_pago.cuenta_id = cuenta_id
+      raise StandardError, registro_tarjeta_pago.errors.full_messages unless registro_tarjeta_pago.save
       render json: { retorno: }, status: :ok
     # rescue ActiveRecord::RecordInvalid => e
     rescue StandardError => e
@@ -111,15 +119,13 @@ class RegistrosTarjetaController < ApplicationController
     registro
   end
 
-  def create_registro_tarjeta_pago(registro_first, total)
-    p registro_first
+  def create_registro_tarjeta_pago(total, fecha_fin)    
     registro_tarjeta = RegistroTarjeta.new
-    registro_tarjeta.estado_registro_tarjeta_id = 2
-    registro_tarjeta.cuenta_id = registro_first.cuenta_id
+    registro_tarjeta.estado_registro_tarjeta_id = 2    
     registro_tarjeta.categoria_id = nil
     registro_tarjeta.tipo_afectacion = "A"
     registro_tarjeta.importe = total
-    registro_tarjeta.fecha = "2023-06-09" # fecha_final # último día del periodo
+    registro_tarjeta.fecha = fecha_fin
     registro_tarjeta.concepto = 'Pago del mes'
     registro_tarjeta.registro = nil
     registro_tarjeta.is_msi = false

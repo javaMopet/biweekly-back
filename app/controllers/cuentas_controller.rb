@@ -45,7 +45,7 @@ class CuentasController < ApplicationController
     p cuenta_id
     to_date = params.fetch(:fecha, nil)
     registros = RegistroTarjeta.where(cuenta_id:, fecha: ..to_date).all
-    suma = registros.map(&:importe).sum
+    suma = registros.map(&:importe).sum * -1
     render json: { suma: }, status: :ok
   end
 
