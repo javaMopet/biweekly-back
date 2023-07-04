@@ -7,7 +7,7 @@ module Types
     field :estado_registro_tarjeta, Types::EstadoRegistroTarjetaType, null: false
     field :tipo_afectacion, String, null: false
     field :cuenta_id, Integer, null: false
-    field :categoria_id, Integer, null: true   
+    field :categoria_id, Integer, null: true
     field :cuenta, Types::Cuentas::CuentaType, null: false
     field :categoria, Types::Categorias::CategoriaType, null: true
     field :importe, Float

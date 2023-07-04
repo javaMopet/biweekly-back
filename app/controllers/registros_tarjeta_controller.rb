@@ -61,7 +61,7 @@ class RegistrosTarjetaController < ApplicationController
         raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
         retorno.push(registro)
-      end 
+      end
       total = retorno.sum(&:importe) * -1
 
       registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin
@@ -70,7 +70,7 @@ class RegistrosTarjetaController < ApplicationController
 
       render json: { retorno: }, status: :ok
     # rescue ActiveRecord::RecordInvalid => e
-    rescue StandardError => e 
+    rescue StandardError => e
       puts e
       raise e
     end
