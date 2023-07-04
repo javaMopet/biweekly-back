@@ -43,8 +43,8 @@ module Types
                                       description: 'Obtener lista de detalles de movimientos'
     field :obtener_registros, resolver: Resolvers::Registros::ObtenerRegistros,
                               description: 'Obtener lista de registros de movimientos'
-    field :obtener_ingresos, resolver: Resolvers::Registros::ObtenerIngresos,
-                             description: 'Obtener lista de registros de movimientos de ingreso'
+    field :obtener_saldo_a_fecha, resolver: Resolvers::Cuentas::ObtenerSaldoAFecha,
+                                  description: 'Obtener saldo a una fecha dada'
     field :obtener_egresos, resolver: Resolvers::Registros::ObtenerEgresos,
                             description: 'Obtener lista de registros de movimientos de egreso'
 

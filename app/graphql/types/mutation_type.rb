@@ -2,6 +2,7 @@
 
 module Types
   class MutationType < Types::BaseObject
+    field :registro_update, mutation: Mutations::RegistroUpdate
     field :registro_tarjeta_delete, mutation: Mutations::RegistroTarjetaDelete
     field :banco_delete, mutation: Mutations::BancoDelete
     field :banco_update, mutation: Mutations::BancoUpdate

@@ -12,7 +12,7 @@ module Mutations
       registro = ::Registro.new(**registro_input)
       raise GraphQL::ExecutionError.new "Error creating registro", extensions: registro.errors.to_hash unless registro.save
 
-      { registro: registro }
+      { registro: }
     end
   end
 end

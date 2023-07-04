@@ -57,19 +57,20 @@ class RegistrosTarjetaController < ApplicationController
 
         registro = obtener_registro registro_param
         registro_tarjeta.registro = registro
-        registro_tarjeta.estado_registro_tarjeta_id = 2 
+        registro_tarjeta.estado_registro_tarjeta_id = 2
         raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
         retorno.push(registro)
-      end      
+      end 
       total = retorno.sum(&:importe) * -1
 
       registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin
       registro_tarjeta_pago.cuenta_id = cuenta_id
       raise StandardError, registro_tarjeta_pago.errors.full_messages unless registro_tarjeta_pago.save
+
       render json: { retorno: }, status: :ok
     # rescue ActiveRecord::RecordInvalid => e
-    rescue StandardError => e
+    rescue StandardError => e 
       puts e
       raise e
     end
@@ -119,9 +120,9 @@ class RegistrosTarjetaController < ApplicationController
     registro
   end
 
-  def create_registro_tarjeta_pago(total, fecha_fin)    
+  def create_registro_tarjeta_pago(total, fecha_fin)
     registro_tarjeta = RegistroTarjeta.new
-    registro_tarjeta.estado_registro_tarjeta_id = 2    
+    registro_tarjeta.estado_registro_tarjeta_id = 2
     registro_tarjeta.categoria_id = nil
     registro_tarjeta.tipo_afectacion = "A"
     registro_tarjeta.importe = total

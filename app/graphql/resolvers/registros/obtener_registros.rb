@@ -15,7 +15,7 @@ module Resolvers
         query = Registro.where(fecha: fecha_inicio..fecha_fin)
         query = query.where(cuenta_id:) if cuenta_id
         query = query.where(categoria_id:) if categoria_id
-        query.all
+        query.order(:fecha).all
       end
     end
   end
