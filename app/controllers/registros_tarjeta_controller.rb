@@ -31,6 +31,7 @@ class RegistrosTarjetaController < ApplicationController
       retorno = []
 
       listado.each do |registro_param|
+        p registro_param[:tipo_afectacion]
         registro_tarjeta = obtener_registro_tarjeta registro_param
         raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
