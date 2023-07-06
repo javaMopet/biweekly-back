@@ -7,4 +7,5 @@ class Cuenta < ApplicationRecord
   belongs_to :banco, optional: true
 
   has_many :registros, dependent: :destroy
+  has_many :registros_tarjeta, dependent: :destroy
 end

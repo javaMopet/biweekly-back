@@ -2,6 +2,7 @@
 
 module Mutations
   class RegistroTarjetaCreate < BaseMutation
+    include UpdateAccountBalanceCredit
     description "Creates a new registro_tarjeta"
 
     field :registro_tarjeta, Types::RegistroTarjetaType, null: false
@@ -9,13 +10,20 @@ module Mutations
     argument :registro_tarjeta_input, Types::RegistroTarjetaInputType, required: true
 
     def resolve(registro_tarjeta_input:)
-      registro_tarjeta = ::RegistroTarjeta.new(**registro_tarjeta_input)
-      unless registro_tarjeta.save
-        raise GraphQL::ExecutionError.new "Error creating registro_tarjeta",
-                                          extensions: registro_tarjeta.errors.to_hash
-      end
+      ActiveRecord::Base.transaction do
+        registro_tarjeta = ::RegistroTarjeta.new(**registro_tarjeta_input)
+        unless registro_tarjeta.save
+          raise GraphQL::ExecutionError.new "Error creating registro_tarjeta",
+                                            extensions: registro_tarjeta.errors.to_hash
+        end
 
-      { registro_tarjeta: }
+        update_account_balance_credit registro_tarjeta.cuenta.id
+
+        { registro_tarjeta: }
+      rescue StandardError => e
+        puts e
+        raise e
+      end
     end
   end
 end

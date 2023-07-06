@@ -1,4 +1,5 @@
 class RegistrosTarjetaController < ApplicationController
+  include UpdateAccountBalanceCredit
   before_action :set_registro_tarjeta, only: %i[show update destroy]
 
   # GET /registros_tarjeta
@@ -38,6 +39,8 @@ class RegistrosTarjetaController < ApplicationController
         retorno.push(registro_tarjeta)
       end
 
+      update_account_balance_credit retorno[0].cuenta.id
+      
       render json: { retorno: }, status: :ok
     rescue StandardError => e
       puts e
