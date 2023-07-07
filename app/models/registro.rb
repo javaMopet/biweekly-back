@@ -9,7 +9,8 @@ class Registro < ApplicationRecord
 
   has_one :registro_tarjeta
 
-  # delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia], required: false, dependent: :destroy
+  # delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia],
+  # required: false, dependent: :destroy
   # delegate :nombre_completo, to: :registrable
   # delegate :categoria, to: :registrable
 

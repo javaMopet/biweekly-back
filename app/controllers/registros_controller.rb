@@ -2,6 +2,7 @@
 
 # Controlador para registros
 class RegistrosController < ApplicationController
+  include UpdateAccountBalance
   before_action :set_registro, only: %i[show update destroy]
 
   # GET /registros
@@ -56,33 +57,41 @@ class RegistrosController < ApplicationController
 
   # POST /registros
   def create
-    @registro = Registro.new(registro_params)
+    ActiveRecord::Base.transaction do
+      @registro = Registro.new(registro_params)
 
-    if @registro.save
-      render json: @registro, status: :created, location: @registro
-    else
-      render json: @registro.errors, status: :unprocessable_entity
+      if @registro.save
+        update_account_balance registro.cuenta.id
+        render json: @registro, status: :created, location: @registro
+      else
+        render json: @registro.errors, status: :unprocessable_entity
+      end
+    rescue StandardError => e
+      puts e
+      raise e
     end
   end
 
   # POST /registros/create_multiple
   def create_multiple
-    listado = params.fetch(:lista_registros, [])
-    retorno = []
+    ActiveRecord::Base.transaction do
+      listado = params.fetch(:lista_registros, [])
+      retorno = []
 
-    listado.each do |registro_param|
-      p registro_param
+      listado.each do |registro_param|
+        registro = obtener_registro registro_param
+        raise StandardError, registro.errors.full_messages unless registro.save
 
-      registro = obtener_registro registro_param
+        retorno.push(registro)
+      end
 
-      # registro.save
+      update_account_balance retorno[0].cuenta.id
 
-      p registro.errors.full_messages unless registro.save
-
-      retorno.push(registro)
+      render json: { retorno: }, status: :ok
+    rescue StandardError => e
+      puts e
+      raise e
     end
-
-    render json: { retorno: }, status: :ok
   end
 
   # PATCH/PUT /registros/1
@@ -100,7 +109,6 @@ class RegistrosController < ApplicationController
   end
 
   private
-
 
   def obtener_registro(registro_param)
     registro = Registro.new
