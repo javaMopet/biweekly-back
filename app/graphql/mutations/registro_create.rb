@@ -14,8 +14,6 @@ module Mutations
         registro = ::Registro.new(**registro_input)
         raise GraphQL::ExecutionError.new "Error creating registro", extensions: registro.errors.to_hash unless registro.save
 
-        p registro.cuenta.id
-
         update_account_balance registro.cuenta.id
 
         { registro: }

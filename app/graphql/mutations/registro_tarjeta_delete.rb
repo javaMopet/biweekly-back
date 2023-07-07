@@ -2,6 +2,7 @@
 
 module Mutations
   class RegistroTarjetaDelete < BaseMutation
+    include UpdateAccountBalanceCredit
     description "Deletes a registro_tarjeta by ID"
 
     field :registro_tarjeta, Types::RegistroTarjetaType, null: false
@@ -9,10 +10,17 @@ module Mutations
     argument :id, ID, required: true
 
     def resolve(id:)
-      registro_tarjeta = ::RegistroTarjeta.find(id)
-      raise GraphQL::ExecutionError.new "Error deleting registro_tarjeta", extensions: registro_tarjeta.errors.to_hash unless registro_tarjeta.destroy
+      ActiveRecord::Base.transaction do
+        registro_tarjeta = ::RegistroTarjeta.find(id)
+        raise GraphQL::ExecutionError.new "Error deleting registro_tarjeta", extensions: registro_tarjeta.errors.to_hash unless registro_tarjeta.destroy
 
-      { registro_tarjeta: }
+        update_account_balance_credit registro_tarjeta.cuenta.id
+
+        { registro_tarjeta: }
+      rescue StandardError => e
+        puts e
+        raise e
+      end
     end
   end
 end

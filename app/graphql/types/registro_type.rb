@@ -14,6 +14,7 @@ module Types
     field :cuenta_id, Integer, null: false
     field :cargo, Float, null: true
     field :abono, Float, null: true
+    field :registro_tarjeta, Types::RegistroTarjetaType, null: true
     field :categoria, Types::Categorias::CategoriaType, null: true
     field :cuenta, Types::Cuentas::CuentaType, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

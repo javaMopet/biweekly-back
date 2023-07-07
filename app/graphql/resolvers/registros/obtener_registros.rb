@@ -12,7 +12,7 @@ module Resolvers
       argument :fecha_fin, GraphQL::Types::ISO8601Date, required: true
 
       def resolve(cuenta_id:, categoria_id:, fecha_inicio:, fecha_fin:)
-        query = Registro.includes(:cuenta, :categoria).where(fecha: fecha_inicio..fecha_fin)
+        query = Registro.includes(:cuenta, :categoria, { registro_tarjeta: :cuenta }).where(fecha: fecha_inicio..fecha_fin)
         query = query.where(cuenta_id:) if cuenta_id
         query = query.where(categoria_id:) if categoria_id
         query.order(:fecha).all

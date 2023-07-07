@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class RegistrosTarjetaController < ApplicationController
   include UpdateAccountBalanceCredit
+  include UpdateAccountBalance
   before_action :set_registro_tarjeta, only: %i[show update destroy]
 
   # GET /registros_tarjeta
@@ -14,16 +17,16 @@ class RegistrosTarjetaController < ApplicationController
     render json: @registro_tarjeta
   end
 
-  # POST /registros_tarjeta
-  def create
-    @registro_tarjeta = RegistroTarjeta.new(registro_tarjeta_params)
+  # # POST /registros_tarjeta
+  # def create
+  #   @registro_tarjeta = RegistroTarjeta.new(registro_tarjeta_params)
 
-    if @registro_tarjeta.save
-      render json: @registro_tarjeta, status: :created, location: @registro_tarjeta
-    else
-      render json: @registro_tarjeta.errors, status: :unprocessable_entity
-    end
-  end
+  #   if @registro_tarjeta.save
+  #     render json: @registro_tarjeta, status: :created, location: @registro_tarjeta
+  #   else
+  #     render json: @registro_tarjeta.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # POST /create_multiple_registros_tarjeta
   def create_multiple
@@ -40,7 +43,7 @@ class RegistrosTarjetaController < ApplicationController
       end
 
       update_account_balance_credit retorno[0].cuenta.id
-      
+
       render json: { retorno: }, status: :ok
     rescue StandardError => e
       puts e
@@ -72,6 +75,9 @@ class RegistrosTarjetaController < ApplicationController
       registro_tarjeta_pago.cuenta_id = cuenta_id
       raise StandardError, registro_tarjeta_pago.errors.full_messages unless registro_tarjeta_pago.save
 
+      update_account_balance_credit registro_tarjeta_pago.cuenta.id
+      update_account_balance retorno[0].cuenta.id
+
       render json: { retorno: }, status: :ok
     # rescue ActiveRecord::RecordInvalid => e
     rescue StandardError => e
@@ -80,14 +86,14 @@ class RegistrosTarjetaController < ApplicationController
     end
   end
 
-  # PATCH/PUT /registros_tarjeta/1
-  def update
-    if @registro_tarjeta.update(registro_tarjeta_params)
-      render json: @registro_tarjeta
-    else
-      render json: @registro_tarjeta.errors, status: :unprocessable_entity
-    end
-  end
+  # # PATCH/PUT /registros_tarjeta/1
+  # def update
+  #   if @registro_tarjeta.update(registro_tarjeta_params)
+  #     render json: @registro_tarjeta
+  #   else
+  #     render json: @registro_tarjeta.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /registros_tarjeta/1
   def destroy

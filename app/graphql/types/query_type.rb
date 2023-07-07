@@ -45,8 +45,8 @@ module Types
                               description: 'Obtener lista de registros de movimientos'
     field :obtener_saldo_a_fecha, resolver: Resolvers::Cuentas::ObtenerSaldoAFecha,
                                   description: 'Obtener saldo a una fecha dada'
-    field :obtener_egresos, resolver: Resolvers::Registros::ObtenerEgresos,
-                            description: 'Obtener lista de registros de movimientos de egreso'
+    # field :obtener_egresos, resolver: Resolvers::Registros::ObtenerEgresos,
+    #                         description: 'Obtener lista de registros de movimientos de egreso'
 
     field :lista_registros_tarjeta, resolver: Resolvers::RegistrosTarjeta::ListaRegistrosTarjeta,
                                     description: 'Obtener lista de registros de una tarjeta de crédito'

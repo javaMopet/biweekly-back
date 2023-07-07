@@ -96,10 +96,16 @@ class RegistrosController < ApplicationController
 
   # PATCH/PUT /registros/1
   def update
-    if @registro.update(registro_params)
-      render json: @registro
-    else
-      render json: @registro.errors, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      if @registro.update(registro_params)
+        update_account_balance registro.cuenta.id
+        render json: @registro
+      else
+        render json: @registro.errors, status: :unprocessable_entity
+      end
+    rescue StandardError => e
+      puts e
+      raise e
     end
   end
 
