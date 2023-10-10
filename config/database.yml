@@ -17,8 +17,8 @@
 default: &default
   adapter: sqlserver
   encoding: utf8
-  username: hpenam
-  password: Erumur2024 #<%= ENV["SA_PASSWORD"] %>
+  username: appBiweekly
+  password: <%= ENV["DEV_PASSWORD"] %>
   host: localhost
 
 # default: &default

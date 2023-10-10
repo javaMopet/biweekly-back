@@ -25,6 +25,8 @@ Categoria.create!(nombre: 'Sueldo Quincenal', icono: 'account_balance', descripc
                   color: '#005c00', tipo_movimiento_id: 1, cuenta_contable_id: 411_002, orden: 200)
 Categoria.create!(nombre: 'Cash Back', icono: 'currency_exchange', descripcion: 'Promoción por tarjeta Santander LikeU',
                   color: '#ff3333', tipo_movimiento_id: 1, cuenta_contable_id: 421_001, orden: 300)
+Categoria.create!(nombre: 'Saldo Inicial', icono: 'attach_money', descripcion: 'Saldo inicial para la migración',
+                  color: '#ff33AA', tipo_movimiento_id: 1, cuenta_contable_id: nil, orden: 400)
 
 Categoria.create!(nombre: 'Crédito Santander', icono: 'local_atm',
                   descripcion: 'Descuento por el crédito de nómina de Santander',
