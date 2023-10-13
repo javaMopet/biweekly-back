@@ -28,6 +28,7 @@ Cuenta.create!(nombre: 'Banco azteca', tipo_cuenta_id: 1, banco_id: 4,
                identificador: '5573',
                cuenta_contable_id: 112_004)
 Cuenta.create!(nombre: 'Efectivo', tipo_cuenta_id: 2,
+               identificador: '',
                cuenta_contable_id: 111_001)
 Cuenta.create!(nombre: 'Santander Like U', tipo_cuenta_id: 3, banco_id: 1,
                identificador: '3376', dia_corte: 12,
