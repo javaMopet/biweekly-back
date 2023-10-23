@@ -17,6 +17,17 @@ class RegistrosTarjetaController < ApplicationController
     render json: @registro_tarjeta
   end
 
+   # GET /saldo_tarjeta_credito
+   def saldo_tarjeta_credito
+    fecha_final = params.fetch(:fecha_final, '2023-06-12')
+    cuenta_id = params.fetch(:cuenta_id, 0).to_i
+    is_detalle = params.fetch(:is_detalle, 0).to_i
+
+    p cuenta_id
+    p is_detalle
+    render json: { data: Pro::DataImport.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle) }
+  end
+
   # # POST /registros_tarjeta
   # def create
   #   @registro_tarjeta = RegistroTarjeta.new(registro_tarjeta_params)

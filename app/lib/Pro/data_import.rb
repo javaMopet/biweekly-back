@@ -22,5 +22,9 @@ module Pro
     def self.buscar_saldos_finales(_ejercicio_fiscal)
       execute_procedure('PA_SALDOS_FINALES', 2023, 4, 1)
     end
+
+    def self.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle)
+      execute_procedure('PA_SALDO_TARJETA',  cuenta_id, fecha_final, is_detalle)
+    end
   end
 end

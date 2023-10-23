@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
   post '/registros/create_multiple', to: 'registros#create_multiple'
   post '/registros_tarjeta/create_pago', to: 'registros_tarjeta#create_pago'
+  get 'saldo_tarjeta_credito', to: 'registros_tarjeta#saldo_tarjeta_credito'
   resources :registros_tarjeta
   resources :cortes_cuenta
   resources :inversiones
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   get 'movimientos', to: 'registros#movimientos'
   get 'saldos_cuentas', to: 'registros#saldos_cuentas'
   get 'saldos_movimientos', to: 'registros#saldos_movimientos'
-  get 'saldos_finales', to: 'registros#saldos_finales'
+  get 'saldos_finales', to: 'registros#saldos_finales'  
 
   resources :transferencias
   resources :egresos
