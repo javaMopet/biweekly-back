@@ -10,6 +10,11 @@ module Mutations
 
     def resolve(id:)
       traspaso = ::Traspaso.find(id)
+      
+      traspaso.traspaso_detalles.each do |td|
+        td.destroy
+      end 
+
       raise GraphQL::ExecutionError.new "Error deleting traspaso", extensions: traspaso.errors.to_hash unless traspaso.destroy
 
       { traspaso: traspaso }

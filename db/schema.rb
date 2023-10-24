@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_001433) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_024139) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_001433) do
 
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
-    t.string "identificador", limit: 10, null: false
+    t.varchar "identificador", limit: 10
     t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
     t.bigint "banco_id"
@@ -214,7 +214,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_001433) do
     t.decimal "importe", precision: 11, scale: 4
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "registro_id", null: false
     t.index ["cuenta_id"], name: "index_traspaso_detalles_on_cuenta_id"
+    t.index ["registro_id"], name: "index_traspaso_detalles_on_registro_id"
     t.index ["tipo_cuenta_traspaso_id"], name: "index_traspaso_detalles_on_tipo_cuenta_traspaso_id"
     t.index ["traspaso_id"], name: "index_traspaso_detalles_on_traspaso_id"
   end
@@ -258,6 +260,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_001433) do
   add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"
   add_foreign_key "registros_tarjeta", "registros"
   add_foreign_key "traspaso_detalles", "cuentas"
+  add_foreign_key "traspaso_detalles", "registros"
   add_foreign_key "traspaso_detalles", "tipos_cuenta_traspaso"
   add_foreign_key "traspaso_detalles", "traspasos"
   add_foreign_key "traspasos", "users"

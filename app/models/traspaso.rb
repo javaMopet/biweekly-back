@@ -1,5 +1,5 @@
 class Traspaso < ApplicationRecord
   belongs_to :user
-  has_many :traspasos_detalle
+  has_many :traspaso_detalles
 
 end
