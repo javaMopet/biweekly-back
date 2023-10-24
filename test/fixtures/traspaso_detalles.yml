@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  traspaso: one
+  cuenta: one
+  tipo_cuenta_trasferencia: one
+  importe: 9.99
+
+two:
+  traspaso: two
+  cuenta: two
+  tipo_cuenta_trasferencia: two
+  importe: 9.99

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_182328) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_001433) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -194,11 +194,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182328) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tipos_cuenta_traspaso", force: :cascade do |t|
+    t.string "nombre", limit: 100
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tipos_movimiento", force: :cascade do |t|
     t.string "nombre", limit: 50
     t.string "icono", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "traspaso_detalles", force: :cascade do |t|
+    t.bigint "traspaso_id", null: false
+    t.bigint "cuenta_id", null: false
+    t.bigint "tipo_cuenta_traspaso_id"
+    t.decimal "importe", precision: 11, scale: 4
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_traspaso_detalles_on_cuenta_id"
+    t.index ["tipo_cuenta_traspaso_id"], name: "index_traspaso_detalles_on_tipo_cuenta_traspaso_id"
+    t.index ["traspaso_id"], name: "index_traspaso_detalles_on_traspaso_id"
+  end
+
+  create_table "traspasos", force: :cascade do |t|
+    t.date "fecha"
+    t.string "observaciones", limit: 300
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_traspasos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -230,4 +257,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182328) do
   add_foreign_key "registros_tarjeta", "cuentas"
   add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"
   add_foreign_key "registros_tarjeta", "registros"
+  add_foreign_key "traspaso_detalles", "cuentas"
+  add_foreign_key "traspaso_detalles", "tipos_cuenta_traspaso"
+  add_foreign_key "traspaso_detalles", "traspasos"
+  add_foreign_key "traspasos", "users"
 end

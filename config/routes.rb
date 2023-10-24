@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :tipos_cuenta_traspaso
+  resources :traspaso_detalles
+  resources :traspasos
   resources :bancos
   post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
   post '/registros/create_multiple', to: 'registros#create_multiple'

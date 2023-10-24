@@ -13,7 +13,7 @@ module Types
       field :tipo_movimiento, Types::TipoMovimientoType, null: false
       field :cuenta_contable, Types::CuentaContableType, null: true
       field :cuenta_default, Types::Cuentas::CuentaType, null: true
-      field :importe_default, Float, null: false
+      field :importe_default, Float, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
