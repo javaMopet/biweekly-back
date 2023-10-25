@@ -2,6 +2,7 @@
 
 module Mutations
   class TraspasoCreate < BaseMutation
+    include UpdateAccountBalance
     description "Creates a new traspaso"
 
     field :traspaso, Types::TraspasoType, null: false
@@ -14,13 +15,17 @@ module Mutations
 
         traspaso = ::Traspaso.new(**traspaso_input)
 
-        traspasos_detalle_input.each do |td|
-          detalle = create_detalle_traspaso td, traspaso.fecha
-          detalle.traspaso = traspaso 
-          traspaso.traspaso_detalles.push(detalle)
-        end 
+         traspasos_detalle_input.each do |td|
+           detalle = create_detalle_traspaso td, traspaso.fecha, traspaso.user_id
+           detalle.traspaso = traspaso 
+           traspaso.traspaso_detalles.push(detalle)            
+         end 
 
-        raise GraphQL::ExecutionError.new "Error creating traspaso", extensions: traspaso.errors.to_hash unless traspaso.save
+        raise GraphQL::ExecutionError.new "Error creating traspaso #{traspaso.errors.full_messages}", extensions: traspaso.errors.to_hash unless traspaso.save
+
+        traspaso.traspaso_detalles.each do |td|
+          update_account_balance td.cuenta.id
+        end 
 
         { traspaso: traspaso }
       end 
@@ -29,24 +34,27 @@ module Mutations
       { error: 'Error al crear el traspaso.', exception: e }    
     end
 
-    def create_detalle_traspaso(detalle, fecha)
+    def create_detalle_traspaso(detalle, fecha, user_id)
       det = TraspasoDetalle.new
       det.cuenta_id  = detalle.cuenta_id
       det.tipo_cuenta_traspaso_id = detalle.tipo_cuenta_traspaso_id
       det.importe = detalle.importe
-      det.registro = create_registro detalle, fecha 
-
+      det.registro = create_registro detalle, fecha, user_id
+      #raise GraphQL::ExecutionError.new "Error creating traspaso #{det.errors.full_messages}", extensions: det.errors.to_hash unless det.save
       det
     end 
-    def create_registro(detalle, fecha)       
+
+    def create_registro(detalle, fecha, user_id)       
       registro = Registro.new
       registro.estado_registro_id =  2
       registro.tipo_afectacion =  detalle.tipo_cuenta_traspaso_id == 2 ? 'A' : 'C'      
       registro.importe = detalle.tipo_cuenta_traspaso_id == 2 ? detalle.importe * -1 : detalle.importe
       registro.fecha = fecha
       registro.observaciones = 'Traspaso entre cuentas'
+      registro.user_id = user_id
       registro.cuenta_id = detalle.cuenta_id
 
+      #raise GraphQL::ExecutionError.new "Error creating traspaso #{registro.errors.full_messages}", extensions: registro.errors.to_hash unless registro.save
       registro
     end 
   end

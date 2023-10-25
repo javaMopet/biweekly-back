@@ -11,6 +11,7 @@ module Types
     argument :cuenta_id, ID, required: false
     argument :categoria_id, ID, required: false
     argument :observaciones, String, required: false
+    argument :user_id, ID, required: true
     argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
     argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
   end

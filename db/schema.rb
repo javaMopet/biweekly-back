@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_024139) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_161108) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_024139) do
 
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
-    t.varchar "identificador", limit: 10
+    t.string "identificador", limit: 10, null: false
     t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
     t.bigint "banco_id"
@@ -150,10 +150,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_024139) do
     t.bigint "tipo_cuenta_transferencia_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["categoria_id"], name: "index_registros_on_categoria_id"
     t.index ["cuenta_id"], name: "index_registros_on_cuenta_id"
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
     t.index ["tipo_cuenta_transferencia_id"], name: "index_registros_on_tipo_cuenta_transferencia_id"
+    t.index ["user_id"], name: "index_registros_on_user_id"
   end
 
   create_table "registros_tarjeta", force: :cascade do |t|
@@ -255,6 +257,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_024139) do
   add_foreign_key "registros", "cuentas"
   add_foreign_key "registros", "estados_registro"
   add_foreign_key "registros", "tipos_cuenta_transferencia"
+  add_foreign_key "registros", "users"
   add_foreign_key "registros_tarjeta", "categorias"
   add_foreign_key "registros_tarjeta", "cuentas"
   add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"

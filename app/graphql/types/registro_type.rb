@@ -17,6 +17,7 @@ module Types
     field :registro_tarjeta, Types::RegistroTarjetaType, null: true
     field :traspaso_detalle, Types::TraspasoDetalleType, null: true
     field :categoria, Types::Categorias::CategoriaType, null: true
+    field :user_id, ID, null: false
     field :cuenta, Types::Cuentas::CuentaType, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
