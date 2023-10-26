@@ -34,5 +34,6 @@ module Types
     field :categoria_create, mutation: Mutations::Categorias::CategoriaCreate
     field :user_update, mutation: Mutations::UserUpdate
     field :user_create, mutation: Mutations::UserCreate
+    field :importar_registros, mutation: Mutations::ImportarRegistros
   end
 end
