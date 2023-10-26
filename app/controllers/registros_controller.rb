@@ -15,34 +15,30 @@ class RegistrosController < ApplicationController
   # GET /columnas
   def columnas
     ejercicio_fiscal = params.fetch(:ejercicio_fiscal,0).to_i
-    mes = params.fetch(:mes, 0).to_i
+    mes = Integer(params.fetch(:mes, 0))
     render json: { data: Pro::DataImport.buscar_columnas(ejercicio_fiscal, mes) }
   end
 
   # GET /movimientos
   def movimientos
-    render json: { data: Pro::DataImport
-      .buscar_movimientos(2023,
-                          params.fetch(:tipoMovimientoId,
-                                       0).to_i,
-                          params.fetch(:isSaldos,
-                                       0).to_i) }
+    tipo_movimiento_id = Integer(params.fetch(:tipoMovimientoId, 0),0)
+    is_saldos = Integer(params.fetch(:isSaldos, 0),0)
+    render json: { data: Pro::DataImport.buscar_movimientos(2023, tipo_movimiento_id, is_saldos) }
+
   end
 
   # GET /saldos_movimientos
   def saldos_movimientos
-    ejercicio_fiscal_id = params.fetch(:ejercicio_fiscal_id, 0).to_i
+    ejercicio_fiscal_id = Integer(params.fetch(:ejercicio_fiscal_id, 0))
 
     render json: { data: Pro::DataImport.buscar_saldos_movimientos(2023, 4, 1) }
   end
 
   # GET /saldos_cuentas
   def saldos_cuentas
-    ejercicio_fiscal_id = params.fetch(:ejercicio_fiscal_id, 0).to_i
+    ejercicio_fiscal_id = Integer(params.fetch(:ejercicio_fiscal_id, 0),0)
     p ejercicio_fiscal_id
-    render json: { data: Pro::DataImport
-      .buscar_saldos_cuentas(2023,
-                             params.fetch(:isSaldos, 0).to_i) }
+    render json: { data: Pro::DataImport.buscar_saldos_cuentas(2023, params.fetch(:isSaldos, 0).to_i) }
   end
 
   # GET /saldos_finales
@@ -135,7 +131,6 @@ class RegistrosController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def registro_params
-    params.require(:registro).permit(:estado_registro_id, :registrable_type, :registrable_id,
-                                     :importe, :fecha)
+    params.require(:registro).permit(:estado_registro_id, :registrable_type, :registrable_id, :importe, :fecha)
   end
 end

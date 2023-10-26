@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_155017) do
 
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
-    t.string "identificador", limit: 10, null: false
+    t.varchar "identificador", limit: 10
     t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
     t.bigint "banco_id"
