@@ -13,6 +13,7 @@ module Types
       argument :cuenta_contable_id, Integer, required: false
       argument :cuenta_default_id, Integer, required: false
       argument :orden, Integer, required: true
+      argument :user_id, ID, required: true
       argument :importe_default, Float, required: false, default_value: 0.00
       argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
       argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false

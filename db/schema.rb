@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_161108) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_25_155017) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,9 +58,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_161108) do
     t.decimal "importe_default", precision: 10, scale: 4, default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", default: 1, null: false
     t.index ["cuenta_contable_id"], name: "index_categorias_on_cuenta_contable_id"
     t.index ["cuenta_default_id"], name: "index_categorias_on_cuenta_default_id"
     t.index ["tipo_movimiento_id"], name: "index_categorias_on_tipo_movimiento_id"
+    t.index ["user_id"], name: "index_categorias_on_user_id"
   end
 
   create_table "cortes_cuenta", force: :cascade do |t|
@@ -75,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_161108) do
 
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
-    t.varchar "identificador", limit: 10
+    t.string "identificador", limit: 10, null: false
     t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
     t.bigint "banco_id"
@@ -249,6 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_161108) do
   add_foreign_key "categorias", "cuentas", column: "cuenta_default_id"
   add_foreign_key "categorias", "cuentas_contable"
   add_foreign_key "categorias", "tipos_movimiento"
+  add_foreign_key "categorias", "users"
   add_foreign_key "cuentas", "bancos"
   add_foreign_key "cuentas", "cuentas_contable"
   add_foreign_key "cuentas", "tipos_cuenta"
