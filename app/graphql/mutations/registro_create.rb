@@ -9,6 +9,7 @@ module Mutations
 
     argument :registro_input, Types::RegistroInputType, required: true
 
+    # Resolver
     def resolve(registro_input:)
       ActiveRecord::Base.transaction do
         registro = ::Registro.new(**registro_input)
