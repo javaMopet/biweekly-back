@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  # Creación de un movimiento de ingreso
+  # Creacion de un movimiento de ingreso
   class IngresoCreate < BaseMutation
     description 'Creates a new ingreso'
 
@@ -9,6 +9,7 @@ module Mutations
 
     argument :ingreso_input, Types::IngresoInputType, required: true
 
+    # Resolver
     def resolve(ingreso_input:)
       registro = ::Registro.new(**ingreso_input[:registro])
       ingreso = ::Ingreso.new(ingreso_input.to_hash.except!(:registro))

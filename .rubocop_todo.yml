@@ -205,12 +205,14 @@ Layout/TrailingWhitespace:
     - 'config/initializers/inflections.rb'
 
 Layout/SpaceBeforeBrackets:
-  Enabled: true
+  Enabled: true 
 
 Layout/LineEndStringConcatenationIndentation:
   Enabled: true
+
 Layout/LineContinuationSpacing:
   Enabled: true
+
 Layout/LineContinuationLeadingSpace:
   Enabled: true
 
@@ -585,13 +587,13 @@ Style/MethodCallWithArgsParentheses:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
 # URISchemes: http, https
 Layout/LineLength:
-  Max: 282
+  Max: 120
 
 Security/IoMethods: 
   Enabled: true
+
 Security/CompoundHash:
   Enabled: true
-
 
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: true

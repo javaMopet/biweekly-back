@@ -8,60 +8,112 @@ module Mutations
     field :registros, [Types::RegistroType], null: false
 
     argument :registros_input, [Types::RegistroInputType], required: true
-    argument :traspasos_detalle_input, [Types::TraspasoDetalleInputType], required: true
+    argument :traspasos_input, [Types::TraspasoInputType], required: true
+    # argument :traspaso_detalles_input, [Types::TraspasoDetalleInputType], required: true
 
     # Creacion de registros y traspasos
-    def resolve(registros_input:, traspasos_detalle_input:)
+    def resolve(registros_input:, traspasos_input:)
       ApplicationRecord.transaction do
-        traspaso = ::Traspaso.new(**traspaso_input)
-
+        registros = []
         registros_input.each do |ri|
-          registro = create_registro ri, fecha, user_id
-          registro.save
+          registro = Registro.new(**ri)
+          unless registro.save
+            raise GraphQL::ExecutionError.new "Error creating traspaso", extensions: registro.errors.to_hash
+          end
+
+          registros.push(registro)
         end
 
-        traspasos_detalle_input.each do |td|
-          detalle = create_detalle_traspaso td, traspaso.fecha, traspaso.user_id
-          detalle.traspaso = traspaso
-          traspaso.traspaso_detalles.push(detalle)
+        traspasos_input.each do |ti|
+          traspaso = create_traspaso ti
+          unless traspaso.save
+            raise GraphQL::ExecutionError.new "Error creating traspaso #{traspaso.errors.full_messages}",
+                                              extensions: traspaso.errors.to_hash
+          end
         end
 
-        raise GraphQL::ExecutionError.new "Error creating traspaso #{traspaso.errors.full_messages}", extensions: traspaso.errors.to_hash unless traspaso.save
+        # Actualizar cuentas y agregar registros de traspasos
+        cuentas = []
 
-        traspaso.traspaso_detalles.each do |td|
-          update_account_balance td.cuenta.id
+        traspasos_input.each do |traspaso_param|
+          detalles_param = traspaso_param[:traspaso_detalles]
+          detalles_param.each do |traspaso_detalle|
+            cuentas.push(traspaso_detalle[:cuenta_id])
+          end
         end
 
-        { traspaso: }
+        cuentas.uniq.each do |cuenta_id|
+          update_account_balance cuenta_id
+        end
+
+        { registros: }
       end
     rescue ActiveRecord::RecordInvalid => e
       puts e.record.errors.to_json
       { error: 'Error al crear el traspaso.', exception: e }
     end
 
+    # Funcion para crear un traspaso y sus respectivos detalles
+    def create_traspaso(traspaso_param)
+      traspaso = ::Traspaso.new(traspaso_param.to_hash.except!(:traspaso_detalles))
+
+      traspaso.traspaso_detalles = create_traspaso_detalles traspaso_param[:traspaso_detalles],
+                                                            traspaso,
+                                                            traspaso.fecha,
+                                                            traspaso.user_id
+      traspaso
+    end
+
+    # Funcion para crear los detalles de un traspaso
+    def create_traspaso_detalles(traspaso_detalles_param, traspaso, fecha, user_id)
+      traspaso_detalles = []
+      traspaso_detalles_param.each do |detalle_param|
+        traspaso_detalle = create_detalle_traspaso detalle_param, fecha, user_id
+        traspaso_detalle.traspaso = traspaso
+        traspaso_detalles.push(traspaso_detalle)
+      end
+      traspaso_detalles
+    end
+
     # Funcion que crea un detalle de traspaso
-    def create_detalle_traspaso(detalle, fecha, user_id)
-      det = TraspasoDetalle.new
-      det.cuenta_id = detalle.cuenta_id
-      det.tipo_cuenta_traspaso_id = detalle.tipo_cuenta_traspaso_id
-      det.importe = detalle.importe
-      det.registro = create_registro detalle, fecha, user_id
-      # raise GraphQL::ExecutionError.new "Error creating traspaso #{det.errors.full_messages}", extensions: det.errors.to_hash unless det.save
-      det
+    def create_detalle_traspaso(detalle_param, fecha, user_id)
+      traspaso_detalle = TraspasoDetalle.new
+      traspaso_detalle.cuenta_id = detalle_param[:cuenta_id]
+      traspaso_detalle.tipo_cuenta_traspaso_id = detalle_param[:tipo_cuenta_traspaso_id]
+      traspaso_detalle.importe = detalle_param[:importe]
+      traspaso_detalle.registro = create_registro_traspaso(detalle_param, fecha, user_id)
+      # raise GraphQL::ExecutionError.new "Error creating traspaso #{traspaso_detalle.errors.full_messages}",
+      # extensions: traspaso_detalle.errors.to_hash unless traspaso_detalle.save
+      traspaso_detalle
     end
 
     # Funcion que crea un detalle de registro
-    def create_registro(detalle, fecha, user_id)
+    # def create_registro(detalle_param)
+    #   registro = Registro.new
+    #   registro.estado_registro_id = 2
+    #   registro.tipo_afectacion =  detalle_param.tipo_afectacion
+    #   registro.importe = detalle_param.importe
+    #   registro.fecha = detalle_param.fecha
+    #   registro.cuenta_id = detalle_param.cuenta_id
+    #   registro.observaciones = detalle_param.observaciones
+    #   registro.user_id = detalle_param.user_id
+
+    #   registro
+    # end
+
+    # Funcion que crea un detalle de registro
+    def create_registro_traspaso(traspaso_detalle_param, fecha, user_id)
       registro = Registro.new
+      # estatus cerrado
       registro.estado_registro_id = 2
-      registro.tipo_afectacion =  detalle.tipo_cuenta_traspaso_id == 2 ? 'A' : 'C'
-      registro.importe = detalle.tipo_cuenta_traspaso_id == 2 ? detalle.importe * -1 : detalle.importe
+      tipo_cuenta_traspaso_id = traspaso_detalle_param[:tipo_cuenta_traspaso_id]
+      registro.tipo_afectacion = tipo_cuenta_traspaso_id == 1 ? 'A' : 'C'
+      registro.importe = traspaso_detalle_param[:importe]
       registro.fecha = fecha
       registro.observaciones = 'Traspaso entre cuentas'
       registro.user_id = user_id
-      registro.cuenta_id = detalle.cuenta_id
+      registro.cuenta_id = traspaso_detalle_param[:cuenta_id]
 
-      # raise GraphQL::ExecutionError.new "Error creating traspaso #{registro.errors.full_messages}", extensions: registro.errors.to_hash unless registro.save
       registro
     end
   end
