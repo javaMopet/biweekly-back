@@ -17,27 +17,14 @@ class RegistrosTarjetaController < ApplicationController
     render json: @registro_tarjeta
   end
 
-   # GET /saldo_tarjeta_credito
-   def saldo_tarjeta_credito
-    fecha_final = params.fetch(:fecha_final, '2023-06-12')
-    cuenta_id = params.fetch(:cuenta_id, 0).to_i
-    is_detalle = params.fetch(:is_detalle, 0).to_i
+  # GET /saldo_tarjeta_credito
+  def saldo_tarjeta_credito
+    fecha_final = params.fetch(:fechaFinal, '2023-06-12')
+    cuenta_id = Integer(params.fetch(:cuentaId, 0))
+    is_detalle = Integer(params.fetch(:isDetalle, 0))
 
-    p cuenta_id
-    p is_detalle
     render json: { data: Pro::DataImport.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle) }
   end
-
-  # # POST /registros_tarjeta
-  # def create
-  #   @registro_tarjeta = RegistroTarjeta.new(registro_tarjeta_params)
-
-  #   if @registro_tarjeta.save
-  #     render json: @registro_tarjeta, status: :created, location: @registro_tarjeta
-  #   else
-  #     render json: @registro_tarjeta.errors, status: :unprocessable_entity
-  #   end
-  # end
 
   # POST /create_multiple_registros_tarjeta
   def create_multiple
@@ -97,15 +84,6 @@ class RegistrosTarjetaController < ApplicationController
     end
   end
 
-  # # PATCH/PUT /registros_tarjeta/1
-  # def update
-  #   if @registro_tarjeta.update(registro_tarjeta_params)
-  #     render json: @registro_tarjeta
-  #   else
-  #     render json: @registro_tarjeta.errors, status: :unprocessable_entity
-  #   end
-  # end
-
   # DELETE /registros_tarjeta/1
   def destroy
     @registro_tarjeta.destroy
@@ -136,6 +114,7 @@ class RegistrosTarjetaController < ApplicationController
     registro.categoria_id = registro_param[:categoria_id]
     registro.observaciones = registro_param[:observaciones]
     registro.cuenta_id = registro_param[:cuenta_id]
+    registro.user_id = registro_param[:user_id]
     raise StandardError, registro.errors.full_messages unless registro.save
 
     registro
@@ -163,6 +142,14 @@ class RegistrosTarjetaController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def registro_tarjeta_params
-    params.require(:registro_tarjeta).permit(:estado_registro_tarjeta_id, :cuenta_id, :importe, :fecha, :concepto, :is_msi, :numero_msi)
+    params.require(:registro_tarjeta).permit(
+      :estado_registro_tarjeta_id,
+      :cuenta_id,
+      :importe,
+      :fecha,
+      :concepto,
+      :is_msi,
+      :numero_msi
+    )
   end
 end

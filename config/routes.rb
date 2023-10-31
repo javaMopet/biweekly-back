@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'movimientos', to: 'registros#movimientos'
   get 'saldos_cuentas', to: 'registros#saldos_cuentas'
   get 'saldos_movimientos', to: 'registros#saldos_movimientos'
-  get 'saldos_finales', to: 'registros#saldos_finales'  
+  get 'saldos_finales', to: 'registros#saldos_finales'
 
   resources :transferencias
   resources :egresos
@@ -28,7 +28,8 @@ Rails.application.routes.draw do
              controllers: {
                sessions: 'users/sessions',
                registrations: 'users/registrations'
-             }, defaults: { format: :json }
+             },
+             defaults: { format: :json }
   get '/cuentas/obtener_saldo_tarjeta', to: 'cuentas#obtener_saldo_tarjeta'
   resources :cuentas
   resources :cuentas_contable

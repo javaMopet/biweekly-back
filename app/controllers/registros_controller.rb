@@ -14,36 +14,41 @@ class RegistrosController < ApplicationController
 
   # GET /columnas
   def columnas
-    ejercicio_fiscal = params.fetch(:ejercicio_fiscal,0).to_i
+    ejercicio_fiscal = Integer(params.fetch(:ejercicio_fiscal,0))
     mes = Integer(params.fetch(:mes, 0))
     render json: { data: Pro::DataImport.buscar_columnas(ejercicio_fiscal, mes) }
   end
 
   # GET /movimientos
   def movimientos
+    ejercicio_fiscal = Integer(params.fetch(:ejercicioFiscalId,0),0)
+    mes_id = Integer(params.fetch(:mesId,0),0)
     tipo_movimiento_id = Integer(params.fetch(:tipoMovimientoId, 0),0)
     is_saldos = Integer(params.fetch(:isSaldos, 0),0)
-    render json: { data: Pro::DataImport.buscar_movimientos(2023, tipo_movimiento_id, is_saldos) }
-
+    render json: { data: Pro::DataImport.buscar_movimientos(ejercicio_fiscal, mes_id, tipo_movimiento_id, is_saldos) }
   end
 
   # GET /saldos_movimientos
   def saldos_movimientos
-    ejercicio_fiscal_id = Integer(params.fetch(:ejercicio_fiscal_id, 0))
-
-    render json: { data: Pro::DataImport.buscar_saldos_movimientos(2023, 4, 1) }
+    ejercicio_fiscal_id = Integer(params.fetch(:ejercicioFiscalId, 0))
+    mes_id = Integer(params.fetch(:mesId, 0))
+    p "Buscando saldo_movimientos en el mes #{mes_id}"
+    render json: { data: Pro::DataImport.buscar_saldos_movimientos(ejercicio_fiscal_id, mes_id) }
   end
 
   # GET /saldos_cuentas
   def saldos_cuentas
-    ejercicio_fiscal_id = Integer(params.fetch(:ejercicio_fiscal_id, 0),0)
-    p ejercicio_fiscal_id
-    render json: { data: Pro::DataImport.buscar_saldos_cuentas(2023, params.fetch(:isSaldos, 0).to_i) }
+    ejercicio_fiscal_id = Integer(params.fetch(:ejercicioFiscalId, 0),0)
+    mes_id = Integer(params.fetch(:mesId,0))
+    is_saldos = Integer(params.fetch(:isSaldos,0))
+    render json: { data: Pro::DataImport.buscar_saldos_cuentas(ejercicio_fiscal_id, mes_id, is_saldos) }
   end
 
   # GET /saldos_finales
   def saldos_finales
-    render json: { data: Pro::DataImport.buscar_saldos_finales(2023) }
+    ejercicio_fiscal_id = Integer(params.fetch(:ejercicioFiscalId, 0),0)
+    mes_id = Integer(params.fetch(:mesId,0))
+    render json: { data: Pro::DataImport.pa_saldos_finales(ejercicio_fiscal_id, mes_id) }
   end
 
   # GET /registros/1
