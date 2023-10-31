@@ -10,10 +10,9 @@ module Resolvers
       # argument :fecha_inicio, GraphQL::Types::ISO8601Date, required: true
       argument :fecha_fin, GraphQL::Types::ISO8601Date, required: true
 
+      # Resolver
       def resolve(cuenta_id:, fecha_fin:)
-        Registro.where(cuenta_id:)
-                .where(fecha: ..fecha_fin)
-                .sum(&:importe)
+        Registro.where(cuenta_id:).where(fecha: ..fecha_fin).sum(&:importe)
       end
     end
   end
