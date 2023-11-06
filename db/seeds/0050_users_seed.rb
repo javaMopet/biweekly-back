@@ -19,7 +19,7 @@ rescue StandardError => e
 end
 
 user1 = User.new(
-  email: "hpenam@uaemex.com",
+  email: "hpenam@uaemex.mx",
   password: 'Sv)c2%h$Kzw2][GYu0b',
   password_confirmation: 'Sv)c2%h$Kzw2][GYu0b',
   name: "Horacio Peña Mendoza"

@@ -12,6 +12,7 @@ module Resolvers
       argument :is_msi, Boolean, required: false
       argument :estado_registro_tarjeta_id, ID, required: false
 
+      # Metodo resolver
       def resolve(cuenta_id:, fecha_inicio:, fecha_fin:, is_msi:, estado_registro_tarjeta_id:)
         registros = RegistroTarjeta.includes(:estado_registro_tarjeta, :cuenta, :categoria)
         registros = registros.where(cuenta_id:) if cuenta_id

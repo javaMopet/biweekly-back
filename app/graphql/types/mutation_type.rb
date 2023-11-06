@@ -14,6 +14,7 @@ module Types
     field :registro_tarjeta_update, mutation: Mutations::RegistroTarjetaUpdate
     field :registro_tarjeta_create, mutation: Mutations::RegistroTarjetaCreate
     field :registro_delete, mutation: Mutations::RegistroDelete
+    field :registros_delete, mutation: Mutations::RegistrosDelete
     field :detalle_movimiento_delete, mutation: Mutations::DetalleMovimientoDelete
     field :detalle_movimiento_update, mutation: Mutations::DetalleMovimientoUpdate
     field :detalle_movimiento_create, mutation: Mutations::DetalleMovimientoCreate
