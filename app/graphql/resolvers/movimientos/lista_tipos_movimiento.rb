@@ -6,6 +6,7 @@ module Resolvers
     class ListaTiposMovimiento < Resolvers::Base
       type [Types::TipoMovimientoType], null: false
 
+      # Metodo default
       def resolve
         TipoMovimiento.all
       end

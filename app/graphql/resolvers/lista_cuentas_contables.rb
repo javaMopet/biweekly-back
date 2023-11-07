@@ -9,6 +9,7 @@ module Resolvers
     argument :clasificacion, String, required: false
     argument :tipo_afectacion, String, required: false # , default: 'C'
 
+    # Default method
     def resolve(subnivel:, clasificacion:, tipo_afectacion:)
       sql_where = ''
 

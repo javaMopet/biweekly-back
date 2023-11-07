@@ -6,6 +6,7 @@ module Resolvers
     class ListaCategorias < Resolvers::Base
       type [Types::Categorias::CategoriaType], null: false
 
+      # Metodo resolver
       def resolve
         Categoria.includes(:tipo_movimiento, :cuenta_contable).all
       end
