@@ -8,11 +8,12 @@ module Mutations
 
     argument :id, ID, required: true
 
+    # Default method
     def resolve(id:)
       banco = ::Banco.find(id)
       raise GraphQL::ExecutionError.new "Error deleting banco", extensions: banco.errors.to_hash unless banco.destroy
 
-      { banco: banco }
+      { banco: }
     end
   end
 end
