@@ -8,6 +8,7 @@ module Mutations
 
     argument :banco_input, Types::BancoInputType, required: true
 
+    # Default method
     def resolve(banco_input:)
       banco = ::Banco.new(**banco_input)
       raise GraphQL::ExecutionError.new "Error creating banco", extensions: banco.errors.to_hash unless banco.save
