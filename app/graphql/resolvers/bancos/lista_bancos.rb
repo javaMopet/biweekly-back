@@ -6,7 +6,11 @@ module Resolvers
     class ListaBancos < Resolvers::Base
       type [Types::BancoType], null: false
 
-      def resolve
+      argument :id, ID, required: false
+      # Default method
+      def resolve(id:)
+        p id
+        # por ahora devuelve todo
         Banco.all
       end
     end
