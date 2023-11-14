@@ -7,7 +7,7 @@ module Resolvers
 
     argument :subnivel, Integer, required: false
     argument :clasificacion, String, required: false
-    argument :tipo_afectacion, String, required: false # , default: 'C'
+    argument :tipo_afectacion, String, required: false
 
     # Default method
     def resolve(subnivel:, clasificacion:, tipo_afectacion:)
