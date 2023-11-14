@@ -9,9 +9,14 @@ module Mutations
     argument :id, ID, required: true
     argument :cuenta_input, Types::Cuentas::CuentaInputType, required: true
 
+    # default method
     def resolve(id:, cuenta_input:)
+      p "id: #{id}"
       cuenta = ::Cuenta.find(id)
-      raise GraphQL::ExecutionError.new "Error updating cuenta", extensions: cuenta.errors.to_hash unless cuenta.update(**cuenta_input)
+      p cuenta
+      unless cuenta.update(**cuenta_input)
+        raise GraphQL::ExecutionError.new "Error updating cuenta", extensions: cuenta.errors.to_hash
+      end
 
       { cuenta: cuenta }
     end
