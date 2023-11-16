@@ -4,8 +4,8 @@ module Pro
   # Clase para la importacion de datos por procedimiento almacenado.
   class DataImport < ActiveRecord::Base
     # ejecuta el procedimiento para buscar las columnas
-    def self.buscar_columnas(ejercicio_fiscal, mes)
-      execute_procedure('PA_COLUMNAS', ejercicio_fiscal, mes, 1)
+    def self.buscar_columnas(ejercicio_fiscal, mes, is_saldos)
+      execute_procedure('PA_COLUMNAS', ejercicio_fiscal, mes, 1, is_saldos)
     end
 
     # Ejecuta el procedimiento almacenado para buscar movimientos tanto de ingresos como egresos

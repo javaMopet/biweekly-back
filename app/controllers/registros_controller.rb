@@ -16,7 +16,9 @@ class RegistrosController < ApplicationController
   def columnas
     ejercicio_fiscal = Integer(params.fetch(:ejercicio_fiscal,0))
     mes = Integer(params.fetch(:mes, 0))
-    render json: { data: Pro::DataImport.buscar_columnas(ejercicio_fiscal, mes) }
+    is_saldos = Integer(params.fetch(:is_saldos, 0))
+    p "is_saldos: #{is_saldos}"
+    render json: { data: Pro::DataImport.buscar_columnas(ejercicio_fiscal, mes, is_saldos) }
   end
 
   # GET /movimientos
