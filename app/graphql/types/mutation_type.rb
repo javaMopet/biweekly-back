@@ -30,6 +30,7 @@ module Types
     field :cuenta_delete, mutation: Mutations::CuentaDelete
     field :cuenta_update, mutation: Mutations::CuentaUpdate
     field :cuenta_create, mutation: Mutations::CuentaCreate
+    field :cuenta_saldo_update, mutation: Mutations::CuentaSaldoUpdate
     field :categoria_update, mutation: Mutations::Categorias::CategoriaUpdate
     field :categoria_delete, mutation: Mutations::Categorias::CategoriaDelete
     field :categoria_create, mutation: Mutations::Categorias::CategoriaCreate

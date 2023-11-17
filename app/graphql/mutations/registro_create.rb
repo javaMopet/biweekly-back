@@ -13,7 +13,9 @@ module Mutations
     def resolve(registro_input:)
       ActiveRecord::Base.transaction do
         registro = ::Registro.new(**registro_input)
-        raise GraphQL::ExecutionError.new "Error creating registro", extensions: registro.errors.to_hash unless registro.save
+        unless registro.save
+          raise GraphQL::ExecutionError.new "Error creating registro", extensions: registro.errors.to_hash
+        end
 
         update_account_balance registro.cuenta.id
 

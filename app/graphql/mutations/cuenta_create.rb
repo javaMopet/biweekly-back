@@ -9,6 +9,7 @@ module Mutations
 
     argument :cuenta_input, Types::Cuentas::CuentaInputType, required: true
 
+    # default method
     def resolve(cuenta_input:)
       cuenta = ::Cuenta.new(**cuenta_input)
       unless cuenta.save
