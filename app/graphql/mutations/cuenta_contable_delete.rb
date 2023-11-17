@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  # Eliminación de una cuenta contable
+  # Eliminacion de una cuenta contable
   class CuentaContableDelete < BaseMutation
     description 'Deletes a cuenta_contable by ID'
 
@@ -9,13 +9,15 @@ module Mutations
 
     argument :id, ID, required: true
 
+    # default method
     def resolve(id:)
       cuenta_contable = ::CuentaContable.find(id)
       unless cuenta_contable.destroy
-        raise GraphQL::ExecutionError.new 'Error deleting cuenta_contable',
-                                          extensions: cuenta_contable.errors.to_hash
+        p 'Error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+        p cuenta_contable.errors
+        raise GraphQL::ExecutionError.new 'Error deleting cuenta_contable', extensions: cuenta_contable.errors.to_hash
       end
-
+      p 'not Error >>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
       { cuenta_contable: }
     end
   end
