@@ -12,13 +12,16 @@ module Mutations
     # default method
     def resolve(id:)
       cuenta_contable = ::CuentaContable.find(id)
-      unless cuenta_contable.destroy
-        p 'Error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-        p cuenta_contable.errors
-        raise GraphQL::ExecutionError.new 'Error deleting cuenta_contable', extensions: cuenta_contable.errors.to_hash
-      end
-      p 'not Error >>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
+      cuenta_contable.destroy
+
       { cuenta_contable: }
+    rescue ActiveRecord::InvalidForeignKey => e
+      raise GraphQL::ExecutionError.new(e.message, extensions: [{ code: 110, from: 'Cuentas Contables' }])
+    rescue StandardError => e
+      raise GraphQL::ExecutionError.new(
+        "Error al intentar eliminar el banco #{e.message}",
+        extensions: [{ code: 115, from: 'Bancos' }]
+      )
     end
   end
 end

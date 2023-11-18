@@ -10,8 +10,22 @@ module Mutations
 
     # Default method
     def resolve(id:)
-      banco = ::Banco.find(id)
-      raise GraphQL::ExecutionError.new "Error deleting banco", extensions: banco.errors.to_hash unless banco.destroy
+      begin
+        banco = ::Banco.find(id)
+        banco.destroy
+      rescue ActiveRecord::InvalidForeignKey => e
+        raise GraphQL::ExecutionError.new(e.message, extensions: [{ code: 110, from: 'Bancos' }])
+      rescue StandardError => e
+        p e.message
+        # se lanza con networkError
+        raise GraphQL::ExecutionError.new(
+          "Error al intentar eliminar el banco #{e.message}",
+          extensions: [{ code: 115, from: 'Bancos' }]
+        )
+      end
+
+      # anterior
+      # raise GraphQL::ExecutionError.new("Error deleting banco", extensions: [{code: 101, from: 'Bancos'}]) unless banco.destroy
 
       { banco: }
     end
