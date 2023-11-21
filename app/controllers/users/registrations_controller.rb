@@ -20,8 +20,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_failed
-    articulos = Articulo.find
-    # render json: { message: 'Something went wrong.' }, status: :uprocessable_entity
-    render articulos
+    # articulos = Articulo.find
+    render json: { message: 'Something went wrong.' }, status: :uprocessable_entity
+    # render articulos
   end
 end

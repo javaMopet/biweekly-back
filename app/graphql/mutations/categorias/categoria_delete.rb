@@ -9,9 +9,20 @@ module Mutations
 
       argument :id, ID, required: true
 
+      # default method
       def resolve(id:)
-        categoria = ::Categoria.find(id)
-        raise GraphQL::ExecutionError.new "Error deleting categoria", extensions: categoria.errors.to_hash unless categoria.destroy
+        begin
+          categoria = ::Categoria.find(id)
+          categoria.destroy
+        rescue ActiveRecord::InvalidForeignKey => e
+          raise GraphQL::ExecutionError.new(e.message, extensions: [{ code: 110, from: 'Categorias' }])
+        rescue StandardError => e
+          # se lanza con networkError
+          raise GraphQL::ExecutionError.new(
+            "Error al intentar eliminar el banco #{e.message}",
+            extensions: [{ code: 115, from: 'Bancos' }]
+          )
+        end
 
         { categoria: categoria }
       end

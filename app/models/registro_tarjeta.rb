@@ -9,10 +9,12 @@ class RegistroTarjeta < ApplicationRecord
   validates :fecha, presence: true
   validates :importe, presence: true
 
+  # Obtener importe como cargo
   def cargo
     tipo_afectacion == 'C' ? importe * -1 : 0
   end
 
+  # Obtener importe como abono
   def abono
     tipo_afectacion == 'A' ? importe : 0
   end

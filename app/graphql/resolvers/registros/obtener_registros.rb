@@ -13,10 +13,15 @@ module Resolvers
 
       # Metodo resolver
       def resolve(cuenta_id:, categoria_id:, fecha_inicio:, fecha_fin:)
-        query = Registro.includes(:cuenta, :categoria, { registro_tarjeta: :cuenta }, :traspaso_detalle).where(fecha: fecha_inicio..fecha_fin)
+        query = Registro.includes(
+          :cuenta,
+          :categoria,
+          { registro_tarjeta: :cuenta },
+          :traspaso_detalle
+        ).where(fecha: fecha_inicio..fecha_fin)
         query = query.where(cuenta_id:) if cuenta_id
         query = query.where(categoria_id:) if categoria_id
-        query.order(:fecha).all
+        query.order(:fecha, :id).all
       end
     end
   end

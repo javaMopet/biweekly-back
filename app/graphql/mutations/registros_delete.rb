@@ -5,28 +5,31 @@ module Mutations
     include UpdateAccountBalance
     description "Deletes a registros by IDs"
 
-    field :registros, [Types::RegistroType], null: false
+    field :saldo, Float, null: false
 
     argument :ids, String, required: true
 
     # Metodo revolver
     def resolve(ids:)
       ActiveRecord::Base.transaction do
-        p ids
+        # p ids
         registros = Registro.where(id: ids.split(','))
-        p 'hasta aqui todo bien '
-        p registros
+        cuenta_id = registros[0].cuenta.id
+        # retorno = registros.dup
+        # p 'hasta aqui todo bien '
+        # p registros
         # registros.destroy_all
-        unless registros.destroy_all
+        unless registros.delete_all
           raise GraphQL::ExecutionError.new "Error deleting registro", extensions: Registro.errors.to_hash
         end
 
-        # update_account_balance registro.cuenta.id
+        cuenta = update_account_balance cuenta_id
+        # p 'retornando registros-----------'
+        # p retorno
 
-        { registros: }
+        { saldo: cuenta.saldo }
       rescue StandardError => e
-        puts e
-        raise e
+        raise GraphQL::ExecutionError.new(e.message, extensions: [{ code: 110, from: 'Registros' }])
       end
     end
   end

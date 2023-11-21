@@ -7,6 +7,7 @@ module Types
     field :traspaso_create, mutation: Mutations::TraspasoCreate
     field :registro_update, mutation: Mutations::RegistroUpdate
     field :registro_tarjeta_delete, mutation: Mutations::RegistroTarjetaDelete
+    field :registros_tarjeta_delete, mutation: Mutations::RegistrosTarjetaDelete
     field :banco_delete, mutation: Mutations::BancoDelete
     field :banco_update, mutation: Mutations::BancoUpdate
     field :banco_create, mutation: Mutations::BancoCreate
