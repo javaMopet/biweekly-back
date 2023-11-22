@@ -16,6 +16,7 @@ module Types
     field :is_msi, Boolean, null: false
     field :cargo, Float, null: true
     field :abono, Float, null: true
+    field :importe_mensual, Float, null: false
     field :numero_msi, Integer, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

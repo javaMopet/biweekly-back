@@ -18,4 +18,9 @@ class RegistroTarjeta < ApplicationRecord
   def abono
     tipo_afectacion == 'A' ? importe : 0
   end
+
+  # Obtener importe mensual
+  def importe_mensual
+    is_msi ? (importe / numero_msi) * -1 : importe * -1
+  end
 end

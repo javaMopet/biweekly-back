@@ -9,10 +9,13 @@ module Mutations
 
     argument :id, ID, required: true
 
+    # default method
     def resolve(id:)
       ActiveRecord::Base.transaction do
         registro = ::Registro.find(id)
-        raise GraphQL::ExecutionError.new "Error deleting registro", extensions: registro.errors.to_hash unless registro.destroy
+        unless registro.destroy
+          raise GraphQL::ExecutionError.new "Error deleting registro", extensions: registro.errors.to_hash
+        end
 
         update_account_balance registro.cuenta.id
 

@@ -9,6 +9,7 @@ module Mutations
 
     argument :id, ID, required: true
 
+    # default method
     def resolve(id:)
       ActiveRecord::Base.transaction do
         registro_tarjeta = ::RegistroTarjeta.find(id)

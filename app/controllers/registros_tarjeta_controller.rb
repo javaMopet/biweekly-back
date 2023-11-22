@@ -18,13 +18,13 @@ class RegistrosTarjetaController < ApplicationController
   end
 
   # GET /saldo_tarjeta_credito
-  def saldo_tarjeta_credito
-    fecha_final = params.fetch(:fechaFinal, '2023-06-12')
-    cuenta_id = Integer(params.fetch(:cuentaId, 0))
-    is_detalle = Integer(params.fetch(:isDetalle, 0))
+  # def saldo_tarjeta_credito
+  #   fecha_final = params.fetch(:fechaFinal, '2023-06-12')
+  #   cuenta_id = Integer(params.fetch(:cuentaId, 0))
+  #   is_detalle = Integer(params.fetch(:isDetalle, 0))
 
-    render json: { data: Pro::DataImport.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle) }
-  end
+  #   render json: { data: Pro::DataImport.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle) }
+  # end
 
   # POST /create_multiple_registros_tarjeta
   def create_multiple
