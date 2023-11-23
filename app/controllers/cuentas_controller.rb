@@ -38,17 +38,6 @@ class CuentasController < ApplicationController
     @cuenta.destroy
   end
 
-  # GET /cuentas/obtener_saldo_tarjeta
-  def obtener_saldo_tarjeta
-    p 'Obteniendo suma'
-    cuenta_id = params.fetch(:cuenta_id, 0)
-    p cuenta_id
-    to_date = params.fetch(:fecha, nil)
-    registros = RegistroTarjeta.where(cuenta_id:, fecha: ..to_date).all
-    suma = registros.map(&:importe).sum * -1
-    render json: { suma: }, status: :ok
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cuenta

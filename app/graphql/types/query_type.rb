@@ -58,8 +58,12 @@ module Types
           description: 'Obtener lista de registros de una tarjeta de crédito'
     field :lista_bancos, resolver: Resolvers::Bancos::ListaBancos, description: 'Obtener lista de bancos'
 
-    field :SaldoTarjetaCredito,
+    field :saldo_tarjeta_credito,
           resolver: Resolvers::TarjetasCredito::SaldoTarjetaCredito,
           description: 'Obtener el saldo de la tarjeta de credito'
+
+    field :saldo_pagar_tarjeta_credito,
+          resolver: Resolvers::TarjetasCredito::SaldoPagarTarjetaCredito,
+          description: 'Obtener el saldo a pagar (p no generar interes) de la tarjeta de credito'
   end
 end

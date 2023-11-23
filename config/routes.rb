@@ -30,7 +30,7 @@ Rails.application.routes.draw do
                registrations: 'users/registrations'
              },
              defaults: { format: :json }
-  get '/cuentas/obtener_saldo_tarjeta', to: 'cuentas#obtener_saldo_tarjeta'
+
   resources :cuentas
   resources :cuentas_contable
   resources :categorias
