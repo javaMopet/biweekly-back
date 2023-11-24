@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_154503) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_24_060710) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_154503) do
 
   create_table "cuentas", force: :cascade do |t|
     t.string "nombre", limit: 100
-    t.string "identificador", limit: 10
+    t.varchar "identificador", limit: 10
     t.bigint "tipo_cuenta_id", null: false
     t.bigint "cuenta_contable_id", null: false
     t.bigint "banco_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_154503) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "propietario", limit: 80
+    t.integer "dias_gracia", default: 0, null: false
     t.index ["banco_id"], name: "index_cuentas_on_banco_id"
     t.index ["cuenta_contable_id"], name: "index_cuentas_on_cuenta_contable_id"
     t.index ["tipo_cuenta_id"], name: "index_cuentas_on_tipo_cuenta_id"

@@ -11,6 +11,7 @@ module Types
       argument :tipo_cuenta_id, Integer, required: true
       argument :dia_corte, Integer, required: false
       argument :propietario, String, required: false
+      argument :dias_gracia, Integer, required: true
       argument :banco_id, ID, required: false
       argument :saldo, Float, required: true
       argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
