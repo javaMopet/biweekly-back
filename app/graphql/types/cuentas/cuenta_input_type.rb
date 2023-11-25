@@ -7,7 +7,7 @@ module Types
       argument :id, ID, required: false
       argument :nombre, String, required: false
       argument :identificador, String, required: false
-      argument :cuenta_contable_id, Integer, required: false
+      argument :cuenta_contable_id, Integer, required: true
       argument :tipo_cuenta_id, Integer, required: true
       argument :dia_corte, Integer, required: false
       argument :propietario, String, required: false

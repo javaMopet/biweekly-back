@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-# Creación de la tabla cuentas
+# Creacion de la tabla cuentas
 class CreateCuentas < ActiveRecord::Migration[7.0]
+  # migration method
   def change
     create_table :cuentas do |t|
       t.string :nombre, limit: 100
