@@ -12,7 +12,7 @@ module Resolvers
 
       # Resolver
       def resolve(cuenta_id:, fecha_fin:)
-        Registro.where(cuenta_id:).where(fecha: ..fecha_fin).sum(&:importe)
+        Registro.where(cuenta_id:).where(fecha: ..fecha_fin).where(estado_registro_id: 2).sum(&:importe)
       end
     end
   end

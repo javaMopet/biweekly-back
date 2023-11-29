@@ -2,7 +2,7 @@
 
 module Resolvers
   module Registros
-    # Resolver para obtener la lista de registros de acuerdo a los argumentos
+    # Resolver para obtener la lista de registros de una cuenta de acuerdo a los argumentos
     class ObtenerRegistros < Resolvers::Base
       type [Types::RegistroType], null: false
 
@@ -18,7 +18,7 @@ module Resolvers
           :categoria,
           { registro_tarjeta: :cuenta },
           :traspaso_detalle
-        ).where(fecha: fecha_inicio..fecha_fin)
+        ).where(fecha: fecha_inicio..fecha_fin).where(estado_registro_id: 2)
         query = query.where(cuenta_id:) if cuenta_id
         query = query.where(categoria_id:) if categoria_id
         query.order(:fecha, :id).all
