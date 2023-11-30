@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
 module Resolvers
-  # Obtiene el menú por niveles formando un árbol
+  # Obtiene el menu por niveles formando un arbol
   class MenuLevels < Resolvers::Base
     type [GraphQL::Types::JSON], null: false
 
     # argument :usuario_id, Integer, required: false
 
+    # default method
     def resolve
-      menu_all = Menu.all.select('id, padre, nombre, ruta, icono, ' \
-                                 'tiene_hijos, ruta_vista, null as nivel')
+      menu_all = Menu.all.select(
+        'id, padre, nombre, ruta, icono, ' \
+        'tiene_hijos, ruta_vista, null as nivel'
+      )
                      .order(orden: :asc).as_json
 
       menu_all.filter_map do |menu|
@@ -17,6 +20,7 @@ module Resolvers
       end
     end
 
+    # obtener hijos por cada nivel
     def children(data, line, nivel)
       line[:nivel] = nivel
 

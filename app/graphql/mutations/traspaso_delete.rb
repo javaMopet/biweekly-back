@@ -8,16 +8,17 @@ module Mutations
 
     argument :id, ID, required: true
 
+    # default method
     def resolve(id:)
       traspaso = ::Traspaso.find(id)
-      
-      traspaso.traspaso_detalles.each do |td|
-        td.destroy
-      end 
 
-      raise GraphQL::ExecutionError.new "Error deleting traspaso", extensions: traspaso.errors.to_hash unless traspaso.destroy
+      traspaso.traspaso_detalles.destroy_all
 
-      { traspaso: traspaso }
+      unless traspaso.destroy
+        raise GraphQL::ExecutionError.new "Error deleting traspaso", extensions: traspaso.errors.to_hash
+      end
+
+      { traspaso: }
     end
   end
 end

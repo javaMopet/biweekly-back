@@ -44,7 +44,8 @@ module Mutations
       det.tipo_cuenta_traspaso_id = detalle.tipo_cuenta_traspaso_id
       det.importe = detalle.importe
       det.registro = create_registro detalle, fecha, user_id
-      # raise GraphQL::ExecutionError.new "Error creating traspaso #{det.errors.full_messages}", extensions: det.errors.to_hash unless det.save
+      # raise GraphQL::ExecutionError.new "Error creating traspaso #{det.errors.full_messages}",
+      # extensions: det.errors.to_hash unless det.save
       det
     end
 
@@ -59,7 +60,8 @@ module Mutations
       registro.user_id = user_id
       registro.cuenta_id = detalle.cuenta_id
 
-      # raise GraphQL::ExecutionError.new "Error creating traspaso #{registro.errors.full_messages}", extensions: registro.errors.to_hash unless registro.save
+      # raise GraphQL::ExecutionError.new "Error creating traspaso #{registro.errors.full_messages}",
+      # extensions: registro.errors.to_hash unless registro.save
       registro
     end
   end
