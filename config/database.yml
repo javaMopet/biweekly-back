@@ -17,7 +17,7 @@
 default: &default
   adapter: sqlserver
   encoding: utf8
-  username: biweekly_user_dev
+  username: appBiweekly
   password: <%= ENV["DEV_PASSWORD"] %>
   host: localhost
 

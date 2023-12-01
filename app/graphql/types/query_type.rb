@@ -65,5 +65,9 @@ module Types
     field :saldo_pagar_tarjeta_credito,
           resolver: Resolvers::TarjetasCredito::SaldoPagarTarjetaCredito,
           description: 'Obtener el saldo a pagar (p no generar interes) de la tarjeta de credito'
+
+    field :lista_traspasos,
+          resolver: Resolvers::Traspasos::ListaTraspasos,
+          description: 'Obtener un lista de todos los traspasos'
   end
 end
