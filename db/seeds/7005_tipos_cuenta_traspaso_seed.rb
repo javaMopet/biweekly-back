@@ -7,14 +7,16 @@
 # end
 
 begin
-  ActiveRecord::Base.connection.execute('DELETE FROM tipos_cuenta_traspaso;
+  ActiveRecord::Base.connection.execute(
+    'DELETE FROM tipos_cuenta_traspaso;
     DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
     DBCC CHECKIDENT (tipos_cuenta_traspaso, RESEED, @reseed);
-    ') # sqlserver
+    '
+  )
 rescue StandardError => e
   p e.message
   puts 'No sqlserver'
 end
 
-TipoCuentaTraspaso.create!(nombre: 'Entrada')
-TipoCuentaTraspaso.create!(nombre: 'Salida')
+TipoCuentaTraspaso.create!(id: 1, nombre: 'Salida')
+TipoCuentaTraspaso.create!(id: 2, nombre: 'Entrada')
