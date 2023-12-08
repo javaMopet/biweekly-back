@@ -46,7 +46,9 @@ Cuenta.create!(
   identificador: '5573',
   cuenta_contable_id: 112_004
 )
-Cuenta.create!(nombre: 'Efectivo', tipo_cuenta_id: 2, identificador: '', cuenta_contable_id: 111_001)
+
+Cuenta.create!(nombre: 'Efectivo', tipo_cuenta_id: 2, banco_id: nil, identificador: '', cuenta_contable_id: 111_001)
+
 Cuenta.create!(
   nombre: 'Santander Like U',
   tipo_cuenta_id: 3,

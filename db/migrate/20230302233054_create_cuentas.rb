@@ -9,7 +9,7 @@ class CreateCuentas < ActiveRecord::Migration[7.0]
       t.string :identificador, limit: 10, null: true
       t.references :tipo_cuenta, null: false, foreign_key: true
       t.references :cuenta_contable, null: false, foreign_key: true
-      t.references :banco, null: true, foreign_key: true, default: nil
+      t.references :banco, null: true, foreign_key: true
       t.decimal :saldo, precision: 10, scale: 4, null: false, default: 0
       t.integer :dia_corte, null: true
 

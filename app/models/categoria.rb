@@ -7,7 +7,7 @@ class Categoria < ApplicationRecord
   belongs_to :cuenta_default, class_name: 'Cuenta', optional: true
 
   validates :tipo_movimiento, presence: true
-  validates :nombre, presence: true
+  validates :nombre, presence: true, uniqueness: { case_sensitive: false }
   validates :orden, presence: true
   # icono
   validates :descripcion, presence: true

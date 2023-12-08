@@ -8,7 +8,12 @@
 
 begin
   ActiveRecord::Base.connection.execute(
-    ' DELETE FROM categorias;
+    '
+    DELETE FROM traspaso_detalles;
+    DELETE FROM registros_tarjeta;
+    DELETE FROM traspasos;
+    DELETE FROM registros;
+     DELETE FROM categorias;
     DELETE FROM users;
       DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
       DBCC CHECKIDENT (users, RESEED, @reseedc);
