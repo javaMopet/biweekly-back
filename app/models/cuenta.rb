@@ -8,4 +8,6 @@ class Cuenta < ApplicationRecord
 
   has_many :registros #, dependent: :destroy
   has_many :registros_tarjeta #, dependent: :destroy
+
+  validates :nombre, presence: true, uniqueness: { case_sensitive: false }
 end
