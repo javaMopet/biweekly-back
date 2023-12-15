@@ -9,7 +9,7 @@ module UpdateAccountBalanceCredit
       cuenta = Cuenta.find(cuenta_id)
       saldo = cuenta.registros_tarjeta.sum(&:importe)
 
-      cuenta.saldo = saldo * -1
+      cuenta.saldo = saldo
       raise GraphQL::ExecutionError.new "Error updating cuenta", extensions: cuenta.errors.to_hash unless cuenta.save
 
       cuenta
