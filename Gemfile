@@ -50,13 +50,12 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   gem 'sprockets' , "4.1.1"
-	gem 'sprockets-rails', "3.4.2"
+  gem 'sprockets-rails', "3.4.2"
 end
 
 gem 'devise', '~> 4.8'
 gem 'devise-jwt', '~> 0.10.0'
 gem 'rack-cors', '~> 1.1'
-
 
 gem 'graphiql-rails', '~> 1.8'
 gem 'graphql', '~> 2.0', '>= 2.0.15'
