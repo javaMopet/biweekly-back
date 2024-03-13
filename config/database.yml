@@ -18,7 +18,7 @@ default: &default
   adapter: sqlserver
   encoding: utf8
   username: appBiweekly
-  password: <%= ENV["DEV_PASSWORD"] %>
+  password: railsstudent #<%= ENV["DEV_PASSWORD"] %>
   host: localhost
 
 # default: &default

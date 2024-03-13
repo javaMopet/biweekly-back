@@ -17,6 +17,8 @@ gem 'puma', '~> 5.0'
 gem 'matrix'
 gem 'prawn'
 
+gem 'graphql_devise'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -49,16 +51,13 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'sprockets' , "4.1.1"
+  gem 'graphiql-rails'
   gem 'sprockets-rails', "3.4.2"
+  gem 'propshaft'
 end
 
-gem 'devise', '~> 4.8'
 gem 'devise-jwt', '~> 0.10.0'
 gem 'rack-cors', '~> 1.1'
-
-gem 'graphiql-rails', '~> 1.8', group: :development
-gem 'graphql', '~> 2.0', '>= 2.0.15'
 
 gem 'blueprinter'
 gem 'oj'
