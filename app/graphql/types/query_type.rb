@@ -28,10 +28,10 @@ module Types
           resolver: Resolvers::Cuentas::ListaTiposCuenta,
           description: 'Obtener lista de tipos de tipos de cuenta'
 
-    field :lista_cuentas, resolver: Resolvers::Cuentas::ListaCuentas, description: 'Obtener lista de cuentas'
+    field :lista_cuentas, resolver: Resolvers::Cuentas::ListaCuentas, authenticate: true,
+          description: 'Obtener lista de cuentas'
 
-    field :lista_cuentas_contables,
-          resolver: Resolvers::ListaCuentasContables,
+    field :lista_cuentas_contables, resolver: Resolvers::ListaCuentasContables, authenticate: false,
           description: 'Obtener lista de cuentas contables'
 
     field :arbol_cuentas_contables,

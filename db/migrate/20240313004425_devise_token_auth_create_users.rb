@@ -10,7 +10,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
       t.string :encrypted_password, :null => false, :default => ""
 
       ## Recoverable
-      t.string   :reset_password_token
+      t.string   :reset_password_token, :null => true
       t.datetime :reset_password_sent_at
       t.boolean  :allow_password_change, :default => false
 
@@ -18,7 +18,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
       t.datetime :remember_created_at
 
       ## Confirmable
-      t.string   :confirmation_token
+      t.string   :confirmation_token, :null => true
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
       t.string   :unconfirmed_email # Only if using reconfirmable
