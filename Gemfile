@@ -57,7 +57,7 @@ gem 'devise', '~> 4.8'
 gem 'devise-jwt', '~> 0.10.0'
 gem 'rack-cors', '~> 1.1'
 
-gem 'graphiql-rails', '~> 1.8'
+gem 'graphiql-rails', '~> 1.8', group: :development
 gem 'graphql', '~> 2.0', '>= 2.0.15'
 
 gem 'blueprinter'
