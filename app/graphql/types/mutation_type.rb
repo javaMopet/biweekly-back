@@ -35,8 +35,8 @@ module Types
     field :categoria_update, mutation: Mutations::Categorias::CategoriaUpdate
     field :categoria_delete, mutation: Mutations::Categorias::CategoriaDelete
     field :categoria_create, mutation: Mutations::Categorias::CategoriaCreate
-    field :user_update, mutation: Mutations::UserUpdate
-    field :user_create, mutation: Mutations::UserCreate
+    # field :user_update, mutation: Mutations::UserUpdate
+    # field :user_create, mutation: Mutations::UserCreate
     field :importar_registros, mutation: Mutations::ImportarRegistros
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # mount_graphql_devise_for User, at: 'graphql_auth'
   resources :tipos_cuenta_traspaso
   resources :traspaso_detalles
   resources :traspasos
@@ -24,21 +25,24 @@ Rails.application.routes.draw do
   resources :registros
   resources :tipos_cuenta
   resources :tipos_movimiento
-  devise_for :users,
-             controllers: {
-               sessions: 'users/sessions',
-               registrations: 'users/registrations'
-             },
-             defaults: { format: :json }
+  # devise_for :users,
+  #            controllers: {
+  #              sessions: 'users/sessions',
+  #              registrations: 'users/registrations'
+  #            },
+  #            defaults: { format: :json }
 
   resources :cuentas
   resources :cuentas_contable
   resources :categorias
-  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
 
   post '/graphql', to: 'graphql#execute'
-  get 'pages/home'
 
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+   end
+  
+  get 'pages/home'
   get 'member-data', to: 'members#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
