@@ -4,7 +4,7 @@
 class User < ApplicationRecord
             
             devise :database_authenticatable, :registerable,
-                    :recoverable, :rememberable, :validatable
+                    :recoverable, :validatable, :timeoutable
               #       :confirmable, :omniauthable, :trackable
   include GraphqlDevise::Authenticatable
   include GraphqlDevise::Model

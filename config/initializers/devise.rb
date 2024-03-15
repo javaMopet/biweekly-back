@@ -16,7 +16,7 @@ Devise.setup do |config|
 
   config.reconfirmable = true
 
-  config.expire_all_remember_me_on_sign_out = true
+  # config.expire_all_remember_me_on_sign_out = true
 
   config.password_length = 6..128
 
@@ -25,6 +25,8 @@ Devise.setup do |config|
   config.reset_password_within = 6.hours
 
   config.sign_out_via = :delete
+
+  config.timeout_in = 1.minute
 
   config.responder.error_status = :unprocessable_entity
   
