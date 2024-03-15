@@ -50,6 +50,16 @@ Menu.create!(
   activo: 1
 )
 
+Menu.create!(
+  nombre: 'usuarios',
+  icono: 'people',
+  ruta: 'usuarios',
+  padre: menu_administracion.id,
+  tiene_hijos: 0,
+  orden: 350,
+  activo: 1
+)
+
 Menu.create!(nombre: 'Cuentas', icono: 'wallet', ruta: 'cuentas', padre: 0, tiene_hijos: 1, orden: 140, activo: 1)
 
 Menu.create!(
