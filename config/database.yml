@@ -88,7 +88,7 @@ test:
 #
 production:
   <<: *default
-  # host: 89.116.49.98
+  host: 89.116.49.98
   database: biweekly_back_production
   username: biweeklyUserProd
   password: <%= ENV["BIWEEKLY_BACK_DATABASE_PASSWORD"] %>

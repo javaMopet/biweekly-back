@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
-   end
+  end
   
   get 'pages/home'
   get 'member-data', to: 'members#show'
