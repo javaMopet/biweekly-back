@@ -9,6 +9,7 @@ module Types
     argument :importe, Float, required: false    
     argument :fecha, GraphQL::Types::ISO8601Date, required: false
     argument :cuenta_id, ID, required: false
+    argument :tipo_cuenta_trasferencia_id, ID, required: false
     argument :categoria_id, ID, required: false
     argument :observaciones, String, required: false
     argument :user_id, ID, required: true

@@ -40,7 +40,7 @@ module Mutations
       traspasos_detalle_input.each do |td_param|
         traspaso_detalle = TraspasoDetalle.find(td_param.id)
         traspaso_detalle.update(**td_param)
-        registro = Registro.find(td_param.registro_id)
+        registro = Registro.find(traspaso_detalle.registro_id)
         importe =
           if td_param.tipo_cuenta_traspaso_id == 1
             td_param.importe * -1

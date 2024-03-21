@@ -5,9 +5,9 @@ module Types
     field :id, ID, null: false
     field :fecha, GraphQL::Types::ISO8601Date
     field :observaciones, String
-    field :user_id, Integer, null: false
+    field :user_id, ID, null: false
     field :detalle_origen, Types::TraspasoDetalleType, null: false
-    field :detalle_destino, Types::TraspasoDetalleType, null: false
+    # field :detalle_destino, Types::TraspasoDetalleType, null: false
     field :traspaso_detalles, [Types::TraspasoDetalleType], null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -18,8 +18,8 @@ module Types
     end
 
     # obtener el detalle de la cuenta destino
-    def detalle_destino
-      object.traspaso_detalles.find_by(tipo_cuenta_traspaso_id: 2)
-    end
+    # def detalle_destino
+    #   object.traspaso_detalles.find_by(tipo_cuenta_traspaso_id: 2)
+    # end
   end
 end

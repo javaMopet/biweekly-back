@@ -5,10 +5,11 @@ class Registro < ApplicationRecord
   belongs_to :estado_registro
   belongs_to :cuenta, optional: true
   belongs_to :categoria, optional: true
-  belongs_to :tipo_cuenta_transferencia, optional: true
+  # belongs_to :tipo_cuenta_transferencia, optional: true
 
   has_one :registro_tarjeta
   has_one :traspaso_detalle
+  has_one :traspaso, through: :traspaso_detalle
 
   # delegated_type :registrable, types: %w[Ingreso Egreso Inversion Transferencia],
   # required: false, dependent: :destroy

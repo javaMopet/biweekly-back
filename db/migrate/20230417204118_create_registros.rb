@@ -11,7 +11,7 @@ class CreateRegistros < ActiveRecord::Migration[7.0]
       t.references :categoria, null: true, foreign_key: true
       t.string :observaciones, limit: 1000, null: true
       t.references :cuenta, null: true, foreign_key: true
-      t.references :tipo_cuenta_transferencia, null: true, foreign_key: true
+      # t.references :tipo_cuenta_transferencia, null: true, foreign_key: true
 
       t.timestamps
     end

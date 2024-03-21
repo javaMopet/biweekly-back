@@ -11,11 +11,14 @@ module Types
     field :observaciones, String
     field :nombre_completo, String
     field :cuenta_id, Integer, null: false
+    field :tipo_cuenta_trasferencia_id, ID, null: true
     field :cargo, Float, null: true
     field :abono, Float, null: true
     field :disable, Boolean, null: false
     field :registro_tarjeta, Types::RegistroTarjetaType, null: true
     field :traspaso_detalle, Types::TraspasoDetalleType, null: true
+    field :tipo_cuenta_traspaso_id, ID, null: true
+    field :traspaso, Types::TraspasoType, null: true
     field :categoria, Types::Categorias::CategoriaType, null: true
     field :user_id, ID, null: false
     field :cuenta, Types::Cuentas::CuentaType, null: false

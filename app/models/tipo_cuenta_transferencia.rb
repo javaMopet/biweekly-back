@@ -1,2 +1,0 @@
-class TipoCuentaTransferencia < ApplicationRecord
-end

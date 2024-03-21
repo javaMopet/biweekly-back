@@ -56,6 +56,7 @@ module Mutations
       registro.tipo_afectacion =  detalle.tipo_cuenta_traspaso_id == 2 ? 'A' : 'C'
       registro.importe = detalle.tipo_cuenta_traspaso_id == 1 ? detalle.importe * -1 : detalle.importe
       registro.fecha = fecha
+      registro.tipo_cuenta_traspaso_id = detalle.tipo_cuenta_traspaso_id
       registro.observaciones = 'Traspaso entre cuentas'
       registro.user_id = user_id
       registro.cuenta_id = detalle.cuenta_id
