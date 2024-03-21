@@ -41,8 +41,13 @@ module Mutations
         traspaso_detalle = TraspasoDetalle.find(td_param.id)
         traspaso_detalle.update(**td_param)
         registro = Registro.find(traspaso_detalle.registro_id)
+        p "Actualziando el registro .......................................=============="
+        p td_param.importe
+        p td_param.tipo_cuenta_traspaso_id
+        p td_param.tipo_cuenta_traspaso_id == '1'
+        p td_param.cuenta_id
         importe =
-          if td_param.tipo_cuenta_traspaso_id == 1
+          if td_param.tipo_cuenta_traspaso_id == '1'
             td_param.importe * -1
           else
             td_param.importe
