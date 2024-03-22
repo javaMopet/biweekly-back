@@ -14,6 +14,7 @@ module Resolvers
 
       # Metodo resolver
       def resolve(cuenta_id:, fecha_inicio:, fecha_fin:, is_msi:, estado_registro_tarjeta_id:)
+        # sleep(2)
         registros = RegistroTarjeta.includes(:estado_registro_tarjeta, :cuenta, :categoria)
         registros = registros.where(cuenta_id:) if cuenta_id
         registros = registros.where(estado_registro_tarjeta_id:) if estado_registro_tarjeta_id
