@@ -257,19 +257,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_030321) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, where: "([confirmation_token] IS NOT NULL)"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, where: "([reset_password_token] IS NOT NULL)"
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categorias", "cuentas", column: "cuenta_default_id"
   add_foreign_key "categorias", "cuentas_contable"
   add_foreign_key "categorias", "tipos_movimiento"
-  add_foreign_key "categorias", "users"
-  add_foreign_key "cuentas", "bancos"
   add_foreign_key "cuentas", "cuentas_contable"
   add_foreign_key "cuentas", "tipos_cuenta"
   add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
@@ -278,7 +272,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_030321) do
   add_foreign_key "registros", "estados_registro"
   add_foreign_key "registros", "tipos_cuenta_transferencia"
   add_foreign_key "registros", "tipos_cuenta_traspaso"
-  add_foreign_key "registros", "users"
   add_foreign_key "registros_tarjeta", "categorias"
   add_foreign_key "registros_tarjeta", "cuentas"
   add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"
@@ -287,5 +280,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_030321) do
   add_foreign_key "traspaso_detalles", "registros"
   add_foreign_key "traspaso_detalles", "tipos_cuenta_traspaso"
   add_foreign_key "traspaso_detalles", "traspasos"
-  add_foreign_key "traspasos", "users"
 end
