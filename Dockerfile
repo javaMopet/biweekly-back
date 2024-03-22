@@ -15,6 +15,6 @@ COPY . .
 
 RUN bundle install
 
-RUN rm config/credentials.yml.enc
+# RUN rm config/credentials.yml.enc
 
 EXPOSE 3000
