@@ -54,8 +54,18 @@ class RegistrosTarjetaController < ApplicationController
     ActiveRecord::Base.transaction do
       listado = params.fetch(:lista_registros, [])
       fecha_fin = params.fetch(:fecha_fin, nil)
+      fecha_aplicacion = params.fetch(:fecha_aplicacion, nil)
+      importe_total = params.fetch(:importe_total, 0)
       cuenta_id = params.fetch(:cuenta_id, nil)
       retorno = []
+
+      p "==================================================================>>>"
+      p importe_total
+      pago_tarjeta = PagoTarjeta.new
+      pago_tarjeta.fecha = fecha_aplicacion
+      pago_tarjeta.importe = importe_total
+
+      pago_tarjeta.save
 
       listado.each do |registro_param|
         registro_tarjeta = RegistroTarjeta.find(registro_param[:registro_id])
@@ -63,6 +73,7 @@ class RegistrosTarjetaController < ApplicationController
         registro = obtener_registro registro_param
         registro_tarjeta.registro = registro
         registro_tarjeta.estado_registro_tarjeta_id = 2
+        registro_tarjeta.pago_tarjeta_id = pago_tarjeta.id
         raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
         retorno.push(registro)
@@ -70,7 +81,9 @@ class RegistrosTarjetaController < ApplicationController
       total = retorno.sum(&:importe) * -1
 
       registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin
+      registro_tarjeta_pago.pago_tarjeta_id = pago_tarjeta.id
       registro_tarjeta_pago.cuenta_id = cuenta_id
+      registro_tarjeta_pago.is_pago = true
       raise StandardError, registro_tarjeta_pago.errors.full_messages unless registro_tarjeta_pago.save
 
       update_account_balance_credit registro_tarjeta_pago.cuenta.id

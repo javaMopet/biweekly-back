@@ -9,12 +9,14 @@ module Types
     field :traspaso_create, mutation: Mutations::TraspasoCreate
     field :registro_update, mutation: Mutations::RegistroUpdate
     field :registro_tarjeta_delete, mutation: Mutations::RegistroTarjetaDelete
+    field :registro_tarjeta_pago_delete, mutation: Mutations::RegistroTarjetaPagoDelete
     field :registros_tarjeta_delete, mutation: Mutations::RegistrosTarjetaDelete
     field :banco_delete, mutation: Mutations::BancoDelete
     field :banco_update, mutation: Mutations::BancoUpdate
     field :banco_create, mutation: Mutations::BancoCreate
     field :registro_create, mutation: Mutations::RegistroCreate
     field :registro_tarjeta_update, mutation: Mutations::RegistroTarjetaUpdate
+    field :registro_tarjeta_date_update, mutation: Mutations::RegistroTarjetaDateUpdate
     field :registro_tarjeta_create, mutation: Mutations::RegistroTarjetaCreate
     field :registro_delete, mutation: Mutations::RegistroDelete
     field :registros_delete, mutation: Mutations::RegistrosDelete

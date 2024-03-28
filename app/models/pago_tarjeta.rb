@@ -1,0 +1,2 @@
+class PagoTarjeta < ApplicationRecord
+end
