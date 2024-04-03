@@ -12,7 +12,7 @@ module Mutations
     # Metodo revolver
     def resolve(ids:)
       ActiveRecord::Base.transaction do
-        registros = RegistroTarjeta.where(id: ids.split(','))
+        registros = RegistroTarjeta.where(id: ids.split(','), estado_registro_tarjeta_id: 1)
         cuenta_id = registros[0].cuenta.id
 
         unless registros.delete_all
