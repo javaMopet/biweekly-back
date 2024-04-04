@@ -11,7 +11,7 @@ module Mutations
 
     def resolve(registro_tarjeta_input:)
       ActiveRecord::Base.transaction do
-        sleep(3)
+        # sleep(3)
         registro_tarjeta = ::RegistroTarjeta.new(**registro_tarjeta_input)
         unless registro_tarjeta.save
           raise GraphQL::ExecutionError.new "Error creating registro_tarjeta",
