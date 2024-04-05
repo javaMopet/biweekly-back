@@ -15,7 +15,7 @@ begin
     DELETE FROM registros;
      DELETE FROM categorias;
     DELETE FROM users;
-      DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
+      DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 0);
       DBCC CHECKIDENT (users, RESEED, @reseedc);
       '
   )

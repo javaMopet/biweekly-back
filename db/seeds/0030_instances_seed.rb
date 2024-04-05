@@ -13,6 +13,9 @@ begin
     DELETE FROM traspasos;
     DELETE FROM registros;
     DELETE FROM categorias;
+    delete from cuentas;
+    delete from cuentas_contable;
+    delete from bancos;
     DELETE FROM users;
     DELETE FROM instances;
     DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);

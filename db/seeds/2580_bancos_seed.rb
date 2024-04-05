@@ -9,7 +9,7 @@
 begin
   ActiveRecord::Base.connection.execute('
   DELETE FROM bancos;
-    DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
+    DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 0);
     DBCC CHECKIDENT (bancos, RESEED, @reseed);
     ') # sqlserver
 rescue StandardError => e
