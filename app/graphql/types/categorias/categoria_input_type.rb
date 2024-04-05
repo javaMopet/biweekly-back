@@ -15,6 +15,7 @@ module Types
       argument :orden, Integer, required: true
       argument :user_id, ID, required: true
       argument :importe_default, Float, required: false, default_value: 0.00
+      argument :instance_id, ID, required: true
       argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
       argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_04_191535) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,6 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.string "icono", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "instance_id", default: 1, null: false
+    t.index ["instance_id"], name: "index_bancos_on_instance_id"
   end
 
   create_table "categorias", force: :cascade do |t|
@@ -59,8 +61,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", default: 1, null: false
+    t.bigint "instance_id", default: 1, null: false
     t.index ["cuenta_contable_id"], name: "index_categorias_on_cuenta_contable_id"
     t.index ["cuenta_default_id"], name: "index_categorias_on_cuenta_default_id"
+    t.index ["instance_id"], name: "index_categorias_on_instance_id"
     t.index ["tipo_movimiento_id"], name: "index_categorias_on_tipo_movimiento_id"
     t.index ["user_id"], name: "index_categorias_on_user_id"
   end
@@ -87,8 +91,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.datetime "updated_at", null: false
     t.string "propietario", limit: 80
     t.integer "dias_gracia", default: 0, null: false
+    t.bigint "instance_id", default: 1, null: false
     t.index ["banco_id"], name: "index_cuentas_on_banco_id"
     t.index ["cuenta_contable_id"], name: "index_cuentas_on_cuenta_contable_id"
+    t.index ["instance_id"], name: "index_cuentas_on_instance_id"
     t.index ["tipo_cuenta_id"], name: "index_cuentas_on_tipo_cuenta_id"
   end
 
@@ -99,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.bigint "padre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "instance_id", default: 1, null: false
+    t.index ["instance_id"], name: "index_cuentas_contable_on_instance_id"
     t.index ["padre_id"], name: "index_cuentas_contable_on_padre_id"
   end
 
@@ -110,6 +118,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
 
   create_table "estados_registro_tarjeta", force: :cascade do |t|
     t.string "nombre", limit: 20
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "instances", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "logo_image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -163,9 +178,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "tipo_cuenta_traspaso_id"
+    t.bigint "instance_id", default: 1, null: false
     t.index ["categoria_id"], name: "index_registros_on_categoria_id"
     t.index ["cuenta_id"], name: "index_registros_on_cuenta_id"
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
+    t.index ["instance_id"], name: "index_registros_on_instance_id"
     t.index ["tipo_cuenta_transferencia_id"], name: "index_registros_on_tipo_cuenta_transferencia_id"
     t.index ["tipo_cuenta_traspaso_id"], name: "index_registros_on_tipo_cuenta_traspaso_id"
     t.index ["user_id"], name: "index_registros_on_user_id"
@@ -186,9 +203,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.datetime "updated_at", null: false
     t.bigint "pago_tarjeta_id"
     t.boolean "is_pago"
+    t.bigint "instance_id", default: 1, null: false
     t.index ["categoria_id"], name: "index_registros_tarjeta_on_categoria_id"
     t.index ["cuenta_id"], name: "index_registros_tarjeta_on_cuenta_id"
     t.index ["estado_registro_tarjeta_id"], name: "index_registros_tarjeta_on_estado_registro_tarjeta_id"
+    t.index ["instance_id"], name: "index_registros_tarjeta_on_instance_id"
     t.index ["pago_tarjeta_id"], name: "index_registros_tarjeta_on_pago_tarjeta_id"
     t.index ["registro_id"], name: "index_registros_tarjeta_on_registro_id"
   end
@@ -245,6 +264,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "instance_id", default: 1, null: false
+    t.index ["instance_id"], name: "index_traspasos_on_instance_id"
     t.index ["user_id"], name: "index_traspasos_on_user_id"
   end
 
@@ -267,28 +288,38 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_014837) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "instance_id", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["instance_id"], name: "index_users_on_instance_id"
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "bancos", "instances", column: "instance_id"
   add_foreign_key "categorias", "cuentas", column: "cuenta_default_id"
   add_foreign_key "categorias", "cuentas_contable"
+  add_foreign_key "categorias", "instances", column: "instance_id"
   add_foreign_key "categorias", "tipos_movimiento"
   add_foreign_key "cuentas", "cuentas_contable"
+  add_foreign_key "cuentas", "instances", column: "instance_id"
   add_foreign_key "cuentas", "tipos_cuenta"
   add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
+  add_foreign_key "cuentas_contable", "instances", column: "instance_id"
   add_foreign_key "registros", "categorias"
   add_foreign_key "registros", "cuentas"
   add_foreign_key "registros", "estados_registro"
+  add_foreign_key "registros", "instances", column: "instance_id"
   add_foreign_key "registros", "tipos_cuenta_transferencia"
   add_foreign_key "registros", "tipos_cuenta_traspaso"
   add_foreign_key "registros_tarjeta", "categorias"
   add_foreign_key "registros_tarjeta", "cuentas"
   add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"
+  add_foreign_key "registros_tarjeta", "instances", column: "instance_id"
   add_foreign_key "registros_tarjeta", "pagos_tarjeta"
   add_foreign_key "registros_tarjeta", "registros"
   add_foreign_key "traspaso_detalles", "cuentas"
   add_foreign_key "traspaso_detalles", "registros"
   add_foreign_key "traspaso_detalles", "tipos_cuenta_traspaso"
   add_foreign_key "traspaso_detalles", "traspasos"
+  add_foreign_key "traspasos", "instances", column: "instance_id"
+  add_foreign_key "users", "instances", column: "instance_id"
 end
