@@ -13,6 +13,10 @@ module Mutations
       # Default method
       def resolve(categoria_input:)
         categoria = ::Categoria.new(**categoria_input)
+
+        categoria.user_id = current_user.id
+        categoria.instance_id = current_user.instance.id
+
         unless categoria.save
           raise GraphQL::ExecutionError.new "Error creating categoria", extensions: categoria.errors.to_hash
         end

@@ -7,7 +7,7 @@ module Resolvers
       type [Types::Categorias::CategoriaType], null: false
 
       # Metodo resolver
-      def resolve
+      def resolve        
         Categoria.includes(:tipo_movimiento, :cuenta_contable).all
       end
     end

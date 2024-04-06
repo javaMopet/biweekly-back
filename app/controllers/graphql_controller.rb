@@ -5,8 +5,7 @@ class GraphqlController < ApplicationController
   # protect_from_forgery with: :null_session
   include GraphqlDevise::SetUserByToken
 
-  before_action -> { set_resource_by_token(User) }
-
+  # Main execution
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
@@ -15,7 +14,14 @@ class GraphqlController < ApplicationController
     #   # Query context goes here, for example:
     #   # current_user: current_user,
     # }
-    result = BiweeklyBackSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    # p "User: ----------------------->"
+    # p current_user
+    result = BiweeklyBackSchema.execute(
+      query,
+      variables: variables,
+      context: gql_devise_context(User),
+      operation_name: operation_name
+    )
     render json: result unless performed?
   rescue StandardError => e
     raise e unless Rails.env.development?
@@ -23,9 +29,9 @@ class GraphqlController < ApplicationController
   end
 
   private
-  def context
-    devise_context = gql_devise_context(User)
-  end 
+
+  # def context
+  # end
 
   # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)

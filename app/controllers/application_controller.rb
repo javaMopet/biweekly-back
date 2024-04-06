@@ -3,6 +3,8 @@
 # ApplicationController
 class ApplicationController < ActionController::API
   # include GraphqlDevise::SetUserByToken
+
+  # before_action -> { set_resource_by_token(User) }
   # To enable sign in to function correctly.
   # skip_before_action :verify_authenticity_token, only: :create
 
@@ -16,5 +18,9 @@ class ApplicationController < ActionController::API
   #   devise_parameter_sanitizer.permit(:sign_up, keys: added_attrs)
   #   devise_parameter_sanitizer.permit(:account_update, keys: added_attrs)
   #   devise_parameter_sanitizer.permit(:sign_in, keys: added_attrs)
+  # end
+
+  # def current_user
+  #   gql_devise_context(User)[:current_resource]
   # end
 end

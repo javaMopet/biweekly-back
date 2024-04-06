@@ -14,7 +14,6 @@ module Types
       argument :dias_gracia, Integer, required: true
       argument :banco_id, ID, required: false
       argument :saldo, Float, required: true
-      argument :instance_id, ID, required: true
       argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
       argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
     end
