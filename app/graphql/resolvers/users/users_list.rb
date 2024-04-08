@@ -6,8 +6,9 @@ module Resolvers
     class UsersList < Resolvers::Base
       type [Types::UserType], null: false
 
+      # Obtener lista de usuarios
       def resolve
-        User.all
+        User.where(instance_id: current_user.instance.id).all
       end
     end
   end

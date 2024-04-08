@@ -5,6 +5,8 @@ class GraphqlController < ApplicationController
   # protect_from_forgery with: :null_session
   include GraphqlDevise::SetUserByToken
 
+  before_action -> { set_resource_by_token(User) }
+
   # Main execution
   def execute
     variables = prepare_variables(params[:variables])

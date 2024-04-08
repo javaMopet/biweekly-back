@@ -5,8 +5,8 @@ module Resolvers
     # if you have a custom argument class, you can attach it:
 
     # Get current user from graphql_devise
-    # def current_user
-    #   context[:current_resource]
-    # end
+    def current_user
+      context[:current_resource]
+    end
   end
 end
