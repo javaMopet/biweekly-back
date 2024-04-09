@@ -2,6 +2,7 @@
 
 # Modelos para usuarios
 class User < ApplicationRecord
+  rolify
   devise :database_authenticatable, :registerable, :recoverable, :validatable, :timeoutable
   #       :confirmable, :omniauthable, :trackable
   include GraphqlDevise::Authenticatable

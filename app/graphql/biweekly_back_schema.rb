@@ -7,14 +7,14 @@ class BiweeklyBackSchema < GraphQL::Schema
     public_introspection: true,
     resource_loaders: [
       GraphqlDevise::ResourceLoader.new(
-        User,
+        User
         # operations: { register: Mutations::Users::SignUp }
-      ),
+      )
     ]
   )
   mutation(Types::MutationType)
   query(Types::QueryType)
-  
+
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
