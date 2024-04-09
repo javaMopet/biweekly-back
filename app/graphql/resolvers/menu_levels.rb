@@ -9,6 +9,8 @@ module Resolvers
 
     # default method
     def resolve
+      p current_user.id
+      p current_user.name
       menu_all = Menu.all.select(
         'id, padre, nombre, ruta, icono, ' \
         'tiene_hijos, ruta_vista, null as nivel'

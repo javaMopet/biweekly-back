@@ -21,6 +21,8 @@ gem 'prawn'
 gem 'graphql_devise'
 # Use rolify with cancan for authorization
 gem "rolify"
+# Use rolify with cancancan for authorization
+gem 'cancancan'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
