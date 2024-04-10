@@ -15,5 +15,16 @@ module Mutations
     def current_user
       context[:current_resource]
     end
+
+    # Get abilities from current user
+    def current_abilities
+      p "getting abilities"
+      Ability.new(current_user)
+    end
+
+    # Simplify method can?
+    def can?(action, subject)
+      current_abilities.can? action, subject
+    end
   end
 end

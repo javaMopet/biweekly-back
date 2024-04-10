@@ -9,8 +9,20 @@ module Types
     field :reset_password_token, String
     field :reset_password_sent_at, GraphQL::Types::ISO8601DateTime
     field :instance, Types::InstanceType, null: false
+    field :can_modify, Boolean, null: false
+    field :is_admin, Boolean, null: false
     field :remember_created_at, GraphQL::Types::ISO8601DateTime
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    # El usuario puede modificar
+    def can_modify
+      object.has_any_role? :admin, :manager
+    end
+
+    # El usuario es administrador
+    def is_admin
+      object.has_role? :admin
+    end
   end
 end

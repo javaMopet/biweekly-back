@@ -9,15 +9,10 @@ class User < ApplicationRecord
   include GraphqlDevise::Model
 
   #   # Include default devise modules. Others available are:
-  #   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  #   devise :database_authenticatable,
-  #          :registerable,
-  #          :validatable,
-  #          :jwt_authenticatable,
+  #   # :confirmable, :lockable,  :trackable and :omniauthable
+  #   devise :jwt_authenticatable,
   #          jwt_revocation_strategy: JwtDenylist
-  #   # :recoverable, :rememberable, :validatable
-
-  #   validates :email, presence: true, uniqueness: true
+  #   # :recoverable, :rememberable
 
   belongs_to :instance
 end
