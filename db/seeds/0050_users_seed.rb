@@ -25,8 +25,8 @@ end
 
 user1 = User.new(
   email: "hpenam@uaemex.mx",
-  password: 'Sv)c2%h$Kzw2][GYu0b',
-  password_confirmation: 'Sv)c2%h$Kzw2][GYu0b',
+  password: 'hpen4633',
+  password_confirmation: 'hpen4633',
   name: "Horacio Peña Mendoza"
 )
 user1.save!

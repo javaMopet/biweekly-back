@@ -7,10 +7,13 @@
 # end
 
 begin
-  ActiveRecord::Base.connection.execute('DELETE FROM estados_registro;
+  # sqlserver
+  ActiveRecord::Base.connection.execute(
+    'DELETE FROM estados_registro;
     DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
     DBCC CHECKIDENT (estados_registro, RESEED, @reseed);
-    ') # sqlserver
+    '
+  )
 rescue StandardError => e
   p e.message
   puts 'No sqlserver'
