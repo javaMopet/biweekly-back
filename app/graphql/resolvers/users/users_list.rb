@@ -8,7 +8,7 @@ module Resolvers
 
       # Obtener lista de usuarios
       def resolve
-        User.where(instance_id: current_user.instance.id).all
+        User.includes(:instance, :roles).where(instance_id: current_user.instance.id).all
       end
     end
   end

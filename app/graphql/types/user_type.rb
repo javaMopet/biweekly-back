@@ -11,6 +11,7 @@ module Types
     field :instance, Types::InstanceType, null: false
     field :can_modify, Boolean, null: false
     field :is_admin, Boolean, null: false
+    field :roles, [String], null: true
     field :remember_created_at, GraphQL::Types::ISO8601DateTime
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -23,6 +24,11 @@ module Types
     # El usuario es administrador
     def is_admin
       object.has_role? :admin
+    end
+
+    # Get roles from user
+    def roles
+      object.roles.distinct.where.not(name: :menuRole).pluck(:name)
     end
   end
 end

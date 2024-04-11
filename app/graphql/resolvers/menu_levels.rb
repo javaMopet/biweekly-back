@@ -9,13 +9,20 @@ module Resolvers
 
     # default method
     def resolve
-      p current_user.id
-      p current_user.name
-      menu_all = Menu.all.select(
-        'id, padre, nombre, ruta, icono, ' \
-        'tiene_hijos, ruta_vista, null as nivel'
-      )
-                     .order(orden: :asc).as_json
+      menu_all =
+        if current_user.has_role? :admin
+          Menu.all.select(
+            'id, padre, nombre, ruta, icono, ' \
+            'tiene_hijos, ruta_vista, null as nivel'
+          )
+              .order(orden: :asc).as_json
+        else
+          current_user.menus.distinct.select(
+            'menus.id, menus.padre, menus.nombre, ruta, icono, ' \
+            'tiene_hijos, ruta_vista, null as nivel, menus.orden'
+          )
+                      .order(orden: :asc).as_json
+        end
 
       menu_all.filter_map do |menu|
         menu.merge(children: children(menu_all, menu, 0)) if menu['padre'].zero?

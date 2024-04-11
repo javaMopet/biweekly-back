@@ -15,4 +15,10 @@ class User < ApplicationRecord
   #   # :recoverable, :rememberable
 
   belongs_to :instance
+
+  # Obtiene todos menus sin importar su rol
+  has_many :menus, through: :roles, source: :resource, source_type: :Menu
+
+  # Obtiene todos los menus dependiendo un rol en este caso manager
+  # has_many :menus, -> { where(roles: { name: :manager }) }, through: :roles, source: :resource, source_type: :Menu
 end

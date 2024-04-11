@@ -11,6 +11,7 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :menu_levels, resolver: Resolvers::MenuLevels, description: 'Arbol de menús'
+    field :menus_list, resolver: Resolvers::Menus::MenusList, description: 'Lista de menús'
 
     field :users_list, resolver: Resolvers::Users::UsersList, description: 'Obtener lista de usuarios'
 
