@@ -4,6 +4,7 @@ module Types
   class MutationType < Types::BaseObject
     field :user_delete, mutation: Mutations::UserDelete
     field :user_update, mutation: Mutations::Admin::UserUpdate
+    field :user_menu_update, mutation: Mutations::Admin::UserMenuUpdate
     field :traspaso_update, mutation: Mutations::TraspasoUpdate
     field :traspaso_delete, mutation: Mutations::TraspasoDelete
     field :traspaso_create, mutation: Mutations::TraspasoCreate
