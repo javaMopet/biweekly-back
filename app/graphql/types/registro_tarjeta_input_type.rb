@@ -12,7 +12,6 @@ module Types
     argument :concepto, String, required: false
     argument :is_msi, Boolean, required: false
     argument :numero_msi, Integer, required: false
-    argument :instance_id, ID, required: true
     argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
     argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
   end
