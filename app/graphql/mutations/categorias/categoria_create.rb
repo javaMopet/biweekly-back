@@ -25,7 +25,10 @@ module Mutations
         categoria.user_id = current_user.id
         categoria.instance_id = current_user.instance.id
 
-        raise GraphQL::ExecutionError.new "Not permited", extensions: [nothing: 'nothing'] unless can? :save, categoria
+        unless can? :save, categoria
+          raise GraphQL::ExecutionError.new "error: unauthorized access: create 'categoria'",
+                                            extensions: { code: :unauthorized }
+        end
 
         unless categoria.save
           raise GraphQL::ExecutionError.new "Error creating categoria", extensions: categoria.errors.to_hash

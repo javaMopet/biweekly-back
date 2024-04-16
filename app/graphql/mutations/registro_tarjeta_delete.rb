@@ -13,7 +13,14 @@ module Mutations
     def resolve(id:)
       ActiveRecord::Base.transaction do
         registro_tarjeta = ::RegistroTarjeta.find(id)
-        raise GraphQL::ExecutionError.new "Error deleting registro_tarjeta", extensions: registro_tarjeta.errors.to_hash unless registro_tarjeta.destroy
+        unless can? :destroy, registro_tarjeta
+          raise GraphQL::ExecutionError.new "error: unauthorized access: delete 'registro_tarjeta'",
+                                            extensions: { code: :unauthorized }
+        end
+        unless registro_tarjeta.destroy
+          raise GraphQL::ExecutionError.new "Error deleting registro_tarjeta",
+                                            extensions: registro_tarjeta.errors.to_hash
+        end
 
         update_account_balance_credit registro_tarjeta.cuenta.id
 

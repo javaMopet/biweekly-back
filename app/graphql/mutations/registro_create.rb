@@ -14,7 +14,10 @@ module Mutations
       ActiveRecord::Base.transaction do
         registro = ::Registro.new(**registro_input)
         registro.user_id = current_user.id
-        # sleep(2)
+        unless can? :create, registro
+          raise GraphQL::ExecutionError.new "error: unauthorized access: create 'registro'",
+                                            extensions: { code: :unauthorized }
+        end
         unless registro.save
           raise GraphQL::ExecutionError.new "Error creating registro", extensions: registro.errors.to_hash
         end

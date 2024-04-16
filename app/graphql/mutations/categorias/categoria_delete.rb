@@ -13,6 +13,12 @@ module Mutations
       def resolve(id:)
         begin
           categoria = ::Categoria.find(id)
+
+          unless can? :destroy, categoria
+            raise GraphQL::ExecutionError.new "error: unauthorized access: delete 'categoria'",
+                                              extensions: { code: :unauthorized }
+          end
+
           categoria.destroy
         rescue ActiveRecord::InvalidForeignKey => e
           raise GraphQL::ExecutionError.new(e.message, extensions: [{ code: 110, from: 'Categorias' }])
