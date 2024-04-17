@@ -55,7 +55,35 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "biweekly_back_production"
 
+  config.action_mailer.raise_delivery_errors = true
+
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.office365.com',
+    port: 587,
+    domain: 'uaemex.mx',
+    user_name: 'hpenam@uaemex.mx',
+    password: 'hpen4633',
+    authentication: :login,
+    enable_starttls_auto: true
+  }
+
+  # config.action_mailer.smtp_settings = {
+  #   :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
+  #   :ssl => true,
+  #   :enable_starttls_auto => true,  #this is the important stuff!
+  #   :address        => 'smtp.xxxx.xxx',
+  #   :port           => xxx,
+  #   :domain         => 'xxxxxx',
+  #   :authentication => :plain,
+  #   :user_name      => 'xxxxxxx@xxx.xxx',
+  #   :password       => 'xxxxxxxxx'
+  # }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -69,7 +97,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"

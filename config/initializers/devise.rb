@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 Devise.setup do |config|
-
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'hpenam@uaemex.mx'
 
   require 'devise/orm/active_record'
 
@@ -29,7 +28,6 @@ Devise.setup do |config|
   config.timeout_in = 1.minute
 
   config.responder.error_status = :unprocessable_entity
-  
-  config.responder.redirect_status = :see_other
 
+  config.responder.redirect_status = :see_other
 end

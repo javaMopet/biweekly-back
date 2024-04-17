@@ -11,6 +11,7 @@ module Types
     field :instance, Types::InstanceType, null: false
     field :can_modify, Boolean, null: false
     field :is_admin, Boolean, null: false
+    field :is_superuser, Boolean, null: false
     field :roles, [String], null: true
     field :menus, [Types::MenuType], null: true
     field :remember_created_at, GraphQL::Types::ISO8601DateTime
@@ -25,6 +26,11 @@ module Types
     # El usuario es administrador
     def is_admin
       object.has_role? :admin
+    end
+
+    # El usuario es administrador
+    def is_superuser
+      object.has_role? :superuser
     end
 
     # Get roles from user
