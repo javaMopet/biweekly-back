@@ -75,16 +75,6 @@ Rails.application.configure do
     read_timeout: 5
   }
   # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.office365.com',
-  #   port: 587,
-  #   domain: 'uaemex.mx',
-  #   user_name: 'hpenam@uaemex.mx',
-  #   password: 'hpen4633',
-  #   authentication: :login,
-  #   enable_starttls_auto: true
-  # }
-
-  # config.action_mailer.smtp_settings = {
   #   :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
   #   :ssl => true,
   #   :enable_starttls_auto => true,  #this is the important stuff!
