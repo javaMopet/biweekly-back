@@ -56,12 +56,16 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'graphiql-rails'
-  gem 'sprockets-rails', "3.4.2"
-  gem 'propshaft'
+  # uso de la interfaz para graphql
+  
+  # sprockets-rails for graphql
+  
 end
+gem 'graphiql-rails'
+gem 'sprockets-rails', "3.4.2"
+gem 'propshaft'
 
-gem 'devise-jwt', '~> 0.10.0'
+# gem 'devise-jwt', '~> 0.10.0'
 gem 'rack-cors', '~> 1.1'
 
 gem 'blueprinter'

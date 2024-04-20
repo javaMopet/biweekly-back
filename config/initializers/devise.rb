@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 Devise.setup do |config|
-  config.mailer_sender = 'hpenam@uaemex.mx'
+  # config.mailer_sender = 'hpenam@uaemex.mx'
+
+  # Al utilizar graphql_devise ya no utilizamos jwt
+  # config.jwt do |jwt|
+  #   jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
+  # end
 
   require 'devise/orm/active_record'
 
