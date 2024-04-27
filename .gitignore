@@ -30,3 +30,6 @@ credentials.yml.enc
 config/master.key
 *.yml.enc
 config/credentials.yml.enc
+
+# quitar el archivo .env
+.env
