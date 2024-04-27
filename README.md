@@ -13,6 +13,11 @@ Things you may want to cover:
 
 * Database creation
 
+  rails db:prepare
+  rails db:migrate
+  rails db:seed:all
+  rails db:seed:3000_categorias_seed
+
 * Database initialization
 
 * How to run the test suite

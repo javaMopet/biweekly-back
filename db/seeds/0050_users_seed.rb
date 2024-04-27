@@ -24,11 +24,16 @@ rescue StandardError => e
 end
 
 user1 = User.new(
-  email: "hpenam@uaemex.mx",
-  password: 'hpen4633',
-  password_confirmation: 'hpen4633',
-  name: "Horacio Peña Mendoza"
+  email: "biweeklyapplication@gmail.com",
+  password: 'Pqt:72i_9b',
+  password_confirmation: 'Pqt:72i_9b',
+  name: "Super User"
 )
 user1.save!
-user2 = User.new(email: "me@gmail.com", password: '123456', password_confirmation: '123456', name: "prueba")
+user2 = User.new(
+  email: "horaciopenamendoza@gmail.com",
+  password: 'Erumur2024*',
+  password_confirmation: 'Erumur2024*',
+  name: "Horacio Peña Mendoza"
+)
 user2.save!

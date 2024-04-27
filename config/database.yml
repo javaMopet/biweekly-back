@@ -3,24 +3,29 @@
 default: &default
   adapter: sqlserver
   encoding: utf8
-  username: appBiweekly
-  password: <%= ENV["DB_PASSWORD_DEV"] %>
-  host: localhost
+  
 
 development:
   <<: *default  
-  database: biweekly_back_development
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
   port: 1433
+  username: <%= ENV["DB_PASSWORD_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD_DEV"] %> 
+  database: biweekly_back_development
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>  
 
-test:
-  <<: *default
-  database: biweekly_back_test
+# test:
+#   <<: *default
+#   # host: localhost 
+#   port: 1433
+#   database: biweekly_back_test
+#   username: test
+#   password: test
 
-production:
-  <<: *default
-  host: 89.116.49.98
-  database: biweekly_back_production
-  username: biweeklyUserProd
-  password: <%= ENV["BIWEEKLY_BACK_DATABASE_PASSWORD"] %>
-  timeout: 1500
+# production:
+#   <<: *default
+#   host: 89.116.49.98
+#   database: biweekly_back_production
+#   username: <%= ENV["BIWEEKLY_BACK_DATABASE_USERNAME"] %>
+#   password: <%= ENV["BIWEEKLY_BACK_DATABASE_PASSWORD"] %>
+#   timeout: 1500

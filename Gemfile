@@ -57,13 +57,14 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   # uso de la interfaz para graphql
-  
+
   # sprockets-rails for graphql
-  
 end
 gem 'graphiql-rails'
 gem 'sprockets-rails', "3.4.2"
 gem 'propshaft'
+# Shim to load environment variables from .env into ENV in development.
+gem 'dotenv', "~> 3.1.0", groups: [:development, :test]
 
 # gem 'devise-jwt', '~> 0.10.0'
 gem 'rack-cors', '~> 1.1'
