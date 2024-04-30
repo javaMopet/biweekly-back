@@ -7,7 +7,7 @@ ruby '3.1.2'
 gem 'rails', '~> 7.0.4'
 
 # Use sqlserver as the database for Active Record
-gem 'activerecord-sqlserver-adapter'
+gem 'activerecord-sqlserver-adapter', '~> 7.0.4'
 # Use postgresql as the database for Active Record
 # gem 'pg', '~> 1.1'
 
@@ -22,11 +22,11 @@ gem 'graphql_devise'
 # Use rolify with cancan for authorization
 gem "rolify"
 # Use rolify with cancancan for authorization
-gem 'cancancan'
+gem 'cancancan', '~> 3.5.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
-
+# gem 'dalli'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -59,10 +59,11 @@ group :development do
   # uso de la interfaz para graphql
 
   # sprockets-rails for graphql
+  gem 'graphiql-rails'
+  
+  gem 'propshaft'
 end
-gem 'graphiql-rails'
 gem 'sprockets-rails', "3.4.2"
-gem 'propshaft'
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv', "~> 3.1.0", groups: [:development, :test]
 

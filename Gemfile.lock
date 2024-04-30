@@ -226,11 +226,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-sqlserver-adapter
+  activerecord-sqlserver-adapter (~> 7.0.4)
   blueprinter
   bootsnap
   byebug (~> 11.1)
-  cancancan
+  cancancan (~> 3.5.0)
   debug
   dotenv (~> 3.1.0)
   graphiql-rails

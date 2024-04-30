@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+    rails-api:
+        env_file:
+            - .env
+        ports:
+            - 3000:3000
+        image: rails-api:latest
+        networks:
+            - biweekly_network
+        restart: always
+        volumes:
+          - ./config:./config
+
+networks:
+    biweekly_network:
+        external: true
