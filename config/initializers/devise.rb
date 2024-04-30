@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Devise.setup do |config|
-  # config.mailer_sender = 'hpenam@uaemex.mx'
+  config.mailer_sender = 'biweeklyaplication@gmail.com'
 
   # Al utilizar graphql_devise ya no utilizamos jwt
   # config.jwt do |jwt|

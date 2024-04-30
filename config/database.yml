@@ -22,10 +22,12 @@ development:
 #   username: test
 #   password: test
 
-# production:
-#   <<: *default
-#   host: 89.116.49.98
-#   database: biweekly_back_production
-#   username: <%= ENV["BIWEEKLY_BACK_DATABASE_USERNAME"] %>
-#   password: <%= ENV["BIWEEKLY_BACK_DATABASE_PASSWORD"] %>
-#   timeout: 1500
+production:
+  <<: *default
+  host: sql_server_container
+  port: 1433
+  database: biweekly_back_production
+  username: <%= ENV["BIWEEKLY_BACK_DATABASE_USERNAME"] %>
+  password: <%= ENV["BIWEEKLY_BACK_DATABASE_PASSWORD"] %>
+  timeout: 1500
+  # host: 89.116.49.98
