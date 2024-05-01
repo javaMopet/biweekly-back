@@ -2,7 +2,7 @@ version: '3.8'
 services:
     rails-api:
         env_file:
-            - .env
+            - ~/Projects/.environment/.env
         ports:
             - 3000:3000
         image: rails-api:latest
