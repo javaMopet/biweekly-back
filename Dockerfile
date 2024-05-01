@@ -43,4 +43,6 @@ RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
+
+# Ejecutando aplicación rails
 CMD ["./bin/rails", "server"]
