@@ -24,10 +24,11 @@ development:
 
 production:
   <<: *default
-  host: sql_server_container
+  # host: sql_server_container
+  host: 89.116.49.98
   port: 1433
   database: biweekly_back_production
   username: <%= ENV["BIWEEKLY_BACK_DATABASE_USERNAME"] %>
   password: <%= ENV["BIWEEKLY_BACK_DATABASE_PASSWORD"] %>
   timeout: 1500
-  # host: 89.116.49.98
+

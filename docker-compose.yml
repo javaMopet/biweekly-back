@@ -10,7 +10,7 @@ services:
             - biweekly_network
         restart: always
         volumes:
-            - ${PWD}:/rails
+            - .:/rails
 
 networks:
     biweekly_network:

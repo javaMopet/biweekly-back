@@ -8,6 +8,7 @@ module Resolvers
 
       # Default method
       def resolve
+        sleep(5)
         Cuenta.includes(:cuenta_contable, :tipo_cuenta, :banco).where(instance_id: current_user.instance_id).all
       end
     end

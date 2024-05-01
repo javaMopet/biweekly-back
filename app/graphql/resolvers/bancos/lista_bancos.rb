@@ -10,6 +10,7 @@ module Resolvers
       # Default method
       def resolve(id:)
         p id
+        sleep(5)
         # por ahora devuelve todo
         Banco.all
       end
