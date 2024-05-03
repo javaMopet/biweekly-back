@@ -1,8 +1,8 @@
-#!/bin/bash -e
+#!/bin/bash
+set -e
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then  
-  # EDITOR=nvim ./bin/rails credentials:edit  
+if [ -f tmp/pids/server.pid ]; then
+  rm tmp/pids/server.pid
 fi
 
-exec "${@}"
+exec bundle exec "$@"
