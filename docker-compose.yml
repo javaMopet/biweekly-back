@@ -1,17 +1,46 @@
 version: '3.8'
 services:
     rails-api:
+        build: .
         env_file:
             - ~/Projects/.environment/.env
         ports:
             - 3000:3000
-        image: rails-api:latest
+        # image: rails-api:latest
         networks:
             - biweekly_network
         restart: always
         volumes:
             - .:/rails
+        depends_on:
+            - sql_server
+    sql_server:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: sql_server_container
+        user: root
+        ports:
+            - "1433:1433"
+        env_file:
+            - ~/Projects/.environment/database/.env
+        networks:
+            - biweekly_network
+        restart: always
+        volumes:
+            - sql_data:/var/opt/mssql/data
+            - sql_log:/var/opt/mssql/log
+            - sql_secrets:/var/opt/mssql/secrets
 
 networks:
     biweekly_network:
-        external: true
+        name: biweekly_network
+        driver: bridge
+volumes:
+  sql_data:
+    name: mssql_data
+    driver: local
+  sql_log:
+    name: mssql_log
+    driver: local
+  sql_secrets:
+    name: mssql_secrets
+    driver: local

@@ -2,8 +2,7 @@
 
 default: &default
   adapter: sqlserver
-  encoding: utf8
-  
+  encoding: utf8 
 
 development:
   <<: *default  
@@ -24,8 +23,7 @@ development:
 
 production:
   <<: *default
-  # host: sql_server_container
-  host: 89.116.49.98
+  host: sql_server_container  
   port: 1433
   database: biweekly_back_production
   username: <%= ENV["BIWEEKLY_BACK_DATABASE_USERNAME"] %>
