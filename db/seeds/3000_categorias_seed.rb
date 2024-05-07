@@ -7,6 +7,7 @@
 # end
 
 begin
+  # sqlserver
   ActiveRecord::Base.connection.execute(
     '
   -- DELETE FROM detalles_movimiento;
@@ -16,7 +17,7 @@ begin
     DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 0);
     DBCC CHECKIDENT (categorias, RESEED, @reseed);
     '
-  ) # sqlserver
+  )
 rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end

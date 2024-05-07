@@ -2,6 +2,7 @@ version: '3.8'
 services:
     rails-api:
         build: .
+        container_name: api_rails_container
         env_file:
             - ~/Projects/.environment/.env
         ports:
@@ -38,9 +39,12 @@ volumes:
   sql_data:
     name: mssql_data
     driver: local
+    external: true
   sql_log:
     name: mssql_log
     driver: local
+    external: true
   sql_secrets:
     name: mssql_secrets
     driver: local
+    external: true
