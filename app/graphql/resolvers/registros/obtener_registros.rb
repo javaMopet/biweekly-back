@@ -13,7 +13,6 @@ module Resolvers
 
       # Metodo resolver
       def resolve(cuenta_id:, categoria_id:, fecha_inicio:, fecha_fin:)
-        # sleep(2)
         query = Registro.includes(
           :cuenta,
           :categoria,

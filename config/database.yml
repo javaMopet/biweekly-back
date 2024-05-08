@@ -23,7 +23,8 @@ development:
 
 production:
   <<: *default
-  host: sql_server_container
+  # host: sql_server_container
+  host: 89.116.49.98
   # host: localhost
   port: 1433
   database: biweekly_back_production
