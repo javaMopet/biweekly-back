@@ -10,12 +10,15 @@ module Mutations
       argument :id, ID, required: true
       argument :user_input, Types::UserInputType, required: true
 
+      # Main method
       def resolve(id:, user_input:)
         user = ::User.find(id)
-        raise GraphQL::ExecutionError.new "Error updating user", extensions: user.errors.to_hash unless user.update(**user_input)
+        unless user.update(**user_input)
+          raise GraphQL::ExecutionError.new "Error updating user", extensions: user.errors.to_hash
+        end
 
-        { user: user }
+        { user: }
       end
-    end 
+    end
   end
 end

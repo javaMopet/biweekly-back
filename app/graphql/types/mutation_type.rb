@@ -2,6 +2,11 @@
 
 module Types
   class MutationType < Types::BaseObject
+    field :user_remove_role, mutation: Mutations::Admin::UserRemoveRole
+    field :user_add_role, mutation: Mutations::Admin::UserAddRole
+    field :instance_delete, mutation: Mutations::InstanceDelete
+    field :instance_update, mutation: Mutations::InstanceUpdate
+    field :instance_create, mutation: Mutations::InstanceCreate
     field :user_delete, mutation: Mutations::UserDelete
     field :user_update, mutation: Mutations::Admin::UserUpdate
     field :user_menu_update, mutation: Mutations::Admin::UserMenuUpdate

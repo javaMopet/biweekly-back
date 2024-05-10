@@ -51,7 +51,7 @@ Menu.create!(
 )
 
 Menu.create!(
-  nombre: 'usuarios',
+  nombre: 'Usuarios',
   icono: 'people',
   ruta: 'usuarios',
   padre: menu_administracion.id,
@@ -99,5 +99,15 @@ Menu.create!(
   padre: 0,
   tiene_hijos: 1,
   orden: 150,
+  activo: 1
+)
+
+Menu.create!(
+  nombre: 'Instancias',
+  icono: 'app_registration',
+  ruta: 'instances',
+  padre: menu_administracion.id,
+  tiene_hijos: 0,
+  orden: 380,
   activo: 1
 )

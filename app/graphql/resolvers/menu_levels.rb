@@ -10,17 +10,23 @@ module Resolvers
     # default method
     def resolve
       menu_all =
-        if current_user.has_role? :admin
+        if current_user.has_role? :superuser
           Menu.all.select(
             'id, padre, nombre, ruta, icono, ' \
             'tiene_hijos, ruta_vista, null as nivel'
           )
               .order(orden: :asc).as_json
+        elsif current_user.has_role? :admin
+          Menu.all.select(
+            'id, padre, nombre, ruta, icono, ' \
+            'tiene_hijos, ruta_vista, null as nivel'
+          ).where.not(nombre: 'Instancias')
+              .order(orden: :asc).as_json
         else
           current_user.menus.distinct.select(
             'menus.id, menus.padre, menus.nombre, ruta, icono, ' \
             'tiene_hijos, ruta_vista, null as nivel, menus.orden'
-          )
+          ).where.not(nombre: 'Instancias')
                       .order(orden: :asc).as_json
         end
 
