@@ -11,6 +11,7 @@ class Cuenta < ApplicationRecord
   # , dependent: :destroy
   has_many :registros_tarjeta
   # , dependent: :destroy
+  has_many :pagos_tarjeta
 
   validates :nombre,
             presence: true,

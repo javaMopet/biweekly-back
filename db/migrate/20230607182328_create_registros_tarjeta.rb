@@ -1,4 +1,5 @@
 class CreateRegistrosTarjeta < ActiveRecord::Migration[7.0]
+  # main method
   def change
     create_table :registros_tarjeta do |t|
       t.references :estado_registro_tarjeta, null: false, foreign_key: true
@@ -8,7 +9,7 @@ class CreateRegistrosTarjeta < ActiveRecord::Migration[7.0]
       t.decimal :importe, precision: 10, scale: 4
       t.date :fecha, null: false
       t.string :concepto, limit: 1000
-      t.references :registro, null: true, foreign_key: true
+      # t.references :registro, null: true, foreign_key: true
       t.boolean :is_msi, null: false, default: 0
       t.integer :numero_msi, null: true
 

@@ -14,19 +14,15 @@ module Mutations
       ActiveRecord::Base.transaction do
         # Se busca el registro del pago
         registro_tarjeta = ::RegistroTarjeta.find(id)
+        # Se busca el pago tarjeta
         pago_tarjeta_id = registro_tarjeta.pago_tarjeta_id
+        # con el pago tarjeta se buscan los registros asociados al registro_tarjeta -> registo
+        # Delete from resgistros where id in (select registro_id from registros_tarjeta where pago_tarjeta_id = 5 )
+        Registro.joins(:registro_tarjeta).where(registro_tarjeta: { pago_tarjeta_id: }).destroy_all
 
-        registros = Registro.joins(:registro_tarjeta).where(registro_tarjeta: { pago_tarjeta_id: })
-        RegistroTarjeta.where(pago_tarjeta_id:).update_all(
-          estado_registro_tarjeta_id: 1,
-          registro_id: nil,
-          pago_tarjeta_id: nil
-        )
+        RegistroTarjeta.where(pago_tarjeta_id:).update_all(estado_registro_tarjeta_id: 1, pago_tarjeta_id: nil)
 
         # Actualizar los registros de tarjeta asociados con el pago
-        # Delete from resgistros where id in (select registro_id from registros_tarjeta where pago_tarjeta_id = 5 )
-        registros.destroy_all
-        # Eliminar registros en la cuenta asociados con el pago
 
         # Eliminar el registro del pago
         registro_tarjeta.destroy
