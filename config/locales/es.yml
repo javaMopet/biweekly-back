@@ -1,4 +1,4 @@
-en:
+es:
   graphql_devise:
     redirect_url_not_allowed: "Redirect to '%{redirect_url}' not allowed."
     registration_failed: "User couldn't be registered"
@@ -29,11 +29,11 @@ en:
         confirm_link_msg: "You can confirm your account email through the link below:"
         confirm_account_link: "Confirm my account"
       reset_password_instructions:
-        request_reset_link_msg: "Someone has requested a link to change your password. You can do this through the link below."
-        password_change_link: "Change my password"
-        ignore_mail_msg: "If you didn't request this, please ignore this email."
-        no_changes_msg: "Your password won't change until you access the link above and create a new one."
+        request_reset_link_msg: "Alguien ha solicitado un cambio de contraseña. Puedes hacerlo en la siguiente liga:"
+        password_change_link: "Cambiar contraseña"
+        ignore_mail_msg: "Si tu no lo solicitaste, por favor ignora este email."        
+        no_changes_msg: "Tu contraseña no cambiará hasta ingreses en la liga anterior y sigas las instrucciones para crear una nueva."
       unlock_instructions:
         account_lock_msg: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
-  hello: "hello"
-  welcome: "welcome"
+  hello: "hola"
+  welcome: "bienvenido"
