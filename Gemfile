@@ -24,6 +24,10 @@ gem "rolify"
 # Use rolify with cancancan for authorization
 gem 'cancancan', '~> 3.5.0'
 
+# Generacion de archivos excel
+gem 'caxlsx'
+# gem 'caxlsx_rails'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 # gem 'dalli'

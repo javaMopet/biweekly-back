@@ -14,17 +14,21 @@ Rails.application.routes.draw do
   resources :cortes_cuenta
   resources :inversiones
   get 'columnas', to: 'registros#columnas'
+  get 'to_excel', to: 'registros#excel_example'
   get 'movimientos', to: 'registros#movimientos'
   get 'saldos_cuentas', to: 'registros#saldos_cuentas'
   get 'saldos_movimientos', to: 'registros#saldos_movimientos'
   get 'saldos_finales', to: 'registros#saldos_finales'
-
+  # get 'to_excel', to: 'tipos_cuenta#show'
   resources :transferencias
   resources :egresos
   resources :ingresos
   resources :registros
-  resources :tipos_cuenta
+  # resources :tipos_cuenta
   resources :tipos_movimiento
+  get 'create_xls_template', to: 'tipos_cuenta#create_xls_template'
+  get 'movimientos_to_excel', to: 'movimientos#to_excel'
+
   # devise_for :users,
   #            controllers: {
   #              sessions: 'users/sessions',
@@ -32,9 +36,9 @@ Rails.application.routes.draw do
   #            },
   #            defaults: { format: :json }
 
-  resources :cuentas
-  resources :cuentas_contable
-  resources :categorias
+  # resources :cuentas
+  # resources :cuentas_contable
+  # resources :categorias
 
   post '/graphql', to: 'graphql#execute'
 

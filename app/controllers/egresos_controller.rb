@@ -24,7 +24,6 @@ class EgresosController < ApplicationController
     end
   end
 
-  
   # def create_list
   #   listado = params.fetch(:lista_egresos, [])
   #   # p listado.class
