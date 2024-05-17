@@ -1,5 +1,0 @@
-
-
-class TemplateBuilderLogic < BusinessLogic
- 
-end

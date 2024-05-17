@@ -9,6 +9,8 @@ class Categoria < ApplicationRecord
   belongs_to :cuenta_default, class_name: 'Cuenta', optional: true
   belongs_to :instance
 
+  has_many :registros
+
   validates :tipo_movimiento, presence: true
   validates :nombre,
             presence: true,
