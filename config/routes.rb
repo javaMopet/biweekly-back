@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   # Para reportes excel xlsx
   get 'create_xls_template', to: 'tipos_cuenta#create_xls_template'
   get 'movimientos_to_excel', to: 'movimientos#to_excel'
-  get 'totales_por_categoria', to: 'reportes#totales_por_categoria'
-  
+  post 'totales_por_categoria', to: 'reportes#totales_por_categoria'
+
   # devise_for :users,
   #            controllers: {
   #              sessions: 'users/sessions',
