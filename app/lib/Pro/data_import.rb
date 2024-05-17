@@ -33,5 +33,15 @@ module Pro
     def self.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle)
       execute_procedure('PA_SALDO_TARJETA',  cuenta_id, fecha_final, is_detalle)
     end
+
+    # Ejecuta el procedimiento almacenado para buscar periodos
+    def self.pa_obtener_periodos(ejercicio_fiscal, mes_id)
+      execute_procedure('PA_OBTENER_PERIODOS', ejercicio_fiscal, mes_id)
+    end
+
+    # Ejecuta el procedimiento almacenado para buscar todos los movimientos
+    def self.pa_reporte_movimientos(ejercicio_fiscal, mes_id)
+      execute_procedure('PA_REPORTE_MOVIMIENTOS', ejercicio_fiscal, mes_id)
+    end
   end
 end

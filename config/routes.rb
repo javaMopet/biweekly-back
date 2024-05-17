@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   #            },
   #            defaults: { format: :json }
 
-  # resources :cuentas
+  resources :cuentas
   # resources :cuentas_contable
   # resources :categorias
 
