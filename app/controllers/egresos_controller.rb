@@ -1,28 +1,28 @@
 class EgresosController < ApplicationController
-  before_action :set_egreso, only: %i[show update destroy]
+  # before_action :set_egreso, only: %i[show update destroy]
 
-  # GET /egresos
-  def index
-    @egresos = Egreso.all
+  # # GET /egresos
+  # def index
+  #   @egresos = Egreso.all
 
-    render json: @egresos
-  end
+  #   render json: @egresos
+  # end
 
-  # GET /egresos/1
-  def show
-    render json: @egreso
-  end
+  # # GET /egresos/1
+  # def show
+  #   render json: @egreso
+  # end
 
-  # POST /egresos
-  def create
-    @egreso = Egreso.new(egreso_params)
+  # # POST /egresos
+  # def create
+  #   @egreso = Egreso.new(egreso_params)
 
-    if @egreso.save
-      render json: @egreso, status: :created, location: @egreso
-    else
-      render json: @egreso.errors, status: :unprocessable_entity
-    end
-  end
+  #   if @egreso.save
+  #     render json: @egreso, status: :created, location: @egreso
+  #   else
+  #     render json: @egreso.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # def create_list
   #   listado = params.fetch(:lista_egresos, [])
@@ -50,46 +50,46 @@ class EgresosController < ApplicationController
   # end
 
   # PATCH/PUT /egresos/1
-  def update
-    if @egreso.update(egreso_params)
-      render json: @egreso
-    else
-      render json: @egreso.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @egreso.update(egreso_params)
+  #     render json: @egreso
+  #   else
+  #     render json: @egreso.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  # DELETE /egresos/1
-  def destroy
-    @egreso.destroy
-  end
+  # # DELETE /egresos/1
+  # def destroy
+  #   @egreso.destroy
+  # end
 
-  private
+  # private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_egreso
-    @egreso = Egreso.find(params[:id])
-  end
+  # # Use callbacks to share common setup or constraints between actions.
+  # def set_egreso
+  #   @egreso = Egreso.find(params[:id])
+  # end
 
-  # Only allow a list of trusted parameters through.
-  def egreso_params
-    params.require(:egreso).permit(:categoria_id, :cuenta_id, :observaciones, registro: [:estado_registro_id, :importe, :fecha, :observaiones])
-  end
+  # # Only allow a list of trusted parameters through.
+  # def egreso_params
+  #   params.require(:egreso).permit(:categoria_id, :cuenta_id, :observaciones, registro: [:estado_registro_id, :importe, :fecha, :observaiones])
+  # end
 
-  def obtener_registro(registro_aux)
-    registro = Registro.new
+  # def obtener_registro(registro_aux)
+  #   registro = Registro.new
 
-    registro.estado_registro_id = registro_aux[:estado_registro_id]
-    registro.importe = registro_aux[:importe]
-    registro.fecha = registro_aux[:fecha]
-    registro.cuenta_id = registro_aux[:cuenta_id]
-    registro.observaciones = registro_aux[:observaciones]
+  #   registro.estado_registro_id = registro_aux[:estado_registro_id]
+  #   registro.importe = registro_aux[:importe]
+  #   registro.fecha = registro_aux[:fecha]
+  #   registro.cuenta_id = registro_aux[:cuenta_id]
+  #   registro.observaciones = registro_aux[:observaciones]
 
-    registro
-  end
+  #   registro
+  # end
 
-  def obtener_egreso(egreso_aux)
-    egreso =Egreso.new
-    egreso.categoria_id = egreso_aux[:categoria_id]
-    egreso
-  end
+  # def obtener_egreso(egreso_aux)
+  #   egreso =Egreso.new
+  #   egreso.categoria_id = egreso_aux[:categoria_id]
+  #   egreso
+  # end
 end
