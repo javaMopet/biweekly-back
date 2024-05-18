@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_13_230142) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_18_011120) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -198,7 +198,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_230142) do
     t.decimal "importe", precision: 10, scale: 4
     t.date "fecha", null: false
     t.string "concepto", limit: 1000
-    t.bigint "registro_id"
     t.boolean "is_msi", default: false, null: false
     t.integer "numero_msi"
     t.datetime "created_at", null: false
@@ -209,7 +208,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_230142) do
     t.index ["cuenta_id"], name: "index_registros_tarjeta_on_cuenta_id"
     t.index ["estado_registro_tarjeta_id"], name: "index_registros_tarjeta_on_estado_registro_tarjeta_id"
     t.index ["pago_tarjeta_id"], name: "index_registros_tarjeta_on_pago_tarjeta_id"
-    t.index ["registro_id"], name: "index_registros_tarjeta_on_registro_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -330,7 +328,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_230142) do
   add_foreign_key "registros_tarjeta", "cuentas"
   add_foreign_key "registros_tarjeta", "estados_registro_tarjeta"
   add_foreign_key "registros_tarjeta", "pagos_tarjeta"
-  add_foreign_key "registros_tarjeta", "registros"
   add_foreign_key "traspaso_detalles", "cuentas"
   add_foreign_key "traspaso_detalles", "registros"
   add_foreign_key "traspaso_detalles", "tipos_cuenta_traspaso"
