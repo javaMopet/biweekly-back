@@ -3,6 +3,7 @@
 # Controlador para registros
 class RegistrosController < ApplicationController
   include UpdateAccountBalance
+  before_action :authenticate_user_from_token!
   before_action :set_registro, only: %i[show update destroy]
 
   # GET /registros
@@ -94,28 +95,6 @@ class RegistrosController < ApplicationController
     end
   end
 
-  # POST /registros/create_multiple
-  def create_multiple
-    ActiveRecord::Base.transaction do
-      listado = params.fetch(:lista_registros, [])
-      retorno = []
-
-      listado.each do |registro_param|
-        registro = obtener_registro registro_param
-        raise StandardError, registro.errors.full_messages unless registro.save
-
-        retorno.push(registro)
-      end
-
-      update_account_balance retorno[0].cuenta.id
-
-      render json: { retorno: }, status: :ok
-    rescue StandardError => e
-      puts e
-      raise e
-    end
-  end
-
   # PATCH/PUT /registros/1
   def update
     ActiveRecord::Base.transaction do
@@ -137,18 +116,6 @@ class RegistrosController < ApplicationController
   end
 
   private
-
-  def obtener_registro(registro_param)
-    registro = Registro.new
-    registro.estado_registro_id = registro_param["estado_registro_id"]
-    registro.tipo_afectacion = registro_param["tipo_afectacion"]
-    registro.categoria_id = registro_param["categoria_id"]
-    registro.importe = registro_param["importe"]
-    registro.fecha = registro_param["fecha"]
-    registro.cuenta_id = registro_param["cuenta_id"]
-    registro.observaciones = registro_param["observaciones"]
-    registro
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_registro

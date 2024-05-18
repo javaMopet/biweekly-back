@@ -21,9 +21,12 @@ module Types
     field :banco_update, mutation: Mutations::BancoUpdate
     field :banco_create, mutation: Mutations::BancoCreate
     field :registro_create, mutation: Mutations::RegistroCreate
+    # se utiliza el importar_registros
+    # field :registro_multiple_create, mutation: Mutations::RegistroMultipleCreate
     field :registro_tarjeta_update, mutation: Mutations::RegistroTarjetaUpdate
     field :registro_tarjeta_date_update, mutation: Mutations::RegistroTarjetaDateUpdate
     field :registro_tarjeta_create, mutation: Mutations::RegistroTarjetaCreate
+    field :registro_tarjeta_multiple_create, mutation: Mutations::RegistroTarjetaMultipleCreate
     field :registro_delete, mutation: Mutations::RegistroDelete
     field :registros_delete, mutation: Mutations::RegistrosDelete
     field :detalle_movimiento_delete, mutation: Mutations::DetalleMovimientoDelete

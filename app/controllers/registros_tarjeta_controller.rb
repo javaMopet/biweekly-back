@@ -27,27 +27,27 @@ class RegistrosTarjetaController < ApplicationController
   # end
 
   # POST /create_multiple_registros_tarjeta
-  def create_multiple
-    ActiveRecord::Base.transaction do
-      listado = params.fetch(:lista_registros_tarjeta, [])
-      retorno = []
+  # def create_multiple
+  #   ActiveRecord::Base.transaction do
+  #     listado = params.fetch(:lista_registros_tarjeta, [])
+  #     retorno = []
 
-      listado.each do |registro_param|
-        p registro_param[:tipo_afectacion]
-        registro_tarjeta = obtener_registro_tarjeta registro_param
-        raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
+  #     listado.each do |registro_param|
+  #       p registro_param[:tipo_afectacion]
+  #       registro_tarjeta = obtener_registro_tarjeta registro_param
+  #       raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
 
-        retorno.push(registro_tarjeta)
-      end
+  #       retorno.push(registro_tarjeta)
+  #     end
 
-      update_account_balance_credit retorno.first.cuenta.id
+  #     update_account_balance_credit retorno.first.cuenta.id
 
-      render json: { retorno: }, status: :ok
-    rescue StandardError => e
-      puts e
-      raise e
-    end
-  end
+  #     render json: { retorno: }, status: :ok
+  #   rescue StandardError => e
+  #     puts e
+  #     raise e
+  #   end
+  # end
 
   # POST /registros_tarjeta/create_pago
   def create_pago

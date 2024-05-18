@@ -3,9 +3,9 @@ class GraphqlController < ApplicationController
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
-  include GraphqlDevise::SetUserByToken
+  # include GraphqlDevise::SetUserByToken
 
-  before_action -> { set_resource_by_token(User) }
+  # before_action -> { set_resource_by_token(User) }
 
   # Main execution
   def execute
@@ -16,8 +16,6 @@ class GraphqlController < ApplicationController
     #   # Query context goes here, for example:
     #   # current_user: current_user,
     # }
-    # p "User: ----------------------->"
-    # p current_user
     result = BiweeklyBackSchema.execute(
       query,
       variables: variables,

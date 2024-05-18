@@ -40,8 +40,8 @@ module Pro
     end
 
     # Ejecuta el procedimiento almacenado para buscar todos los movimientos
-    def self.pa_reporte_movimientos(ejercicio_fiscal, mes_id)
-      execute_procedure('PA_REPORTE_MOVIMIENTOS', ejercicio_fiscal, mes_id)
+    def self.pa_reporte_movimientos(ejercicio_fiscal, mes_id, instance_id)
+      execute_procedure('PA_REPORTE_MOVIMIENTOS', ejercicio_fiscal, mes_id, instance_id)
     end
   end
 end

@@ -2,12 +2,12 @@
 
 Rails.application.routes.draw do
   # only for show 1 element y create pago arriba
-  post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
-  post '/registros/create_multiple', to: 'registros#create_multiple'
+  # post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
+  # post '/registros/create_multiple', to: 'registros#create_multiple'
   post '/registros_tarjeta/create_pago', to: 'registros_tarjeta#create_pago'
 
   get 'columnas', to: 'registros#columnas'
-  get 'to_excel', to: 'registros#excel_example'
+
   get 'movimientos', to: 'registros#movimientos'
   get 'saldos_cuentas', to: 'registros#saldos_cuentas'
   get 'saldos_movimientos', to: 'registros#saldos_movimientos'
@@ -17,12 +17,12 @@ Rails.application.routes.draw do
   resources :registros
 
   # Para reportes excel xlsx
-  get 'create_xls_template', to: 'tipos_cuenta#create_xls_template'
-  get 'movimientos_to_excel', to: 'movimientos#to_excel'
+  get '/movimientos/to_excel'
   post 'totales_por_categoria', to: 'reportes#totales_por_categoria'
   post '/graphql', to: 'graphql#execute'
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
 
+  # get 'to_excel', to: 'registros#excel_example'
   # mount_graphql_devise_for User, at: 'graphql_auth'
   # resources :tipos_cuenta_traspaso
   # resources :traspaso_detalles
