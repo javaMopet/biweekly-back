@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # only for show 1 element y create pago arriba
-  # post '/create_multiple_registros_tarjeta', to: 'registros_tarjeta#create_multiple'
-  # post '/registros/create_multiple', to: 'registros#create_multiple'
-  post '/registros_tarjeta/create_pago', to: 'registros_tarjeta#create_pago'
+  # Para la vista de movimientos
+  get '/movimientos/columnas'
+  get '/movimientos/ingresos_egresos'
+  get '/movimientos/saldos_cuentas'
+  get '/movimientos/saldos_ingresos_egresos'
+  get '/movimientos/saldos_finales'
 
-  get 'columnas', to: 'registros#columnas'
-
-  get 'movimientos', to: 'registros#movimientos'
-  get 'saldos_cuentas', to: 'registros#saldos_cuentas'
-  get 'saldos_movimientos', to: 'registros#saldos_movimientos'
-  get 'saldos_finales', to: 'registros#saldos_finales'
-
-  resources :registros_tarjeta
-  resources :registros
+  # Generacion del pago de una tarjeta de credito
+  post '/registros_tarjeta/create_pago'
 
   # Para reportes excel xlsx
   get '/movimientos/to_excel'
-  post 'totales_por_categoria', to: 'reportes#totales_por_categoria'
+  post '/reportes/totales_por_categoria'
+
+  # Graphql end-point
   post '/graphql', to: 'graphql#execute'
+
+  # graphiql for dev environment
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
 
+  # Todo lo demas se deja como referencia historica
   # get 'to_excel', to: 'registros#excel_example'
   # mount_graphql_devise_for User, at: 'graphql_auth'
   # resources :tipos_cuenta_traspaso

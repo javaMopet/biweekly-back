@@ -278,7 +278,7 @@ class AddProcedureReporteMovimientos < ActiveRecord::Migration[7.0]
         drop table if EXISTS #reporte_pre_sf
         drop table if EXISTS #total_cash_bank_account
         drop table if EXISTS #reporte_final
-      
+
       END
     SQL
   end

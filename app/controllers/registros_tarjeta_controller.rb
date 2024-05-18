@@ -4,50 +4,7 @@ class RegistrosTarjetaController < ApplicationController
   include UpdateAccountBalanceCredit
   include UpdateAccountBalance
   before_action :set_registro_tarjeta, only: %i[show update destroy]
-
-  # GET /registros_tarjeta
-  def index
-    @registros_tarjeta = RegistroTarjeta.all
-
-    render json: @registros_tarjeta
-  end
-
-  # GET /registros_tarjeta/1
-  def show
-    render json: @registro_tarjeta
-  end
-
-  # GET /saldo_tarjeta_credito
-  # def saldo_tarjeta_credito
-  #   fecha_final = params.fetch(:fechaFinal, '2023-06-12')
-  #   cuenta_id = Integer(params.fetch(:cuentaId, 0))
-  #   is_detalle = Integer(params.fetch(:isDetalle, 0))
-
-  #   render json: { data: Pro::DataImport.saldo_tarjeta_credito(fecha_final, cuenta_id, is_detalle) }
-  # end
-
-  # POST /create_multiple_registros_tarjeta
-  # def create_multiple
-  #   ActiveRecord::Base.transaction do
-  #     listado = params.fetch(:lista_registros_tarjeta, [])
-  #     retorno = []
-
-  #     listado.each do |registro_param|
-  #       p registro_param[:tipo_afectacion]
-  #       registro_tarjeta = obtener_registro_tarjeta registro_param
-  #       raise StandardError, registro_tarjeta.errors.full_messages unless registro_tarjeta.save
-
-  #       retorno.push(registro_tarjeta)
-  #     end
-
-  #     update_account_balance_credit retorno.first.cuenta.id
-
-  #     render json: { retorno: }, status: :ok
-  #   rescue StandardError => e
-  #     puts e
-  #     raise e
-  #   end
-  # end
+  before_action :authenticate_user_from_token!
 
   # POST /registros_tarjeta/create_pago
   def create_pago
@@ -64,10 +21,8 @@ class RegistrosTarjetaController < ApplicationController
 
       total = retorno.sum(&:importe) * -1
 
-      registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin
-      registro_tarjeta_pago.pago_tarjeta_id = pago_tarjeta.id
-      registro_tarjeta_pago.cuenta_id = cuenta_id
-      registro_tarjeta_pago.is_pago = true
+      registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin, pago_tarjeta.id, cuenta_id
+
       raise StandardError, registro_tarjeta_pago.errors.full_messages unless registro_tarjeta_pago.save
 
       update_account_balance_credit registro_tarjeta_pago.cuenta.id
@@ -79,11 +34,6 @@ class RegistrosTarjetaController < ApplicationController
       puts e
       raise e
     end
-  end
-
-  # DELETE /registros_tarjeta/1
-  def destroy
-    @registro_tarjeta.destroy
   end
 
   private
@@ -141,7 +91,7 @@ class RegistrosTarjetaController < ApplicationController
     registro
   end
 
-  def create_registro_tarjeta_pago(total, fecha_fin)
+  def create_registro_tarjeta_pago(total, fecha_fin, pago_tarjeta_id, cuenta_id)
     registro_tarjeta = RegistroTarjeta.new
     registro_tarjeta.estado_registro_tarjeta_id = 2
     registro_tarjeta.categoria_id = nil
@@ -152,6 +102,9 @@ class RegistrosTarjetaController < ApplicationController
     registro_tarjeta.registro = nil
     registro_tarjeta.is_msi = false
     registro_tarjeta.numero_msi = 0
+    registro_tarjeta.pago_tarjeta_id = pago_tarjeta_id
+    registro_tarjeta.cuenta_id = cuenta_id
+    registro_tarjeta.is_pago = true
 
     registro_tarjeta
   end

@@ -6,7 +6,8 @@ class AddProcedureSaldoCuentas < ActiveRecord::Migration[7.0]
         (
         @ejercicio_fiscal int= 2023,
         @mes int =4,
-        @isSaldos bit = 0
+        @isSaldos bit = 0,
+        @instance_id int
       )
       AS
       BEGIN
@@ -35,12 +36,16 @@ class AddProcedureSaldoCuentas < ActiveRecord::Migration[7.0]
           periodo_id int,
           importe money
         )
-
+        /**
+        ** Va obteniendo el saldo final por cuenta
+        **/
         insert into #final_data
           (cuenta_id, periodo_id, importe)
         select registros.cuenta_id, periodos.id periodo_id, sum(registros.importe) importe
         from registros
+        join cuentas on registros.cuenta_id = cuentas.id
           left join #PERIODOS periodos on registros.fecha <= periodos.fecha_fin
+        where cuentas.instance_id = @instance_id
         group by registros.cuenta_id, periodos.id
 
         SELECT cuenta_id,

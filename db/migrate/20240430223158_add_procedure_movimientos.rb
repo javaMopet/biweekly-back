@@ -3,12 +3,13 @@ class AddProcedureMovimientos < ActiveRecord::Migration[7.0]
   def up
     execute <<~SQL
         CREATE PROCEDURE [dbo].[PA_MOVIMIENTOS]
-      	(
+        (
           @ejercicio_fiscal int= null,
-      		@mes int =null,
+          @mes int =null,
           @tipo_movimiento_id int = 2, --Egresos
-          @isSaldos bit= 0
-      	)
+          @isSaldos bit= 0,
+          @instance_id int
+        )
       AS
       BEGIN
 
@@ -28,6 +29,7 @@ class AddProcedureMovimientos < ActiveRecord::Migration[7.0]
         left join registros on categorias.id = registros.categoria_id
         left join #PERIODOS periodos on registros.fecha BETWEEN periodos.fecha_inicio and periodos.fecha_fin
         where categorias.tipo_movimiento_id = @tipo_movimiento_id
+        and categorias.instance_id = @instance_id
 
       END ELSE BEGIN
         /* ****************** SE OBTIENEN SOLO IMPORTE TOTAL DE MOVIMIENTOS *********************** */
@@ -37,6 +39,7 @@ class AddProcedureMovimientos < ActiveRecord::Migration[7.0]
         left join registros on categorias.id = registros.categoria_id
         left join #PERIODOS periodos on registros.fecha BETWEEN periodos.fecha_inicio and periodos.fecha_fin
         where categorias.tipo_movimiento_id = @tipo_movimiento_id
+        and categorias.instance_id = @instance_id
         group by periodos.id
 
       end

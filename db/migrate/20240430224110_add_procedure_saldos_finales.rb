@@ -5,7 +5,9 @@ class AddProcedureSaldosFinales < ActiveRecord::Migration[7.0]
         CREATE PROCEDURE [dbo].[PA_SALDOS_FINALES]
         (
           @ejercicio_fiscal int= 2023,
-          @mes int =4)
+          @mes int =4,
+          @instance_id int
+        )
       AS
       BEGIN
       -- EN ESTE PROCEDIMIENTO SE OBTIENEN DOS LINEA EL NET CASH POR PERIODO Y EL FINAL CASH BALANCE POR PERIODO
@@ -26,7 +28,9 @@ class AddProcedureSaldosFinales < ActiveRecord::Migration[7.0]
       insert into #final_cash_balance(periodo_id, importe)
         select  periodos.id periodo_id, sum(registros.importe) importe
         from registros
+        join cuentas on registros.cuenta_id = cuentas.id
           left join #PERIODOS periodos on registros.fecha <= periodos.fecha_fin
+        where cuentas.instance_id = @instance_id
         group by registros.cuenta_id, periodos.id
 
       insert into #total_cash_bank_account
@@ -35,6 +39,7 @@ class AddProcedureSaldosFinales < ActiveRecord::Migration[7.0]
         from registros
           join cuentas on registros.cuenta_id = cuentas.id
           left join #PERIODOS periodos on registros.fecha <= periodos.fecha_fin
+        where cuentas.instance_id = @instance_id
         group by registros.cuenta_id, periodos.id
 
       insert into #net_balance
