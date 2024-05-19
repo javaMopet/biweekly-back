@@ -5,7 +5,7 @@ class Registro < ApplicationRecord
   belongs_to :estado_registro
   belongs_to :cuenta, optional: true
   belongs_to :categoria, optional: true
-  belongs_to :registro_tarjeta
+  belongs_to :registro_tarjeta, optional: true
   # belongs_to :tipo_cuenta_transferencia, optional: true
 
   # has_one :registro_tarjeta

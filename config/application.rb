@@ -27,7 +27,7 @@ module BiweeklyBack
     I18n.available_locales = [:en, :es]
 
     # Set default locale to something other than :en
-    I18n.default_locale = :es
+    # I18n.default_locale = :es
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
