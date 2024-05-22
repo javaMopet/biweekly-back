@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_18_011120) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,6 +67,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_18_011120) do
     t.index ["instance_id"], name: "index_categorias_on_instance_id"
     t.index ["tipo_movimiento_id"], name: "index_categorias_on_tipo_movimiento_id"
     t.index ["user_id"], name: "index_categorias_on_user_id"
+  end
+
+  create_table "clasificaciones", force: :cascade do |t|
+    t.string "nombre"
+    t.string "color"
+    t.bigint "instance_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instance_id"], name: "index_clasificaciones_on_instance_id"
   end
 
   create_table "cortes_cuenta", force: :cascade do |t|
@@ -310,6 +319,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_18_011120) do
   add_foreign_key "categorias", "instances", column: "instance_id"
   add_foreign_key "categorias", "tipos_movimiento"
   add_foreign_key "categorias", "users"
+  add_foreign_key "clasificaciones", "instances", column: "instance_id"
   add_foreign_key "cuentas", "bancos"
   add_foreign_key "cuentas", "cuentas_contable"
   add_foreign_key "cuentas", "instances", column: "instance_id"
