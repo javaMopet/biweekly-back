@@ -111,3 +111,13 @@ Menu.create!(
   orden: 380,
   activo: 1
 )
+
+Menu.create!(
+  nombre: 'Estadisticas',
+  icono: 'query_stats',
+  ruta: 'estadisticas',
+  padre: 0,
+  tiene_hijos: 0,
+  orden: 500,
+  activo: 1
+)

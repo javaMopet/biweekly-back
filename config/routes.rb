@@ -21,6 +21,12 @@ Rails.application.routes.draw do
   # graphiql for dev environment
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
 
+  namespace :stats do
+    get 'ingresos_egresos_dataset', to: 'stats#ingresos_egresos_dataset'
+    get 'ingresos_dataset', to: 'stats#ingresos_dataset'
+    get 'egresos_dataset', to: 'stats#egresos_dataset'
+  end
+
   # Todo lo demas se deja como referencia historica
   # get 'to_excel', to: 'registros#excel_example'
   # mount_graphql_devise_for User, at: 'graphql_auth'

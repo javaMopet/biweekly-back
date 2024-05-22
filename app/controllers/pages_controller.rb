@@ -2,12 +2,16 @@
 
 # Clase de muestra para el envio de pdf
 class PagesController < ApplicationController
+  # Prueba de generacion de pdf
   def home
     # Prawn::Document.generate("hello_world.pdf") do
     #   text "Hello World!"
     #   stroke_circle [250,300], 200
     # end
-    send_data Pdf::PdfSingleBlog.new.print_data, file_name: 'blog.pdf', type: 'application/pdf' # , disposition: :attachment
+    send_data Pdf::PdfSingleBlog.new.print_data,
+              file_name: 'blog.pdf',
+              type: 'application/pdf',
+              disposition: :attachment
   end
 
   # class PdfSingleBlog
