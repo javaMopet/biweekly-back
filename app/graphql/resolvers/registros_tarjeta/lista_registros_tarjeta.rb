@@ -20,7 +20,7 @@ module Resolvers
         registros = registros.where(estado_registro_tarjeta_id:) if estado_registro_tarjeta_id
         registros = registros.where(fecha: fecha_inicio..fecha_fin)
         registros = registros.where(is_msi:) unless is_msi.nil?
-        registros.order(fecha: :desc, id: :desc).all
+        registros.order(fecha: :asc, id: :desc).all
       end
     end
   end
