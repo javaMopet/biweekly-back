@@ -9,9 +9,15 @@ module Mutations
     argument :id, ID, required: true
     argument :instance_input, Types::InstanceInputType, required: true
 
+    # main method
     def resolve(id:, instance_input:)
       instanz = ::Instance.find(id)
-      raise GraphQL::ExecutionError.new "Error updating instance", extensions: instanz.errors.to_hash unless instanz.update(**instance_input)
+
+      authorize!(:update, instanz)
+
+      unless instanz.update(**instance_input)
+        raise GraphQL::ExecutionError.new "Error updating instance", extensions: instanz.errors.to_hash
+      end
 
       { instance: instanz }
     end

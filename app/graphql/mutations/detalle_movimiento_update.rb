@@ -9,9 +9,16 @@ module Mutations
     argument :id, ID, required: true
     argument :detalle_movimiento_input, Types::DetalleMovimientoInputType, required: true
 
+    # main method
     def resolve(id:, detalle_movimiento_input:)
       detalle_movimiento = ::DetalleMovimiento.find(id)
-      raise GraphQL::ExecutionError.new "Error updating detalle_movimiento", extensions: detalle_movimiento.errors.to_hash unless detalle_movimiento.update(**detalle_movimiento_input)
+
+      authorize!(:update, detalle_movimiento)
+
+      unless detalle_movimiento.update(**detalle_movimiento_input)
+        raise GraphQL::ExecutionError.new "Error updating detalle_movimiento",
+                                          extensions: detalle_movimiento.errors.to_hash
+      end
 
       { detalle_movimiento: detalle_movimiento }
     end

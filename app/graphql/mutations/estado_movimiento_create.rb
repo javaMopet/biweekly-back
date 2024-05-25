@@ -9,8 +9,12 @@ module Mutations
 
     argument :estado_movimiento_input, Types::EstadoMovimientoInputType, required: true
 
+    # main method
     def resolve(estado_movimiento_input:)
       estado_movimiento = ::EstadoMovimiento.new(**estado_movimiento_input)
+
+      authorize!(:save, estado_movimiento)
+
       unless estado_movimiento.save
         raise GraphQL::ExecutionError.new 'Error creating estado_movimiento',
                                           extensions: estado_movimiento.errors.to_hash

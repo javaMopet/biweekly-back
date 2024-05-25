@@ -13,10 +13,7 @@ module Mutations
     def resolve(id:, cuenta_input:)
       cuenta = ::Cuenta.find(id)
 
-      unless can? :update, cuenta
-        raise GraphQL::ExecutionError.new "error: unauthorized access: update 'cuenta'",
-                                          extensions: { code: :unauthorized }
-      end
+      authorize!(:update, cuenta)
 
       unless cuenta.update(**cuenta_input)
         raise GraphQL::ExecutionError.new "Error updating cuenta", extensions: cuenta.errors.to_hash

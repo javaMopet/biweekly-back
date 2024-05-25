@@ -16,10 +16,7 @@ module Mutations
       cuenta.user_id = current_user.id
       cuenta.instance_id = current_user.instance.id
 
-      unless can? :save, cuenta
-        raise GraphQL::ExecutionError.new "error: unauthorized access: create 'cuenta'",
-                                          extensions: { code: :unauthorized }
-      end
+      authorize!(:save, cuenta)
 
       unless cuenta.save
         raise GraphQL::ExecutionError.new "Error creating cuenta #{cuenta.errors.full_messages}",

@@ -8,10 +8,12 @@ module Mutations
 
     argument :id, ID, required: true
 
-    # Default method
+    # main method
     def resolve(id:)
       begin
         banco = ::Banco.find(id)
+        authorize!(:destroy, banco)
+
         banco.destroy
       rescue ActiveRecord::InvalidForeignKey => e
         raise GraphQL::ExecutionError.new(e.message, extensions: [{ code: 110, from: 'Bancos' }])

@@ -12,12 +12,10 @@ module Mutations
     # Main resolver
     def resolve(registro_tarjeta_input:)
       ActiveRecord::Base.transaction do
-        # sleep(3)
         registro_tarjeta = ::RegistroTarjeta.new(**registro_tarjeta_input)
-        unless can? :create, registro_tarjeta
-          raise GraphQL::ExecutionError.new "error: unauthorized access: create 'registro_tarjeta'",
-                                            extensions: { code: :unauthorized }
-        end
+
+        authorize!(:create, registro_tarjeta)
+
         unless registro_tarjeta.save
           raise GraphQL::ExecutionError.new "Error creating registro_tarjeta",
                                             extensions: registro_tarjeta.errors.to_hash

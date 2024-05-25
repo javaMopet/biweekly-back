@@ -8,11 +8,15 @@ module Mutations
 
     argument :id, ID, required: true
 
+    # main method
     def resolve(id:)
       user = ::User.find(id)
+
+      authorize!(:destroy, user)
+
       raise GraphQL::ExecutionError.new "Error deleting user", extensions: user.errors.to_hash unless user.destroy
 
-      { user: user }
+      { user: }
     end
   end
 end

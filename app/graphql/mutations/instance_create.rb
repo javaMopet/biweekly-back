@@ -11,6 +11,9 @@ module Mutations
     # main menu
     def resolve(instance_input:)
       instanz = ::Instance.new(**instance_input)
+
+      authorize!(:save, instanz)
+
       unless instanz.save
         raise GraphQL::ExecutionError.new "Error creating instance", extensions: instanz.errors.to_hash
       end

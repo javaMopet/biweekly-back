@@ -17,8 +17,6 @@ module Mutations
         # p registros_tarjeta_input
 
         registros_tarjeta_input.each do |registro_param|
-          p registro_param
-
           registro_tarjeta = ::RegistroTarjeta.new(**registro_param)
           unless registro_tarjeta.save
             raise GraphQL::ExecutionError.new "Error creating registro_tarjeta",

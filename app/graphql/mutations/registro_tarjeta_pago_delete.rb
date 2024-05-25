@@ -14,6 +14,9 @@ module Mutations
       ActiveRecord::Base.transaction do
         # Se busca el registro del pago
         registro_tarjeta = ::RegistroTarjeta.find(id)
+
+        authorize!(:destroy, registro_tarjeta)
+
         # Se busca el pago tarjeta
         pago_tarjeta_id = registro_tarjeta.pago_tarjeta_id
         # con el pago tarjeta se buscan los registros asociados al registro_tarjeta -> registo

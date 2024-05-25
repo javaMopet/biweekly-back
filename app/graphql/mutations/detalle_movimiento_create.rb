@@ -9,8 +9,12 @@ module Mutations
 
     argument :detalle_movimiento_input, Types::DetalleMovimientoInputType, required: true
 
+    # main method
     def resolve(detalle_movimiento_input:)
       detalle_movimiento = ::DetalleMovimiento.new(**detalle_movimiento_input)
+
+      authorize!(:save, detalle_movimiento)
+
       unless detalle_movimiento.save
         raise GraphQL::ExecutionError.new 'Error creating detalle_movimiento',
                                           extensions: detalle_movimiento.errors.to_hash

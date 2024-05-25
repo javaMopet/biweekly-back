@@ -9,9 +9,16 @@ module Mutations
     argument :id, ID, required: true
     argument :estado_movimiento_input, Types::EstadoMovimientoInputType, required: true
 
+    # main method
     def resolve(id:, estado_movimiento_input:)
       estado_movimiento = ::EstadoMovimiento.find(id)
-      raise GraphQL::ExecutionError.new "Error updating estado_movimiento", extensions: estado_movimiento.errors.to_hash unless estado_movimiento.update(**estado_movimiento_input)
+
+      authorize!(:update, estado_movimiento)
+
+      unless estado_movimiento.update(**estado_movimiento_input)
+        raise GraphQL::ExecutionError.new "Error updating estado_movimiento",
+                                          extensions: estado_movimiento.errors.to_hash
+      end
 
       { estado_movimiento: estado_movimiento }
     end

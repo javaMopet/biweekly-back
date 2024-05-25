@@ -18,6 +18,8 @@ class Ability
 
     if user.has_any_role? :admin, :manager
       can :manage, :all
+      can :assign_roles, User
+      can :remove_roles, User
     else
       can :read, :all
     end

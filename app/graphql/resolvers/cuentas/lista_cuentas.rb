@@ -11,6 +11,7 @@ module Resolvers
       # Default method
       def resolve
         cuentas = Cuenta.includes(:cuenta_contable, :tipo_cuenta, :banco).where(instance_id: current_user.instance_id)
+
         # cuentas = cuentas.where(id:) if id
         cuentas.all
       end

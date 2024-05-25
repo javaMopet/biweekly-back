@@ -14,6 +14,8 @@ module Mutations
     # Main resolver
     def resolve(pago_tarjeta_id:, fecha:)
       ActiveRecord::Base.transaction do
+        authorize!(:update, registro)
+
         Registro.joins(:registro_tarjeta).where(registro_tarjeta: { pago_tarjeta_id: }).update_all(fecha:)
 
         { fecha_nueva: fecha }

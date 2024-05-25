@@ -6,10 +6,7 @@ class BiweeklyBackSchema < GraphQL::Schema
     mutation: Types::MutationType,
     public_introspection: true,
     resource_loaders: [
-      GraphqlDevise::ResourceLoader.new(
-        User
-        # operations: { register: Mutations::Users::SignUp }
-      )
+      GraphqlDevise::ResourceLoader.new(User, operations: { register: Mutations::Register })
     ]
   )
   mutation(Types::MutationType)

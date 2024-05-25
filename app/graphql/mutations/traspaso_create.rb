@@ -15,6 +15,8 @@ module Mutations
       ApplicationRecord.transaction do
         traspaso = ::Traspaso.new(**traspaso_input)
 
+        authorize!(:save, traspaso)
+
         traspasos_detalle_input.each do |td|
           detalle = create_detalle_traspaso td, traspaso.fecha, traspaso.user_id
           detalle.traspaso = traspaso

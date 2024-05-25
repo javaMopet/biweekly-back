@@ -12,6 +12,9 @@ module Mutations
     # default method
     def resolve(id:)
       cuenta_contable = ::CuentaContable.find(id)
+
+      authorize!(:destroy, cuenta_contable)
+
       cuenta_contable.destroy
 
       { cuenta_contable: }

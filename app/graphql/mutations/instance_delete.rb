@@ -11,6 +11,9 @@ module Mutations
     # main function
     def resolve(id:)
       instanz = ::Instance.find(id)
+
+      authorize!(:destroy, instanz)
+
       unless instanz.destroy
         raise GraphQL::ExecutionError.new "Error deleting instance", extensions: instanz.errors.to_hash
       end

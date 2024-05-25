@@ -12,6 +12,8 @@ module Mutations
     def resolve(id:)
       traspaso = ::Traspaso.find(id)
 
+      authorize!(:destroy, traspaso)
+
       traspaso.traspaso_detalles.destroy_all
 
       unless traspaso.destroy

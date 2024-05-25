@@ -16,6 +16,9 @@ module Mutations
     # default method
     def resolve(id:, traspaso_input:, traspasos_detalle_input:)
       traspaso = ::Traspaso.find(id)
+
+      authorize!(:update, traspaso)
+
       cuentas_ids = traspaso.traspaso_detalles.map { |item| item.cuenta_id.to_s }
       cuentas_ids.concat(traspasos_detalle_input.map(&:cuenta_id))
       cuentas_ids.uniq!

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  # Actualización de una cuenta contable
+  # Actualizacion de una cuenta contable
   class CuentaContableUpdate < BaseMutation
     description 'Updates a cuenta_contable by id'
 
@@ -10,11 +10,14 @@ module Mutations
     argument :id, ID, required: true
     argument :cuenta_contable_input, Types::CuentaContableInputType, required: true
 
+    # main method
     def resolve(id:, cuenta_contable_input:)
       cuenta_contable = ::CuentaContable.find(id)
+
+      authorize!(:update, cuenta_contable)
+
       unless cuenta_contable.update(**cuenta_contable_input)
-        raise GraphQL::ExecutionError.new 'Error updating cuenta_contable',
-                                          extensions: cuenta_contable.errors.to_hash
+        raise GraphQL::ExecutionError.new 'Error updating cuenta_contable', extensions: cuenta_contable.errors.to_hash
       end
 
       { cuenta_contable: }
