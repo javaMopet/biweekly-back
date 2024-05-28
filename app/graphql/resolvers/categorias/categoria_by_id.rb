@@ -8,6 +8,7 @@ module Resolvers
 
       argument :id, ID, required: true
 
+      # main method
       def resolve(id:)
         Categoria.includes(:tipo_movimiento, :cuenta_contable, :cuenta_default).find(id)
       end

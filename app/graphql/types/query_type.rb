@@ -46,12 +46,6 @@ module Types
           resolver: Resolvers::CuentasContables::ArbolCuentasContables,
           description: 'Obtener arbol de cuentas contables'
 
-    field :lista_movimientos,
-          resolver: Resolvers::Movimientos::ListaMovimientos,
-          description: 'Obtener lista de movimientos'
-    field :lista_detalles_movimiento,
-          resolver: Resolvers::Movimientos::ListaDetallesMovimiento,
-          description: 'Obtener lista de detalles de movimientos'
     field :obtener_registros,
           resolver: Resolvers::Registros::ObtenerRegistros,
           description: 'Obtener lista de registros de movimientos'

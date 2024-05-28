@@ -29,12 +29,6 @@ module Types
     field :registro_tarjeta_multiple_create, mutation: Mutations::RegistroTarjetaMultipleCreate
     field :registro_delete, mutation: Mutations::RegistroDelete
     field :registros_delete, mutation: Mutations::RegistrosDelete
-    field :detalle_movimiento_delete, mutation: Mutations::DetalleMovimientoDelete
-    field :detalle_movimiento_update, mutation: Mutations::DetalleMovimientoUpdate
-    field :detalle_movimiento_create, mutation: Mutations::DetalleMovimientoCreate
-    field :movimiento_delete, mutation: Mutations::MovimientoDelete
-    field :movimiento_update, mutation: Mutations::MovimientoUpdate
-    field :movimiento_create, mutation: Mutations::MovimientoCreate
     field :estado_movimiento_delete, mutation: Mutations::EstadoMovimientoDelete
     field :estado_movimiento_update, mutation: Mutations::EstadoMovimientoUpdate
     field :estado_movimiento_create, mutation: Mutations::EstadoMovimientoCreate
