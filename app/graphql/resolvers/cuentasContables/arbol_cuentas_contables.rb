@@ -77,7 +77,7 @@ module Resolvers
 
       # obtiene los nodos hijos a partir del nodo padre, en teoria deberia se dependiendo de los permisos que se tengan.
       def get_reporte_permisos(padre_id)
-        p "padre_id  a buscar  #{padre_id}"
+        # p "padre_id  a buscar  #{padre_id}"
 
         sql_where = ' '
 

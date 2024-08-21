@@ -14,21 +14,10 @@ module Mutations
       def resolve(categoria_input:)
         categoria = ::Categoria.new(**categoria_input)
 
-        # current_user.has_role :admin
+        authorize!(:save, categoria)
 
-        # unless current_user.has_any_role? :admin, :manager
-        #   raise GraphQL::ExecutionError.new "Not permited", extensions: [nothing: 'nothing']
-        # end
-
-        # abilities = Ability.new(current_user)
-        # p abilities
         categoria.user_id = current_user.id
-        categoria.instance_id = current_user.instance.id
-
-        unless can? :save, categoria
-          raise GraphQL::ExecutionError.new "error: unauthorized access: create 'categoria'",
-                                            extensions: { code: :unauthorized }
-        end
+        categoria.instance_id = current_user.instance_id
 
         unless categoria.save
           raise GraphQL::ExecutionError.new "Error creating categoria", extensions: categoria.errors.to_hash

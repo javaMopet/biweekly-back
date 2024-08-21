@@ -14,10 +14,7 @@ module Mutations
       def resolve(id:, categoria_input:)
         categoria = ::Categoria.find(id)
 
-        unless can? :update, categoria
-          raise GraphQL::ExecutionError.new "error: unauthorized access: update 'categoria'",
-                                            extensions: { code: :unauthorized }
-        end
+        authorize!(:update, categoria)
 
         unless categoria.update(**categoria_input)
           raise GraphQL::ExecutionError.new "Error updating categoria", extensions: categoria.errors.to_hash
