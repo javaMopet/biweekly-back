@@ -15,7 +15,7 @@ module Mutations
       ActiveRecord::Base.transaction do
         registro = ::Registro.find(id)
 
-        authorize!(:update, registo)
+        authorize!(:update, registro)
 
         unless registro.update(**registro_input)
           raise GraphQL::ExecutionError.new "Error updating registro", extensions: registro.errors.to_hash

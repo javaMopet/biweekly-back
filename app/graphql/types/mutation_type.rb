@@ -13,6 +13,7 @@ module Types
     field :traspaso_update, mutation: Mutations::TraspasoUpdate
     field :traspaso_delete, mutation: Mutations::TraspasoDelete
     field :traspaso_create, mutation: Mutations::TraspasoCreate
+    field :registro_parcial_update, mutation: Mutations::Registros::RegistroParcialUpdate
     field :registro_update, mutation: Mutations::RegistroUpdate
     field :registro_tarjeta_delete, mutation: Mutations::RegistroTarjetaDelete
     field :registro_tarjeta_pago_delete, mutation: Mutations::RegistroTarjetaPagoDelete
