@@ -20,13 +20,14 @@ begin
     DELETE FROM instances;
     DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
     DBCC CHECKIDENT (instances, RESEED, @reseedc);
-      ')
+      '
+  )
 rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end
 
-instance1 = Instance.new(
-  name: "Ingresos y Egresos H&L",
-  logo_image: "logo_handl.png"  
-)
+instance1 = Instance.new(name: "Ingresos y Egresos H&L", logo_image: "logo_handl.png")
 instance1.save!
+
+instance2 = Instance.new(name: "Prueba2", logo_image: "logo_hand2.png")
+instance2.save!
