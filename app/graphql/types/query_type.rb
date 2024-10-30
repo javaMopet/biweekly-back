@@ -37,6 +37,7 @@ module Types
           description: 'Obtener lista de tipos de tipos de cuenta'
 
     field :lista_cuentas, resolver: Resolvers::Cuentas::ListaCuentas, description: 'Obtener lista de cuentas'
+    field :cuenta_by_id, resolver: Resolvers::Cuentas::CuentaById, description: 'Obtener una cuenta por id'
 
     field :lista_cuentas_contables,
           resolver: Resolvers::ListaCuentasContables,
