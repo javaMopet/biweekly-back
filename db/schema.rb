@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_29_025142) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -191,11 +191,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_29_025142) do
     t.bigint "user_id", null: false
     t.bigint "tipo_cuenta_traspaso_id"
     t.bigint "registro_tarjeta_id"
-    t.bigint "instance_id", default: 1, null: false
     t.index ["categoria_id"], name: "index_registros_on_categoria_id"
     t.index ["cuenta_id"], name: "index_registros_on_cuenta_id"
     t.index ["estado_registro_id"], name: "index_registros_on_estado_registro_id"
-    t.index ["instance_id"], name: "index_registros_on_instance_id"
     t.index ["registro_tarjeta_id"], name: "index_registros_on_registro_tarjeta_id"
     t.index ["tipo_cuenta_traspaso_id"], name: "index_registros_on_tipo_cuenta_traspaso_id"
     t.index ["user_id"], name: "index_registros_on_user_id"
@@ -333,7 +331,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_29_025142) do
   add_foreign_key "registros", "categorias"
   add_foreign_key "registros", "cuentas"
   add_foreign_key "registros", "estados_registro"
-  add_foreign_key "registros", "instances", column: "instance_id"
   add_foreign_key "registros", "registros_tarjeta"
   add_foreign_key "registros", "tipos_cuenta_traspaso"
   add_foreign_key "registros", "users"

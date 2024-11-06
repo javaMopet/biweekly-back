@@ -14,7 +14,6 @@ module Mutations
       ActiveRecord::Base.transaction do
         registro = ::Registro.new(**registro_input)
         registro.user_id = current_user.id
-        registro.instance_id = current_user.instance_id
 
         authorize!(:save, registro)
 
