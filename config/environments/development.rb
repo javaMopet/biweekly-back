@@ -37,28 +37,18 @@ Rails.application.configure do
 
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.gmail.com',
-  #   port: 587,
-  #   domain: 'example.com',
-  #   user_name: Rails.application.credentials.dig(:email, :user),
-  #   password: Rails.application.credentials.dig(:email, :password),
-  #   authentication: 'plain',
-  #   enable_starttls_auto: true,
-  #   open_timeout: 5,
-  #   read_timeout: 5
-  # }
   config.action_mailer.smtp_settings = {
-    address: 'smtp.office365.com',
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: 'outlook.com',
+    domain: 'gmail.com',
     user_name: Rails.application.credentials.dig(:email, :user),
     password: Rails.application.credentials.dig(:email, :password),
-    authentication: 'login',
+    authentication: :plain,
     enable_starttls_auto: true,
-    open_timeout: 5,
-    read_timeout: 5
+    open_timeout: 10,
+    read_timeout: 30
   }
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

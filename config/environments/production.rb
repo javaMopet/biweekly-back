@@ -64,28 +64,16 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.smtp_settings = {
-    address: 'smtp.office365.com',
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: 'outlook.com',
+    domain: 'gmail.com',
     user_name: Rails.application.credentials.dig(:email, :user),
     password: Rails.application.credentials.dig(:email, :password),
-    authentication: 'login',
+    authentication: :plain,
     enable_starttls_auto: true,
-    open_timeout: 5,
-    read_timeout: 5
+    open_timeout: 10,
+    read_timeout: 30
   }
-  # config.action_mailer.smtp_settings = {
-  #   :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
-  #   :ssl => true,
-  #   :enable_starttls_auto => true,  #this is the important stuff!
-  #   :address        => 'smtp.xxxx.xxx',
-  #   :port           => xxx,
-  #   :domain         => 'xxxxxx',
-  #   :authentication => :plain,
-  #   :user_name      => 'xxxxxxx@xxx.xxx',
-  #   :password       => 'xxxxxxxxx'
-  # }
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
