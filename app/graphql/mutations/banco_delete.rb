@@ -27,7 +27,8 @@ module Mutations
       end
 
       # anterior
-      # raise GraphQL::ExecutionError.new("Error deleting banco", extensions: [{code: 101, from: 'Bancos'}]) unless banco.destroy
+      # raise GraphQL::ExecutionError.new("Error deleting banco", extensions: [{code: 101, from: 'Bancos'}])
+      # unless banco.destroy
 
       { banco: }
     end

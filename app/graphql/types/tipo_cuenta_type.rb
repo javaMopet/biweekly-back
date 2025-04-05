@@ -11,14 +11,17 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
+    # Crear una etiqueta.
     def label
       object.nombre.to_s
     end
 
+    # obtener el id
     def value
       object.id
     end
 
+    # Obtener el icono en cadena.
     def icon
       object.icono.to_s
     end
