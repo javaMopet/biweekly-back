@@ -66,6 +66,10 @@ group :development do
   gem 'graphiql-rails'
   
   gem 'propshaft'
+
+  # rubocop gem
+  gem 'rubocop', '~> 1.69'
+  gem 'rubocop-rails'
 end
 gem 'sprockets-rails', "3.4.2"
 # Shim to load environment variables from .env into ENV in development.
