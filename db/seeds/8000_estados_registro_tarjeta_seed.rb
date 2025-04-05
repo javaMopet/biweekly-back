@@ -7,10 +7,12 @@
 # end
 
 begin
-  ActiveRecord::Base.connection.execute('DELETE FROM estados_registro_tarjeta;
+  ActiveRecord::Base.connection.execute(
+    'DELETE FROM estados_registro_tarjeta;
     DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
     DBCC CHECKIDENT (estados_registro_tarjeta, RESEED, @reseed);
-    ') # sqlserver
+    '
+  )
 rescue StandardError => e
   p e.message
   puts 'No sqlserver'

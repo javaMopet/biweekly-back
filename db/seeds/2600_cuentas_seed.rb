@@ -13,7 +13,6 @@ begin
     DBCC CHECKIDENT (cuentas, RESEED, @reseed);
     '
   )
-
 rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end

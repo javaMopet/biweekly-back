@@ -7,14 +7,16 @@
 # end
 
 begin
-  ActiveRecord::Base.connection.execute('
+  ActiveRecord::Base.connection.execute(
+    '
   DELETE FROM cuentas;
     DECLARE @reseedc tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
     DBCC CHECKIDENT (cuentas, RESEED, @reseedc);
   DELETE FROM tipos_cuenta;
     DECLARE @reseed tinyint = IIF(@@ROWCOUNT > 0, 0, 1);
     DBCC CHECKIDENT (tipos_cuenta, RESEED, @reseed);
-    ') # sqlserver
+    '
+  )
 rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end
