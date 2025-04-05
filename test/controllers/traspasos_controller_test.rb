@@ -12,7 +12,15 @@ class TraspasosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create traspaso" do
     assert_difference("Traspaso.count") do
-      post traspasos_url, params: { traspaso: { fecha: @traspaso.fecha, observaciones: @traspaso.observaciones, user_id: @traspaso.user_id } }, as: :json
+      post traspasos_url,
+           params: {
+             traspaso: {
+               fecha: @traspaso.fecha,
+               observaciones: @traspaso.observaciones,
+               user_id: @traspaso.user_id
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +32,15 @@ class TraspasosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update traspaso" do
-    patch traspaso_url(@traspaso), params: { traspaso: { fecha: @traspaso.fecha, observaciones: @traspaso.observaciones, user_id: @traspaso.user_id } }, as: :json
+    patch traspaso_url(@traspaso),
+          params: {
+            traspaso: {
+              fecha: @traspaso.fecha,
+              observaciones: @traspaso.observaciones,
+              user_id: @traspaso.user_id
+            }
+          },
+          as: :json
     assert_response :success
   end
 

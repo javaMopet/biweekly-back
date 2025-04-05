@@ -12,7 +12,15 @@ class IngresosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create ingreso" do
     assert_difference("Ingreso.count") do
-      post ingresos_url, params: { ingreso: { categoria_id: @ingreso.categoria_id, cuenta_id: @ingreso.cuenta_id, observaciones: @ingreso.observaciones } }, as: :json
+      post ingresos_url,
+           params: {
+             ingreso: {
+               categoria_id: @ingreso.categoria_id,
+               cuenta_id: @ingreso.cuenta_id,
+               observaciones: @ingreso.observaciones
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +32,15 @@ class IngresosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update ingreso" do
-    patch ingreso_url(@ingreso), params: { ingreso: { categoria_id: @ingreso.categoria_id, cuenta_id: @ingreso.cuenta_id, observaciones: @ingreso.observaciones } }, as: :json
+    patch ingreso_url(@ingreso),
+          params: {
+            ingreso: {
+              categoria_id: @ingreso.categoria_id,
+              cuenta_id: @ingreso.cuenta_id,
+              observaciones: @ingreso.observaciones
+            }
+          },
+          as: :json
     assert_response :success
   end
 

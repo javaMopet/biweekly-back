@@ -12,7 +12,16 @@ class TraspasoDetallesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create traspaso_detalle" do
     assert_difference("TraspasoDetalle.count") do
-      post traspaso_detalles_url, params: { traspaso_detalle: { cuenta_id: @traspaso_detalle.cuenta_id, importe: @traspaso_detalle.importe, tipo_cuenta_trasferencia_id: @traspaso_detalle.tipo_cuenta_trasferencia_id, traspaso_id: @traspaso_detalle.traspaso_id } }, as: :json
+      post traspaso_detalles_url,
+           params: {
+             traspaso_detalle: {
+               cuenta_id: @traspaso_detalle.cuenta_id,
+               importe: @traspaso_detalle.importe,
+               tipo_cuenta_trasferencia_id: @traspaso_detalle.tipo_cuenta_trasferencia_id,
+               traspaso_id: @traspaso_detalle.traspaso_id
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +33,16 @@ class TraspasoDetallesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update traspaso_detalle" do
-    patch traspaso_detalle_url(@traspaso_detalle), params: { traspaso_detalle: { cuenta_id: @traspaso_detalle.cuenta_id, importe: @traspaso_detalle.importe, tipo_cuenta_trasferencia_id: @traspaso_detalle.tipo_cuenta_trasferencia_id, traspaso_id: @traspaso_detalle.traspaso_id } }, as: :json
+    patch traspaso_detalle_url(@traspaso_detalle),
+          params: {
+            traspaso_detalle: {
+              cuenta_id: @traspaso_detalle.cuenta_id,
+              importe: @traspaso_detalle.importe,
+              tipo_cuenta_trasferencia_id: @traspaso_detalle.tipo_cuenta_trasferencia_id,
+              traspaso_id: @traspaso_detalle.traspaso_id
+            }
+          },
+          as: :json
     assert_response :success
   end
 

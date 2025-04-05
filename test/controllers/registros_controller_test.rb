@@ -12,7 +12,17 @@ class RegistrosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create registro" do
     assert_difference("Registro.count") do
-      post registros_url, params: { registro: { estado_registro_id: @registro.estado_registro_id, fecha: @registro.fecha, importe: @registro.importe, registrable_id: @registro.registrable_id, registrable_type: @registro.registrable_type } }, as: :json
+      post registros_url,
+           params: {
+             registro: {
+               estado_registro_id: @registro.estado_registro_id,
+               fecha: @registro.fecha,
+               importe: @registro.importe,
+               registrable_id: @registro.registrable_id,
+               registrable_type: @registro.registrable_type
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +34,17 @@ class RegistrosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update registro" do
-    patch registro_url(@registro), params: { registro: { estado_registro_id: @registro.estado_registro_id, fecha: @registro.fecha, importe: @registro.importe, registrable_id: @registro.registrable_id, registrable_type: @registro.registrable_type } }, as: :json
+    patch registro_url(@registro),
+          params: {
+            registro: {
+              estado_registro_id: @registro.estado_registro_id,
+              fecha: @registro.fecha,
+              importe: @registro.importe,
+              registrable_id: @registro.registrable_id,
+              registrable_type: @registro.registrable_type
+            }
+          },
+          as: :json
     assert_response :success
   end
 

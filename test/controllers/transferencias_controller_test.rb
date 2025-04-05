@@ -12,7 +12,15 @@ class TransferenciasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create transferencia" do
     assert_difference("Transferencia.count") do
-      post transferencias_url, params: { transferencia: { cuenta_destino_id: @transferencia.cuenta_destino_id, cuenta_origen_id: @transferencia.cuenta_origen_id, observaciones: @transferencia.observaciones } }, as: :json
+      post transferencias_url,
+           params: {
+             transferencia: {
+               cuenta_destino_id: @transferencia.cuenta_destino_id,
+               cuenta_origen_id: @transferencia.cuenta_origen_id,
+               observaciones: @transferencia.observaciones
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +32,15 @@ class TransferenciasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update transferencia" do
-    patch transferencia_url(@transferencia), params: { transferencia: { cuenta_destino_id: @transferencia.cuenta_destino_id, cuenta_origen_id: @transferencia.cuenta_origen_id, observaciones: @transferencia.observaciones } }, as: :json
+    patch transferencia_url(@transferencia),
+          params: {
+            transferencia: {
+              cuenta_destino_id: @transferencia.cuenta_destino_id,
+              cuenta_origen_id: @transferencia.cuenta_origen_id,
+              observaciones: @transferencia.observaciones
+            }
+          },
+          as: :json
     assert_response :success
   end
 

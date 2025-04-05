@@ -24,7 +24,9 @@ class TiposMovimientoControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tipo_movimiento" do
-    patch tipo_movimiento_url(@tipo_movimiento), params: { tipo_movimiento: { nombre: @tipo_movimiento.nombre } }, as: :json
+    patch tipo_movimiento_url(@tipo_movimiento),
+          params: { tipo_movimiento: { nombre: @tipo_movimiento.nombre } },
+          as: :json
     assert_response :success
   end
 

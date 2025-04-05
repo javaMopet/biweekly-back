@@ -12,7 +12,15 @@ class CuentasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create cuenta" do
     assert_difference("Cuenta.count") do
-      post cuentas_url, params: { cuenta: { cuenta_contable_id: @cuenta.cuenta_contable_id, descripcion: @cuenta.descripcion, nombre: @cuenta.nombre } }, as: :json
+      post cuentas_url,
+           params: {
+             cuenta: {
+               cuenta_contable_id: @cuenta.cuenta_contable_id,
+               descripcion: @cuenta.descripcion,
+               nombre: @cuenta.nombre
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +32,15 @@ class CuentasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cuenta" do
-    patch cuenta_url(@cuenta), params: { cuenta: { cuenta_contable_id: @cuenta.cuenta_contable_id, descripcion: @cuenta.descripcion, nombre: @cuenta.nombre } }, as: :json
+    patch cuenta_url(@cuenta),
+          params: {
+            cuenta: {
+              cuenta_contable_id: @cuenta.cuenta_contable_id,
+              descripcion: @cuenta.descripcion,
+              nombre: @cuenta.nombre
+            }
+          },
+          as: :json
     assert_response :success
   end
 

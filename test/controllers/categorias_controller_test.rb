@@ -13,11 +13,16 @@ class CategoriasControllerTest < ActionDispatch::IntegrationTest
   test 'should create categoria' do
     assert_difference('Categoria.count') do
       post categorias_url,
-           params: { categoria: { color: @categoria.color,
-                                  cuenta_contable_id: @categoria.cuenta_contable_id,
-                                  descripcion: @categoria.descripcion,
-                                  icono: @categoria.icono, nombre: @categoria.nombre,
-                                  tipo_movimiento_id: @categoria.tipo_movimiento_id } },
+           params: {
+             categoria: {
+               color: @categoria.color,
+               cuenta_contable_id: @categoria.cuenta_contable_id,
+               descripcion: @categoria.descripcion,
+               icono: @categoria.icono,
+               nombre: @categoria.nombre,
+               tipo_movimiento_id: @categoria.tipo_movimiento_id
+             }
+           },
            as: :json
     end
 
@@ -31,11 +36,16 @@ class CategoriasControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update categoria' do
     patch categoria_url(@categoria),
-          params: { categoria: { color: @categoria.color,
-                                 cuenta_contable_id: @categoria.cuenta_contable_id,
-                                 descripcion: @categoria.descripcion,
-                                 icono: @categoria.icono, nombre: @categoria.nombre,
-                                 tipo_movimiento_id: @categoria.tipo_movimiento_id } },
+          params: {
+            categoria: {
+              color: @categoria.color,
+              cuenta_contable_id: @categoria.cuenta_contable_id,
+              descripcion: @categoria.descripcion,
+              icono: @categoria.icono,
+              nombre: @categoria.nombre,
+              tipo_movimiento_id: @categoria.tipo_movimiento_id
+            }
+          },
           as: :json
     assert_response :success
   end

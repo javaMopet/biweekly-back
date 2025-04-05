@@ -12,7 +12,17 @@ class CortesCuentaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create corte_cuenta" do
     assert_difference("CorteCuenta.count") do
-      post cortes_cuenta_url, params: { corte_cuenta: { estatus: @corte_cuenta.estatus, fecha_final: @corte_cuenta.fecha_final, fecha_inicial: @corte_cuenta.fecha_inicial, saldo_final: @corte_cuenta.saldo_final, saldo_inicial: @corte_cuenta.saldo_inicial } }, as: :json
+      post cortes_cuenta_url,
+           params: {
+             corte_cuenta: {
+               estatus: @corte_cuenta.estatus,
+               fecha_final: @corte_cuenta.fecha_final,
+               fecha_inicial: @corte_cuenta.fecha_inicial,
+               saldo_final: @corte_cuenta.saldo_final,
+               saldo_inicial: @corte_cuenta.saldo_inicial
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +34,17 @@ class CortesCuentaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update corte_cuenta" do
-    patch corte_cuenta_url(@corte_cuenta), params: { corte_cuenta: { estatus: @corte_cuenta.estatus, fecha_final: @corte_cuenta.fecha_final, fecha_inicial: @corte_cuenta.fecha_inicial, saldo_final: @corte_cuenta.saldo_final, saldo_inicial: @corte_cuenta.saldo_inicial } }, as: :json
+    patch corte_cuenta_url(@corte_cuenta),
+          params: {
+            corte_cuenta: {
+              estatus: @corte_cuenta.estatus,
+              fecha_final: @corte_cuenta.fecha_final,
+              fecha_inicial: @corte_cuenta.fecha_inicial,
+              saldo_final: @corte_cuenta.saldo_final,
+              saldo_inicial: @corte_cuenta.saldo_inicial
+            }
+          },
+          as: :json
     assert_response :success
   end
 

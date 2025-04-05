@@ -12,7 +12,9 @@ class TiposCuentaTraspasoControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tipo_cuenta_traspaso" do
     assert_difference("TipoCuentaTraspaso.count") do
-      post tipos_cuenta_traspaso_url, params: { tipo_cuenta_traspaso: { nombre: @tipo_cuenta_traspaso.nombre } }, as: :json
+      post tipos_cuenta_traspaso_url,
+           params: { tipo_cuenta_traspaso: { nombre: @tipo_cuenta_traspaso.nombre } },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +26,9 @@ class TiposCuentaTraspasoControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tipo_cuenta_traspaso" do
-    patch tipo_cuenta_traspaso_url(@tipo_cuenta_traspaso), params: { tipo_cuenta_traspaso: { nombre: @tipo_cuenta_traspaso.nombre } }, as: :json
+    patch tipo_cuenta_traspaso_url(@tipo_cuenta_traspaso),
+          params: { tipo_cuenta_traspaso: { nombre: @tipo_cuenta_traspaso.nombre } },
+          as: :json
     assert_response :success
   end
 

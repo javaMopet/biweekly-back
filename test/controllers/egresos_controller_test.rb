@@ -12,7 +12,15 @@ class EgresosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create egreso" do
     assert_difference("Egreso.count") do
-      post egresos_url, params: { egreso: { categoria_id: @egreso.categoria_id, cuenta_id: @egreso.cuenta_id, observaciones: @egreso.observaciones } }, as: :json
+      post egresos_url,
+           params: {
+             egreso: {
+               categoria_id: @egreso.categoria_id,
+               cuenta_id: @egreso.cuenta_id,
+               observaciones: @egreso.observaciones
+             }
+           },
+           as: :json
     end
 
     assert_response :created
@@ -24,7 +32,15 @@ class EgresosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update egreso" do
-    patch egreso_url(@egreso), params: { egreso: { categoria_id: @egreso.categoria_id, cuenta_id: @egreso.cuenta_id, observaciones: @egreso.observaciones } }, as: :json
+    patch egreso_url(@egreso),
+          params: {
+            egreso: {
+              categoria_id: @egreso.categoria_id,
+              cuenta_id: @egreso.cuenta_id,
+              observaciones: @egreso.observaciones
+            }
+          },
+          as: :json
     assert_response :success
   end
 
