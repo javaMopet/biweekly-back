@@ -48,7 +48,7 @@ Rails.application.configure do
     open_timeout: 10,
     read_timeout: 30
   }
-  
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

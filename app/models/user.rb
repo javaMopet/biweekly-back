@@ -14,7 +14,8 @@ class User < ApplicationRecord
   #          jwt_revocation_strategy: JwtDenylist
   #   # :recoverable, :rememberable
 
-  belongs_to :instance
+  has_many :users_instances, dependent: :destroy
+  has_many :instances, through: :users_instances
 
   # Obtiene todos menus sin importar su rol
   has_many :menus, through: :roles, source: :resource, source_type: :Menu

@@ -3,7 +3,7 @@
 module Mutations
   class Register < GraphqlDevise::Mutations::Register
     argument :name, String, required: true
-    argument :instance_id, ID, required: true
+    argument :instances, [Types::InstanceInputType], required: true
 
     field :authenticatable, Types::UserType, null: true
 

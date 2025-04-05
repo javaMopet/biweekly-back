@@ -8,7 +8,7 @@ module Types
     field :encrypted_password, String, null: false
     field :reset_password_token, String
     field :reset_password_sent_at, GraphQL::Types::ISO8601DateTime
-    field :instance, Types::InstanceType, null: false
+    field :instances, [Types::InstanceType], null: false
     field :can_modify, Boolean, null: false
     field :is_admin, Boolean, null: false
     field :is_superuser, Boolean, null: false

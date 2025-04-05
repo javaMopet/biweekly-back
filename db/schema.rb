@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_02_202025) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -138,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
     t.string "logo_image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "dominio", limit: 20
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -296,11 +297,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "instance_id", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["instance_id"], name: "index_users_on_instance_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, where: "([reset_password_token] IS NOT NULL)"
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+  end
+
+  create_table "users_instances", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "instance_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instance_id"], name: "index_users_instances_on_instance_id"
+    t.index ["user_id", "instance_id"], name: "index_users_instances_on_user_id_and_instance_id", unique: true
+    t.index ["user_id"], name: "index_users_instances_on_user_id"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -316,17 +325,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
   add_foreign_key "bancos", "users"
   add_foreign_key "categorias", "cuentas", column: "cuenta_default_id"
   add_foreign_key "categorias", "cuentas_contable"
-  add_foreign_key "categorias", "instances", column: "instance_id"
+  add_foreign_key "categorias", "instances"
   add_foreign_key "categorias", "tipos_movimiento"
   add_foreign_key "categorias", "users"
-  add_foreign_key "clasificaciones", "instances", column: "instance_id"
+  add_foreign_key "clasificaciones", "instances"
   add_foreign_key "cuentas", "bancos"
   add_foreign_key "cuentas", "cuentas_contable"
-  add_foreign_key "cuentas", "instances", column: "instance_id"
+  add_foreign_key "cuentas", "instances"
   add_foreign_key "cuentas", "tipos_cuenta"
   add_foreign_key "cuentas", "users"
   add_foreign_key "cuentas_contable", "cuentas_contable", column: "padre_id"
-  add_foreign_key "cuentas_contable", "instances", column: "instance_id"
+  add_foreign_key "cuentas_contable", "instances"
   add_foreign_key "pagos_tarjeta", "cuentas"
   add_foreign_key "registros", "categorias"
   add_foreign_key "registros", "cuentas"
@@ -342,7 +351,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_005409) do
   add_foreign_key "traspaso_detalles", "registros"
   add_foreign_key "traspaso_detalles", "tipos_cuenta_traspaso"
   add_foreign_key "traspaso_detalles", "traspasos"
-  add_foreign_key "traspasos", "instances", column: "instance_id"
+  add_foreign_key "traspasos", "instances"
   add_foreign_key "traspasos", "users"
-  add_foreign_key "users", "instances", column: "instance_id"
+  add_foreign_key "users_instances", "instances"
+  add_foreign_key "users_instances", "users"
 end

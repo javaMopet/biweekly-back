@@ -6,7 +6,7 @@ module Types
     argument :name, String, required: false
     argument :nickname, String, required: false
     argument :image, String, required: false
-    argument :instance_id, ID, required: false
+    argument :instances, [Types::InstanceInputType], required: false
     argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
     argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
   end
