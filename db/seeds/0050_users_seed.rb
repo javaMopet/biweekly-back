@@ -24,7 +24,7 @@ rescue StandardError => e
 end
 
 user1 = User.new(
-  email: "biweeklyapplication@gmail.com",
+  email: "hpenam.dtic@gmail.com",
   password: 'Pqt:72i_9b',
   password_confirmation: 'Pqt:72i_9b',
   name: "Super User"
