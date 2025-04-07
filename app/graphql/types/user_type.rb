@@ -12,7 +12,7 @@ module Types
     field :can_modify, Boolean, null: false
     field :is_admin, Boolean, null: false
     field :is_superuser, Boolean, null: false
-    field :roles, [String], null: true
+    field :roles, [Types::RoleType], null: true
     field :menus, [Types::MenuType], null: true
     field :remember_created_at, GraphQL::Types::ISO8601DateTime
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -35,7 +35,7 @@ module Types
 
     # Get roles from user
     def roles
-      object.roles.distinct.where.not(name: :menuRole).pluck(:name)
+      object.roles.distinct.where.not(name: :menuRole).all
     end
   end
 end
