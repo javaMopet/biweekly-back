@@ -19,7 +19,9 @@ module Resolvers
             fecha_fin
           end
 
-        RegistroTarjeta.where(cuenta_id:).where(fecha: ..fecha_final).where(is_msi: 0).sum(&:importe)
+        saldo_final = RegistroTarjeta.where(cuenta_id:).where(fecha: ..fecha_final).where(is_msi: 0).sum(&:importe)
+        p "Saldo a pagar: #{saldo_final}"
+        saldo_final
       end
     end
   end
