@@ -21,3 +21,4 @@ end
 EstadoRegistroTarjeta.create!(nombre: 'Pendiente')
 EstadoRegistroTarjeta.create!(nombre: 'Cerrado')
 EstadoRegistroTarjeta.create!(nombre: 'Cancelado')
+EstadoRegistroTarjeta.create!(nombre: 'Pagado')

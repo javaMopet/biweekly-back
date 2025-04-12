@@ -10,7 +10,7 @@ class RegistrosTarjetaController < ApplicationController
   def create_pago
     ActiveRecord::Base.transaction do
       listado = params.fetch(:lista_registros, [])
-      fecha_fin = params.fetch(:fecha_fin, nil)
+      _fecha_fin = params.fetch(:fecha_fin, nil)
       fecha_aplicacion = params.fetch(:fecha_aplicacion, nil)
       importe_total = params.fetch(:importe_total, 0)
       cuenta_id = params.fetch(:cuenta_id, nil)
@@ -21,7 +21,7 @@ class RegistrosTarjetaController < ApplicationController
 
       total = retorno.sum(&:importe) * -1
 
-      registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_fin, pago_tarjeta.id, cuenta_id
+      registro_tarjeta_pago = create_registro_tarjeta_pago total, fecha_aplicacion, pago_tarjeta.id, cuenta_id
 
       raise StandardError, registro_tarjeta_pago.errors.full_messages unless registro_tarjeta_pago.save
 

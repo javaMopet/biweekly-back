@@ -12,6 +12,7 @@ module Resolvers
 
       # default method
       def resolve(cuenta_id:, fecha_fin:, is_detalle:)
+        p is_detalle
         fecha_final =
           if fecha_fin.nil?
             Time.current.to_date
@@ -19,7 +20,12 @@ module Resolvers
             fecha_fin
           end
 
-        saldo_final = RegistroTarjeta.where(cuenta_id:).where(fecha: ..fecha_final).where(is_msi: 0).sum(&:importe)
+        saldo_final = RegistroTarjeta.where(
+          cuenta_id:,
+          estado_registro_tarjeta_id: 1,
+          fecha: ..fecha_final,
+          is_msi: 0
+        ).sum(&:importe)
         p "Saldo a pagar: #{saldo_final}"
         saldo_final
       end
