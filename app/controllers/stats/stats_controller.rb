@@ -6,11 +6,12 @@ module Stats
     before_action :set_instance
     # Obtener el dataset para la grafica de ingresos y egresos.
     def ingresos_egresos_dataset
-      year = 2024
+      # year = 2024
+      p @year
       retorno =
         Registro.joins(:cuenta, :categoria)
                 .where(cuentas: { instance_id: @instance_id })
-                .where('YEAR(registros.fecha) = ?', year)
+                .where('YEAR(registros.fecha) = ?', @year)
                 .select('MONTH(registros.fecha) AS mes, categorias.tipo_movimiento_id, ' \
                         'SUM(case categorias.tipo_movimiento_id when 1 then registros.importe ' \
                         'when 2 then registros.importe * -1 end) AS importe')
@@ -29,15 +30,16 @@ module Stats
 
     # Obtener el dataset para la grafica de ingresos.
     def ingresos_dataset
-      year = 2024
-      retorno = obtener_registros(1, year)
+      p @instance_id
+      # year = 2024
+      retorno = obtener_registros(1,  @year)
       render json: { retorno: }, status: :ok
     end
 
     # Obtener el dataset para la grafica de egresos.
     def egresos_dataset
-      year = 2024
-      retorno = obtener_registros(2, year)
+      # year = 2024
+      retorno = obtener_registros(2, @year)
       render json: { retorno: }, status: :ok
     end
 
@@ -66,7 +68,8 @@ module Stats
     end
 
     def set_instance
-      @instance_id = current_user.instance_id
+      @year = params[:year]
+      @instance_id = params[:instanceId]
     end
   end
 end
