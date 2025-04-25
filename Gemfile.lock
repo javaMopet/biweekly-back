@@ -69,7 +69,6 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    ast (2.4.2)
     bcrypt (3.1.20)
     bigdecimal (3.1.6)
     blueprinter (1.0.2)
@@ -119,8 +118,6 @@ GEM
     irb (1.12.0)
       rdoc
       reline (>= 0.4.2)
-    json (2.8.2)
-    language_server-protocol (3.17.0.3)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -150,10 +147,6 @@ GEM
     oj (3.16.3)
       bigdecimal (>= 3.0)
     orm_adapter (0.5.0)
-    parallel (1.26.3)
-    parser (3.3.6.0)
-      ast (~> 2.4.1)
-      racc
     pdf-core (0.10.0)
     prawn (2.5.0)
       matrix (~> 0.4)
@@ -202,35 +195,15 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
-    rainbow (3.1.1)
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
-    regexp_parser (2.9.2)
     reline (0.4.3)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
     rolify (6.0.1)
-    rubocop (1.69.0)
-      json (~> 2.3)
-      language_server-protocol (>= 3.17.0)
-      parallel (~> 1.10)
-      parser (>= 3.3.0.2)
-      rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 2.4, < 3.0)
-      rubocop-ast (>= 1.36.1, < 2.0)
-      ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.36.2)
-      parser (>= 3.3.1.0)
-    rubocop-rails (2.27.0)
-      activesupport (>= 4.2.0)
-      rack (>= 1.1)
-      rubocop (>= 1.52.0, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
-    ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -249,9 +222,6 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2024.1)
       tzinfo (>= 1.0.0)
-    unicode-display_width (3.1.2)
-      unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.6)
@@ -264,25 +234,22 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-sqlserver-adapter (~> 7.0.4)
-  blueprinter
+  blueprinter (~> 1.0.2)
   bootsnap
   byebug (~> 11.1)
   cancancan (~> 3.5.0)
-  caxlsx
+  caxlsx (~> 4.1.0)
   debug
   dotenv (~> 3.1.0)
   graphiql-rails
-  graphql_devise
-  matrix
-  oj
-  prawn
+  graphql_devise (~> 1.4.0)
+  oj (~> 3.16.3)
+  prawn (~> 2.5.0)
   propshaft
   puma (~> 5.0)
   rack-cors (~> 1.1)
   rails (~> 7.0.4)
-  rolify
-  rubocop (~> 1.69)
-  rubocop-rails
+  rolify (~> 6.0.1)
   sprockets-rails (= 3.4.2)
   tzinfo-data
 

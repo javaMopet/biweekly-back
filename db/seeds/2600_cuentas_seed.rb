@@ -22,7 +22,8 @@ Cuenta.create!(
   tipo_cuenta_id: 1,
   banco_id: 2,
   identificador: '2659',
-  cuenta_contable_id: 112_001
+  user_id: 2,
+  instance_id: 1
 )
 Cuenta.create!(
   nombre: 'Santander HPM',

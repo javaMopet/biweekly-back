@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_04_02_202025) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_25_011433) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -92,7 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_02_202025) do
     t.string "nombre", limit: 100
     t.string "identificador", limit: 10
     t.bigint "tipo_cuenta_id", null: false
-    t.bigint "cuenta_contable_id", null: false
+    t.bigint "cuenta_contable_id"
     t.bigint "banco_id"
     t.decimal "saldo", precision: 10, scale: 4, default: 0.0, null: false
     t.integer "dia_corte"

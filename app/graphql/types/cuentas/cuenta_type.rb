@@ -7,8 +7,8 @@ module Types
       field :id, ID, null: false
       field :nombre, String
       field :identificador, String
-      field :cuenta_contable_id, Integer, null: false
-      field :cuenta_contable, Types::CuentaContableType, null: false
+      field :cuenta_contable_id, ID, null: true
+      field :cuenta_contable, Types::CuentaContableType, null: true
       field :tipo_cuenta, Types::TipoCuentaType, null: false
       field :dia_corte, Integer, null: true
       field :propietario, String, null: true

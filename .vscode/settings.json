@@ -1,0 +1,6 @@
+{
+  "ruby.rubocop.useBundler": true,
+  "ruby.rubocop.commandPath": "bundle",
+  "ruby.rubocop.onSave": true,
+  "ruby.rubocop.format": "json"
+}

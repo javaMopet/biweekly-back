@@ -14,18 +14,22 @@ gem 'activerecord-sqlserver-adapter', '~> 7.0.4'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
-gem 'matrix'
-gem 'prawn'
+# Revisar
+# gem 'matrix'
+# Fast, Nimble PDF Generation For Ruby
+gem 'prawn', '~> 2.5.0'
+# end revisar
 
 # Use graphql_devise for authentication
-gem 'graphql_devise'
+gem 'graphql_devise', '~> 1.4.0'
+
 # Use rolify with cancan for authorization
-gem "rolify"
+gem "rolify", '~> 6.0.1'
 # Use rolify with cancancan for authorization
 gem 'cancancan', '~> 3.5.0'
 
 # Generacion de archivos excel
-gem 'caxlsx'
+gem 'caxlsx', '~> 4.1.0'
 # gem 'caxlsx_rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -64,12 +68,12 @@ group :development do
 
   # sprockets-rails for graphql
   gem 'graphiql-rails'
-  
+
   gem 'propshaft'
 
   # rubocop gem
-  gem 'rubocop', '~> 1.69'
-  gem 'rubocop-rails'
+  # gem 'rubocop', '~> 1.69', require: false
+  # gem 'rubocop-rails'
 end
 gem 'sprockets-rails', "3.4.2"
 # Shim to load environment variables from .env into ENV in development.
@@ -78,6 +82,8 @@ gem 'dotenv', "~> 3.1.0", groups: [:development, :test]
 # gem 'devise-jwt', '~> 0.10.0'
 gem 'rack-cors', '~> 1.1'
 
-gem 'blueprinter'
-gem 'oj'
+# Blueprinter for json formatting
+gem 'blueprinter', '~> 1.0.2'
+# oj
+gem 'oj', '~> 3.16.3'
 gem "byebug", "~> 11.1", :groups => [:development, :test]

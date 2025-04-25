@@ -3,7 +3,7 @@
 # Modelo para cuenta
 class Cuenta < ApplicationRecord
   belongs_to :tipo_cuenta
-  belongs_to :cuenta_contable
+  belongs_to :cuenta_contable, optional: true
   belongs_to :banco, optional: true
   belongs_to :instance
 
