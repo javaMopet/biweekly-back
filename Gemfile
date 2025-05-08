@@ -48,7 +48,7 @@ gem 'caxlsx', '~> 4.1.0'
 gem 'tzinfo-data' # , platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem 'bootsnap', "~> 1.18.3", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -67,14 +67,17 @@ group :development do
   # uso de la interfaz para graphql
 
   # sprockets-rails for graphql
-  gem 'graphiql-rails'
+  gem 'graphiql-rails', '~> 1.10.0'
 
-  gem 'propshaft'
+  # Use propshaft for serving static assets
+  gem 'propshaft', '~> 0.8.0'
 
   # rubocop gem
-  # gem 'rubocop', '~> 1.69', require: false
-  # gem 'rubocop-rails'
+  gem 'rubocop', '~> 1.69', require: false
+  # Use rubocop-rails for rails specific rules
+  gem 'rubocop-rails', '~> 2.31.0', require: false
 end
+# Use sprockets for serving static assets
 gem 'sprockets-rails', "3.4.2"
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv', "~> 3.1.0", groups: [:development, :test]

@@ -26,8 +26,8 @@ rescue StandardError => e
   puts "No sqlserver #{e.message}"
 end
 
-instance1 = Instance.new(name: "Ingresos y Egresos H&L", logo_image: "logo_handl.png")
+instance1 = Instance.new(name: "Ingresos y Egresos H&L", logo_image: "logo_handl.png", dominio: "lyh")
 instance1.save!
 
-instance2 = Instance.new(name: "Prueba2", logo_image: "logo_hand2.png")
+instance2 = Instance.new(name: "Prueba2", logo_image: "logo_hand2.png", dominio: "test")
 instance2.save!
